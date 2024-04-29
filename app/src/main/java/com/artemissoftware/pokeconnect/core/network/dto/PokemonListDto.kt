@@ -9,7 +9,7 @@ data class PokemonListDto(
     @field:Json(name = "next")
     val next: String = "",
     @field:Json(name = "previous")
-    val previous: Any? = null,
+    val previous: String? = null,
     @field:Json(name = "results")
     val results: List<PokedexEntryDto> = listOf()
 )
