@@ -15,7 +15,7 @@ interface PokeApi {
     ): PokemonLisDto
 
     @GET("pokemon/{name}")
-    suspend fun getPokemonInfo(
+    suspend fun getPokemon(
         @Path("name") name: String
     ): PokemonDto
 
