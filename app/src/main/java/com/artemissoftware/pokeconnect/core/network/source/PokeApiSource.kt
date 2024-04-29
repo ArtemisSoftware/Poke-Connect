@@ -4,8 +4,9 @@ import com.artemissoftware.pokeconnect.core.network.HandleApi
 import com.artemissoftware.pokeconnect.core.network.PokeApi
 import com.artemissoftware.pokeconnect.core.network.dto.PokemonDto
 import com.artemissoftware.pokeconnect.core.network.dto.PokemonLisDto
+import javax.inject.Inject
 
-class PokeApiSource constructor(
+class PokeApiSource @Inject constructor(
     private val pokeApi: PokeApi,
 ) {
 
