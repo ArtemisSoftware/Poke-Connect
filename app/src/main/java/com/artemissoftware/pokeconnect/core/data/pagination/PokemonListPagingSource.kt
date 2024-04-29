@@ -7,21 +7,20 @@ import com.artemissoftware.pokeconnect.core.domain.Resource
 import com.artemissoftware.pokeconnect.core.domain.error.DataError
 import com.artemissoftware.pokeconnect.core.domain.exceptions.PaginationException
 import com.artemissoftware.pokeconnect.core.network.PokeApi
-import com.artemissoftware.pokeconnect.core.network.dto.PokemonLisDto
-import com.artemissoftware.pokeconnect.core.network.dto.ResumeDto
+import com.artemissoftware.pokeconnect.core.network.dto.PokedexEntryDto
 import com.artemissoftware.pokeconnect.core.network.source.PokeApiSource
 
 class PokemonListPagingSource(
     private val pokeApiSource: PokeApiSource,
-) : PagingSource<Int, ResumeDto>() {
+) : PagingSource<Int, PokedexEntryDto>() {
 
     private var totalCount = 0
 
-    override fun getRefreshKey(state: PagingState<Int, ResumeDto>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, PokedexEntryDto>): Int? {
         return state.anchorPosition
     }
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ResumeDto> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PokedexEntryDto> {
         val currentPage = params.key ?: 1
 
         val result = HandleNetwork.safeNetworkCall {
@@ -36,7 +35,7 @@ class PokemonListPagingSource(
                 val pokemonList = result.data
                 totalCount += pokemonList.results.size
 
-                var data = emptyList<ResumeDto>()
+                var data = emptyList<PokedexEntryDto>()
                 var prevKey: Int? = null
                 var nextKey: Int? = null
 

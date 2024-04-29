@@ -7,5 +7,5 @@ data class PokedexNumberDto(
     @field:Json(name = "entry_number")
     val entryNumber: Int = 0,
     @field:Json(name = "pokedex")
-    val pokedex: PokedexDto = PokedexDto()
+    val pokedex: PokedexEntryDto = PokedexEntryDto()
 )
