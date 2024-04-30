@@ -17,6 +17,7 @@ paging-runtime = "3.2.1"
 paging-compose = "3.2.1"
 paging-common = "3.2.1"
 coil-compose = "2.5.0"
+kotlinPlugin = "1.8.10"
 
 # test
 
@@ -83,8 +84,8 @@ androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 
 com-google-devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "com-google-devtools-ksp" }
-
 com-google-dagger-hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize",  version.ref = "kotlinPlugin"  }
 
 # test
 
