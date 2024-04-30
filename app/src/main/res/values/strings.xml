@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">PokeConnect</string>
+    <string name="species">Species</string>
+    <string name="height">Height</string>
+    <string name="weight">Weight</string>
+    <string name="abilities">Abilities</string>
+    <string name="page_not_found">Page not found</string>
+    <string name="favorites">Favorites</string>
+    <string name="here_are_your_favorites">Here are your favorites</string>
+    <string name="pokedex">Pokédex</string>
+    <string name="connection_error">Connection error</string>
+    <string name="connection_socket_time_out">Socket timeout</string>
+    <string name="unknown_error">Unknown error</string>
+    <string name="unknown_host_error">Unknown host error</string>
+    <string name="error_not_mapped">Error not mapped</string>
 </resources>
