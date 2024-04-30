@@ -16,6 +16,7 @@ hilt-navigation-compose = "1.2.0"
 paging-runtime = "3.2.1"
 paging-compose = "3.2.1"
 paging-common = "3.2.1"
+coil-compose = "2.5.0"
 
 # test
 
@@ -63,6 +64,9 @@ paging-runtime-ktx = { group = "androidx.paging", name = "paging-runtime-ktx", v
 paging-compose = { group = "androidx.paging", name = "paging-compose", version.ref = "paging-compose" }
 paging-common = { group = "androidx.paging", name = "paging-common", version.ref = "paging-common" }
 
+# Coil
+
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil-compose" }
 
 # Test
 

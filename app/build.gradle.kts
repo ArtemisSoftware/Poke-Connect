@@ -71,6 +71,8 @@ dependencies {
     implementation(libs.paging.compose)
     implementation(libs.paging.runtime)
 
+    implementation(libs.coil.compose)
+
     testImplementation(libs.junit)
     testImplementation(libs.junit.jupiter.api)
     testRuntimeOnly(libs.junit.jupiter.engine)
