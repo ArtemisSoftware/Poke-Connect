@@ -1,0 +1,59 @@
+package com.artemissoftware.pokeconnect.core.presentation.composables.pagination
+
+import androidx.compose.runtime.Composable
+import androidx.paging.LoadState
+import androidx.paging.compose.LazyPagingItems
+import com.artemissoftware.pokeconnect.R
+import com.artemissoftware.pokeconnect.core.domain.exceptions.PaginationException
+import com.artemissoftware.pokeconnect.core.presentation.util.extensions.toUiText
+import com.artemissoftware.pokeconnect.core.ui.text.UiText
+
+@Composable
+fun <T : Any>PaginationContent(
+    items: LazyPagingItems<T>,
+    loadingContent: @Composable () -> Unit,
+    errorContent: @Composable (UiText) -> Unit,
+    content: @Composable (LazyPagingItems<T>) -> Unit,
+) {
+    items.apply {
+        val error = when {
+            loadState.refresh is LoadState.Error -> loadState.refresh as LoadState.Error
+            loadState.prepend is LoadState.Error -> loadState.prepend as LoadState.Error
+            loadState.append is LoadState.Error -> loadState.append as LoadState.Error
+            else -> null
+        }
+
+        when {
+            loadState.refresh is LoadState.Loading -> {
+                loadingContent()
+            }
+
+            error != null -> {
+                errorContent(parseErrorMessage(error))
+            }
+
+            else -> {
+                content(items)
+            }
+        }
+    }
+}
+
+private fun parseErrorMessage(pagingError: LoadState.Error?): UiText {
+    pagingError?.let {
+        return when (val error = it.error) {
+            is PaginationException -> {
+                error.error.toUiText()
+            }
+            else -> {
+                error.message?.let { message ->
+                    UiText.DynamicString(message)
+                } ?: run {
+                    UiText.StringResource(R.string.unknown_error)
+                }
+            }
+        }
+    }
+
+    return UiText.StringResource(R.string.unknown_error)
+}
