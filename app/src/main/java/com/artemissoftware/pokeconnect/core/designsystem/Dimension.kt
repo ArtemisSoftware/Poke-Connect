@@ -14,6 +14,7 @@ data class Dimension(
     val iconSizeBig: DpSize,
     val iconContentSize: DpSize,
     val statMaxWidth: Dp,
+    val shimmerTextHeight: Dp,
 )
 
 val dimension = Dimension(
@@ -22,7 +23,8 @@ val dimension = Dimension(
     iconSizeBig = DpSize(width = 120.dp, height = 120.dp),
     iconChipSize = DpSize(width = 18.dp, height = 18.dp),
     iconContentSize = DpSize(width = 20.dp, height = 20.dp),
-    statMaxWidth = 48.dp
+    statMaxWidth = 48.dp,
+    shimmerTextHeight = 20.dp
 )
 
 internal val localDimension = staticCompositionLocalOf<Dimension> { throw IllegalStateException("No theme installed") }
