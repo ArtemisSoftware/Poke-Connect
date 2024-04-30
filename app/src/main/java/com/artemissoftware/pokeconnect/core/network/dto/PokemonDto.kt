@@ -2,12 +2,7 @@ package com.artemissoftware.pokeconnect.core.network.dto
 
 
 import com.artemissoftware.pokeconnect.core.network.dto.pokemon.AbilityDto
-import com.artemissoftware.pokeconnect.core.network.dto.pokemon.CriesDto
-import com.artemissoftware.pokeconnect.core.network.dto.pokemon.GameIndiceDto
 import com.artemissoftware.pokeconnect.core.network.dto.pokemon.MoveDto
-import com.artemissoftware.pokeconnect.core.network.dto.pokemon.SpritesDto
-import com.artemissoftware.pokeconnect.core.network.dto.pokemon.StatDto
-import com.artemissoftware.pokeconnect.core.network.dto.pokemon.UrlNameDto
 import com.squareup.moshi.Json
 
 data class PokemonDto(
@@ -15,16 +10,16 @@ data class PokemonDto(
     val abilities: List<AbilityDto> = emptyList(),
     @field:Json(name = "base_experience")
     val baseExperience: Int = 0,
-    @field:Json(name = "cries")
-    val cries: CriesDto = CriesDto(),
-    @field:Json(name = "forms")
-    val forms: List<Form> = listOf(),
-    @field:Json(name = "game_indices")
-    val gameIndices: List<GameIndiceDto> = emptyList(),
+//    @field:Json(name = "cries")
+//    val cries: CriesDto = CriesDto(),
+//    @field:Json(name = "forms")
+//    val forms: List<UrlNameDto> = emptyList(),
+//    @field:Json(name = "game_indices")
+//    val gameIndices: List<GameIndiceDto> = emptyList(),
     @field:Json(name = "height")
     val height: Int = 0,
-    @field:Json(name = "held_items")
-    val heldItems: List<Any> = listOf(), // TODO: encontrar exemplo
+//    @field:Json(name = "held_items")
+//    val heldItems: List<Any> = listOf(), // TODO: encontrar exemplo
     @field:Json(name = "id")
     val id: Int = 0,
     @field:Json(name = "is_default")
@@ -37,18 +32,18 @@ data class PokemonDto(
     val name: String = "",
     @field:Json(name = "order")
     val order: Int = 0,
-    @field:Json(name = "past_abilities")
-    val pastAbilities: List<Any> = listOf(), // TODO: encontrar exemplo
-    @field:Json(name = "past_types")
-    val pastTypes: List<Any> = listOf(), // TODO: encontrar exemplo
-    @field:Json(name = "species")
-    val species: UrlNameDto = UrlNameDto(),
-    @field:Json(name = "sprites")
-    val sprites: SpritesDto = SpritesDto(),
-    @Json(name = "stats")
-    val stats: List<StatDto> = emptyList(),
-    @Json(name = "types")
-    val types: List<Type> = listOf(),
-    @field:Json(name = "weight")
+//    @field:Json(name = "past_abilities")
+//    val pastAbilities: List<Any> = listOf(), // TODO: encontrar exemplo
+//    @field:Json(name = "past_types")
+//    val pastTypes: List<Any> = listOf(), // TODO: encontrar exemplo
+//    @field:Json(name = "species")
+//    val species: UrlNameDto = UrlNameDto(),
+//    @field:Json(name = "sprites")
+//    val sprites: SpritesDto = SpritesDto(),
+//    @Json(name = "stats")
+//    val stats: List<StatDto> = emptyList(),
+//    @Json(name = "types")
+//    val types: List<TypeDto> = emptyList(),
+//    @field:Json(name = "weight")
     val weight: Int = 0
 )

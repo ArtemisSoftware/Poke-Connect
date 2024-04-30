@@ -7,5 +7,5 @@ data class GameIndiceDto(
     @Json(name = "game_index")
     val gameIndex: Int,
     @Json(name = "version")
-    val version: Version = Version()
+    val version: UrlNameDto = UrlNameDto()
 )

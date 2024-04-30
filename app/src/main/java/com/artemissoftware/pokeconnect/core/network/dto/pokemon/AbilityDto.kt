@@ -1,7 +1,6 @@
 package com.artemissoftware.pokeconnect.core.network.dto.pokemon
 
 
-import com.artemissoftware.pokeconnect.core.network.dto.AbilityX
 import com.squareup.moshi.Json
 
 data class AbilityDto(

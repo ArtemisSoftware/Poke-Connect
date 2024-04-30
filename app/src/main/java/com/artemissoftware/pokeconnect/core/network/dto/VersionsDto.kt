@@ -2,6 +2,7 @@ package com.artemissoftware.pokeconnect.core.network.dto
 
 
 import com.artemissoftware.pokeconnect.core.network.dto.pokemon.GenerationIDto
+import com.artemissoftware.pokeconnect.core.network.dto.pokemon.GenerationIiDto
 import com.squareup.moshi.Json
 
 data class VersionsDto(

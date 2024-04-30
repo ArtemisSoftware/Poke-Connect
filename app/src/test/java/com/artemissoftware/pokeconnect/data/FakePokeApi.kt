@@ -1,6 +1,7 @@
 package com.artemissoftware.pokeconnect.data
 
 import com.artemissoftware.pokeconnect.core.network.PokeApi
+import com.artemissoftware.pokeconnect.core.network.dto.PokemonDto
 import com.artemissoftware.pokeconnect.core.network.dto.pokedex.PokedexPageDto
 import com.artemissoftware.pokeconnect.data.TestMockData.pokedexPageDto
 

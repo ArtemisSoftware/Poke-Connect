@@ -1,9 +1,6 @@
-package com.artemissoftware.pokeconnect.core.network.dto
+package com.artemissoftware.pokeconnect.core.network.dto.pokemon
 
 
-import com.artemissoftware.pokeconnect.core.network.dto.pokemon.CrystalDto
-import com.artemissoftware.pokeconnect.core.network.dto.pokemon.GoldDto
-import com.artemissoftware.pokeconnect.core.network.dto.pokemon.SilverDto
 import com.squareup.moshi.Json
 
 data class GenerationIiDto(
