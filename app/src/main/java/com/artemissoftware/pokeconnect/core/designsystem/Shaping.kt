@@ -10,11 +10,13 @@ import androidx.compose.ui.unit.dp
 
 data class Shaping(
     val circular: Shape,
+    val roundedCorners0_5: Shape,
     val roundedCorners2: Shape,
 )
 
 internal val shape = Shaping(
     circular = CircleShape,
+    roundedCorners0_5 = RoundedCornerShape(4.dp),
     roundedCorners2 = RoundedCornerShape(16.dp),
 )
 
