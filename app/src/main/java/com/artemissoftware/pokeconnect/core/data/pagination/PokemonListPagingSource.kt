@@ -7,7 +7,7 @@ import com.artemissoftware.pokeconnect.core.domain.Resource
 import com.artemissoftware.pokeconnect.core.domain.error.DataError
 import com.artemissoftware.pokeconnect.core.domain.exceptions.PaginationException
 import com.artemissoftware.pokeconnect.core.network.PokeApi
-import com.artemissoftware.pokeconnect.core.network.dto.PokedexEntryDto
+import com.artemissoftware.pokeconnect.core.network.dto.pokedex.PokedexEntryDto
 import com.artemissoftware.pokeconnect.core.network.source.PokeApiSource
 
 class PokemonListPagingSource(

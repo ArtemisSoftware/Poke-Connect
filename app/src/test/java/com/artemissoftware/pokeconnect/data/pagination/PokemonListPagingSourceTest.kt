@@ -7,7 +7,7 @@ import com.artemissoftware.pokeconnect.core.data.pagination.PokemonListPagingSou
 import com.artemissoftware.pokeconnect.core.network.PokeApi
 import com.artemissoftware.pokeconnect.core.network.source.PokeApiSource
 import com.artemissoftware.pokeconnect.data.FakePokeApi
-import com.artemissoftware.pokeconnect.data.TestMockData.pokemonListDto
+import com.artemissoftware.pokeconnect.data.TestMockData.pokedexPageDto
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
@@ -27,14 +27,14 @@ class PokemonListPagingSourceTest {
     @Test
     fun `Request pokemon page, expect multiple result, assert LoadResult_Page`() = runTest {
         val currentPage = 1
-        val endOfPaginationReached =  currentPage * PokeApi.PAGE_SIZE >= pokemonListDto.count
+        val endOfPaginationReached =  currentPage * PokeApi.PAGE_SIZE >= pokedexPageDto.count
         val nextKey = if (endOfPaginationReached) null else currentPage + 1
 
         val pokemonListPagingSource = PokemonListPagingSource(pokeApiSource = pokeApiSource)
 
         assertThat(
             PagingSource.LoadResult.Page(
-                data = pokemonListDto.results,
+                data = pokedexPageDto.results,
                 prevKey = null,
                 nextKey = nextKey
             )
@@ -42,7 +42,7 @@ class PokemonListPagingSourceTest {
             pokemonListPagingSource.load(
                 PagingSource.LoadParams.Refresh(
                     key = null,
-                    loadSize = pokemonListDto.results.size,
+                    loadSize = pokedexPageDto.results.size,
                     placeholdersEnabled = false
                 )
             )
@@ -56,7 +56,7 @@ class PokemonListPagingSourceTest {
         val loadResult = pokemonListPagingSource.load(
             PagingSource.LoadParams.Refresh(
                 key = null,
-                loadSize = pokemonListDto.results.size,
+                loadSize = pokedexPageDto.results.size,
                 placeholdersEnabled = false
             )
         )

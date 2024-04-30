@@ -1,61 +1,54 @@
 package com.artemissoftware.pokeconnect.core.network.dto
 
 
+import com.artemissoftware.pokeconnect.core.network.dto.pokemon.AbilityDto
+import com.artemissoftware.pokeconnect.core.network.dto.pokemon.CriesDto
+import com.artemissoftware.pokeconnect.core.network.dto.pokemon.GameIndiceDto
+import com.artemissoftware.pokeconnect.core.network.dto.pokemon.MoveDto
+import com.artemissoftware.pokeconnect.core.network.dto.pokemon.SpritesDto
+import com.artemissoftware.pokeconnect.core.network.dto.pokemon.StatDto
+import com.artemissoftware.pokeconnect.core.network.dto.pokemon.UrlNameDto
 import com.squareup.moshi.Json
 
 data class PokemonDto(
+    @field:Json(name = "abilities")
+    val abilities: List<AbilityDto> = emptyList(),
+    @field:Json(name = "base_experience")
+    val baseExperience: Int = 0,
+    @field:Json(name = "cries")
+    val cries: CriesDto = CriesDto(),
+    @field:Json(name = "forms")
+    val forms: List<Form> = listOf(),
+    @field:Json(name = "game_indices")
+    val gameIndices: List<GameIndiceDto> = emptyList(),
+    @field:Json(name = "height")
+    val height: Int = 0,
+    @field:Json(name = "held_items")
+    val heldItems: List<Any> = listOf(), // TODO: encontrar exemplo
     @field:Json(name = "id")
     val id: Int = 0,
+    @field:Json(name = "is_default")
+    val isDefault: Boolean = false,
+    @field:Json(name = "location_area_encounters")
+    val locationAreaEncounters: String,
+    @field:Json(name = "moves")
+    val moves: List<MoveDto> = emptyList(),
     @field:Json(name = "name")
     val name: String = "",
-    @field:Json(name = "base_happiness")
-    val baseHappiness: Int = 0,
-    @field:Json(name = "capture_rate")
-    val captureRate: Int = 0,
-    @field:Json(name = "color")
-    val color: ColorDto = ColorDto(),
-    @field:Json(name = "egg_groups")
-    val eggGroups: List<EggGroupDto> = emptyList(),
-    @field:Json(name = "evolution_chain")
-    val evolutionChain: EvolutionChainDto = EvolutionChainDto(),
-    @field:Json(name = "evolves_from_species")
-    val evolvesFromSpecies: EvolvesFromSpeciesDto? = null,
-    @field:Json(name = "flavor_text_entries")
-    val flavorTextEntries: List<FlavorTextEntriesDto> = emptyList(),
-    @field:Json(name = "form_descriptions")
-    val formDescriptions: List<Any> = listOf(),  //-------------------
-    @field:Json(name = "forms_switchable")
-    val formsSwitchable: Boolean = false,
-    @field:Json(name = "gender_rate")
-    val genderRate: Int = 0,
-    @field:Json(name = "genera")
-    val genera: List<GeneraDto> = emptyList(),
-    @field:Json(name = "generation")
-    val generation: GenerationDto = GenerationDto(),
-    @field:Json(name = "growth_rate")
-    val growthRate: GrowthRateDto = GrowthRateDto(),
-    @field:Json(name = "habitat")
-    val habitat: HabitatDto = HabitatDto(),
-    @field:Json(name = "has_gender_differences")
-    val hasGenderDifferences: Boolean = false,
-    @field:Json(name = "hatch_counter")
-    val hatchCounter: Int = 0,
-    @field:Json(name = "is_baby")
-    val isBaby: Boolean = false,
-    @field:Json(name = "is_legendary")
-    val isLegendary: Boolean = false,
-    @field:Json(name = "is_mythical")
-    val isMythical: Boolean = false,
-    @field:Json(name = "names")
-    val names: List<NameDto> = emptyList(),
     @field:Json(name = "order")
     val order: Int = 0,
-    @field:Json(name = "pal_park_encounters")
-    val palParkEncounters: List<PalParkEncounterDto> = emptyList(),
-    @field:Json(name = "pokedex_numbers")
-    val pokedexNumbers: List<PokedexNumberDto> = emptyList(),
-    @field:Json(name = "shape")
-    val shape: ShapeDto = ShapeDto(),
-    @field:Json(name = "varieties")
-    val varieties: List<Any> = listOf()
+    @field:Json(name = "past_abilities")
+    val pastAbilities: List<Any> = listOf(), // TODO: encontrar exemplo
+    @field:Json(name = "past_types")
+    val pastTypes: List<Any> = listOf(), // TODO: encontrar exemplo
+    @field:Json(name = "species")
+    val species: UrlNameDto = UrlNameDto(),
+    @field:Json(name = "sprites")
+    val sprites: SpritesDto = SpritesDto(),
+    @Json(name = "stats")
+    val stats: List<StatDto> = emptyList(),
+    @Json(name = "types")
+    val types: List<Type> = listOf(),
+    @field:Json(name = "weight")
+    val weight: Int = 0
 )

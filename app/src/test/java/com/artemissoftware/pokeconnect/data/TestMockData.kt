@@ -1,8 +1,8 @@
 package com.artemissoftware.pokeconnect.data
 
 import com.artemissoftware.pokeconnect.core.models.PokedexEntry
-import com.artemissoftware.pokeconnect.core.network.dto.PokedexEntryDto
-import com.artemissoftware.pokeconnect.core.network.dto.PokemonListDto
+import com.artemissoftware.pokeconnect.core.network.dto.pokedex.PokedexEntryDto
+import com.artemissoftware.pokeconnect.core.network.dto.pokedex.PokedexPageDto
 
 object TestMockData {
 
@@ -11,7 +11,7 @@ object TestMockData {
         url = "https://pokeapi.co/api/v2/pokemon/1/",
     )
 
-    val pokemonListDto = PokemonListDto(
+    val pokedexPageDto = PokedexPageDto(
         count = 1003,
         next = "https://pokeapi.co/api/v2/pokemon?offset=20&limit=20",
         previous= null,

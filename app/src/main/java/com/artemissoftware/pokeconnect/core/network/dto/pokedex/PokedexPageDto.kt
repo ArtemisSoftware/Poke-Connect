@@ -1,9 +1,9 @@
-package com.artemissoftware.pokeconnect.core.network.dto
+package com.artemissoftware.pokeconnect.core.network.dto.pokedex
 
 
 import com.squareup.moshi.Json
 
-data class PokemonListDto(
+data class PokedexPageDto(
     @field:Json(name = "count")
     val count: Int = 0,
     @field:Json(name = "next")

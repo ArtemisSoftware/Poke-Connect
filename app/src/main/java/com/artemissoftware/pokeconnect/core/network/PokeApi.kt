@@ -1,7 +1,7 @@
 package com.artemissoftware.pokeconnect.core.network
 
 import com.artemissoftware.pokeconnect.core.network.dto.PokemonDto
-import com.artemissoftware.pokeconnect.core.network.dto.PokemonListDto
+import com.artemissoftware.pokeconnect.core.network.dto.pokedex.PokedexPageDto
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -12,7 +12,7 @@ interface PokeApi {
     suspend fun getPokemonList(
         @Query("limit") limit: Int,
         @Query("offset") offset: Int
-    ): PokemonListDto
+    ): PokedexPageDto
 
     @GET("pokemon/{name}")
     suspend fun getPokemon(

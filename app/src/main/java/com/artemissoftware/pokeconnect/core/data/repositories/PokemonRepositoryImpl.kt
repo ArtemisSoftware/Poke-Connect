@@ -9,7 +9,7 @@ import com.artemissoftware.pokeconnect.core.data.pagination.PokemonListPagingSou
 import com.artemissoftware.pokeconnect.core.domain.repositories.PokemonRepository
 import com.artemissoftware.pokeconnect.core.models.PokedexEntry
 import com.artemissoftware.pokeconnect.core.network.PokeApi
-import com.artemissoftware.pokeconnect.core.network.dto.PokedexEntryDto
+import com.artemissoftware.pokeconnect.core.network.dto.pokedex.PokedexEntryDto
 import com.artemissoftware.pokeconnect.core.network.source.PokeApiSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

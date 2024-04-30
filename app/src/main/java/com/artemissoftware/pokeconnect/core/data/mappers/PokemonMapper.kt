@@ -2,7 +2,7 @@ package com.artemissoftware.pokeconnect.core.data.mappers
 
 import com.artemissoftware.pokeconnect.core.models.PokedexEntry
 import com.artemissoftware.pokeconnect.core.network.PokeApi
-import com.artemissoftware.pokeconnect.core.network.dto.PokedexEntryDto
+import com.artemissoftware.pokeconnect.core.network.dto.pokedex.PokedexEntryDto
 
 fun PokedexEntryDto.toPokedexEntry(): PokedexEntry{
     val id = url.toPokemonId()

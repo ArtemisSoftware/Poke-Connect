@@ -2,10 +2,12 @@ package com.artemissoftware.pokeconnect.core.network.dto
 
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
-data class EggGroupDto(
-    @field:Json(name = "name")
+@JsonClass(generateAdapter = true)
+data class Form(
+    @Json(name = "name")
     val name: String = "",
-    @field:Json(name = "url")
+    @Json(name = "url")
     val url: String = ""
 )

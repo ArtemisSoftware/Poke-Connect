@@ -1,20 +1,19 @@
 package com.artemissoftware.pokeconnect.data
 
 import com.artemissoftware.pokeconnect.core.network.PokeApi
-import com.artemissoftware.pokeconnect.core.network.dto.PokemonDto
-import com.artemissoftware.pokeconnect.core.network.dto.PokemonListDto
-import com.artemissoftware.pokeconnect.data.TestMockData.pokemonListDto
+import com.artemissoftware.pokeconnect.core.network.dto.pokedex.PokedexPageDto
+import com.artemissoftware.pokeconnect.data.TestMockData.pokedexPageDto
 
 class FakePokeApi : PokeApi {
 
     var callShouldReturnError = false
 
-    override suspend fun getPokemonList(limit: Int, offset: Int): PokemonListDto {
+    override suspend fun getPokemonList(limit: Int, offset: Int): PokedexPageDto {
         if(callShouldReturnError){
             throw RuntimeException()
         }
         else {
-            return pokemonListDto
+            return pokedexPageDto
         }
     }
 
