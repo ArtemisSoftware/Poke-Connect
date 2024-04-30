@@ -11,10 +11,10 @@ val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 
 internal val White = Color(0xFFFFFFFF)
-internal val Black = Color(0xFF4E4B66)
+internal val Black = Color(0xFF000000)
+internal val DarkBlue = Color(0xFF4E4B66)
 internal val LightGray = Color(0XFFF5F5F5)
 internal val WhiteGray = Color(0xFFB0B3B8)
-
 
 internal val GrayShimmer1 = Color(0xFFF5F5F5)
 internal val GrayShimmer2 = Color(0xFFD3D3D3)
