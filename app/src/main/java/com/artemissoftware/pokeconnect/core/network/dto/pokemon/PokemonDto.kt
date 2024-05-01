@@ -24,12 +24,12 @@ data class PokemonDto(
     val isDefault: Boolean = false,
     @field:Json(name = "location_area_encounters")
     val locationAreaEncounters: String,
-    @field:Json(name = "moves")
-    val moves: List<MoveDto> = emptyList(),
+//    @field:Json(name = "moves")
+//    val moves: List<MoveDto> = emptyList(),
     @field:Json(name = "name")
     val name: String,
     @field:Json(name = "order")
-    val order: Int = 0,
+    val order: Int,
 //    @field:Json(name = "past_abilities")
 //    val pastAbilities: List<Any> = listOf(), // TODO: encontrar exemplo
 //    @field:Json(name = "past_types")
@@ -43,5 +43,5 @@ data class PokemonDto(
 //    @Json(name = "types")
 //    val types: List<TypeDto> = emptyList(),
     @field:Json(name = "weight")
-    val weight: Int = 0
+    val weight: Int
 )
