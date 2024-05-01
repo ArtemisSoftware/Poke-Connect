@@ -71,11 +71,13 @@ dependencies {
 
     implementation(libs.paging.compose)
     implementation(libs.paging.runtime)
+    implementation(libs.paging.common)
 
     implementation(libs.coil.compose)
 
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
+    implementation(libs.room.paging)
     annotationProcessor(libs.room.compiler)
     ksp(libs.room.compiler)
 

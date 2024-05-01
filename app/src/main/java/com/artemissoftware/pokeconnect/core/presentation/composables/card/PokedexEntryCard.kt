@@ -24,7 +24,7 @@ import androidx.compose.ui.text.style.TextAlign
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.artemissoftware.pokeconnect.R
-import com.artemissoftware.pokeconnect.core.data.common.util.extensions.toFormattedNumber
+import com.artemissoftware.pokeconnect.core.common.util.extensions.toFormattedNumber
 import com.artemissoftware.pokeconnect.core.designsystem.PokeConnectTheme
 import com.artemissoftware.pokeconnect.core.designsystem.ThemePreviews
 import com.artemissoftware.pokeconnect.core.designsystem.dimension
