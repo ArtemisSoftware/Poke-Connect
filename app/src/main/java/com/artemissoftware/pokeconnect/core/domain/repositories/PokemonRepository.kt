@@ -10,4 +10,10 @@ interface PokemonRepository {
     fun getPokemonList(): Flow<PagingData<PokedexEntry>>
 
     suspend fun getPokemon(query: String): Resource<Pokemon>
+
+    suspend fun save(pokemon: Pokemon)
+
+    suspend fun delete(pokemon: Pokemon)
+
+    fun getAll(): Flow<PagingData<Pokemon>>
 }

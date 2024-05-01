@@ -1,6 +1,8 @@
 package com.artemissoftware.pokeconnect.core.database.dao
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -13,7 +15,7 @@ import com.artemissoftware.pokeconnect.core.database.relations.PokemonRelation
 @Dao
 interface PokemonDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(pokemonEntity: PokemonEntity)
+    suspend fun insertPokemon(pokemonEntity: PokemonEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAbilities(abilityEntities: List<AbilityEntity>)
@@ -22,16 +24,19 @@ interface PokemonDao {
     suspend fun insertStats(statsEntities: List<StatEntity>)
 
     @Transaction
-    @Query("SELECT * FROM PokemonEntity WHERE id = :id")
-    suspend fun getPokemon(id: Int): PokemonRelation
-
-    @Transaction
     suspend fun insert(pokemonEntity: PokemonEntity, statsEntities: List<StatEntity>, abilityEntities: List<AbilityEntity>) {
-        insert(pokemonEntity = pokemonEntity)
+        insertPokemon(pokemonEntity = pokemonEntity)
         insertStats(statsEntities = statsEntities)
         insertAbilities(abilityEntities = abilityEntities)
     }
 
-    @Query("DELETE FROM PokemonEntity WHERE id = :id")
-    suspend fun delete(id: Int)
+    @Transaction
+    @Query("SELECT * FROM PokemonEntity WHERE id = :id")
+    suspend fun getPokemon(id: Int): PokemonRelation
+
+    @Query("SELECT * FROM PokemonEntity ORDER BY id ASC")
+    fun getAll(): PagingSource<Int, PokemonRelation>
+
+    @Delete
+    suspend fun delete(pokemonEntity: PokemonEntity)
 }
