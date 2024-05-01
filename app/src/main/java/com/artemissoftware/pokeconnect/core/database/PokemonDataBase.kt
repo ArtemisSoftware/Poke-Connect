@@ -19,4 +19,8 @@ import com.artemissoftware.pokeconnect.core.database.entities.StatEntity
 abstract class PokemonDataBase : RoomDatabase() {
 
     abstract fun getPokemonDao(): PokemonDao
+
+    companion object{
+        const val DB_NAME = "pokemon_db"
+    }
 }
