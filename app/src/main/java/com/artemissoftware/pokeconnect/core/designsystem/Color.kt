@@ -18,3 +18,5 @@ internal val WhiteGray = Color(0xFFB0B3B8)
 
 internal val GrayShimmer1 = Color(0xFFF5F5F5)
 internal val GrayShimmer2 = Color(0xFFD3D3D3)
+internal val FavoriteRed = Color(0xFFFF0000)
+internal val NotFavoriteRed = Color(0XFFF5F5F5)

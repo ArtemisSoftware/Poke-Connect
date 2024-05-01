@@ -41,6 +41,7 @@ fun PokemonRelation.toPokemon(): Pokemon{
         height = pokemon.height,
         weight = pokemon.weight,
         imageUrl = pokemon.imageUrl,
+        isFavorite = true,
         abilities = abilities.map { it.description },
         stats = stats.map { it.toStat() }
     )

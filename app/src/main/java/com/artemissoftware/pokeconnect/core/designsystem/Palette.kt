@@ -11,6 +11,8 @@ data class Palette(
     val onSecondary: Color,
     val secondaryContainer: Color,
     val onSecondaryContainer: Color,
+    val favorite: Color,
+    val notFavorite: Color,
 )
 
 internal val paletteLight = Palette(
@@ -18,7 +20,9 @@ internal val paletteLight = Palette(
     onBackground = Black,
     onSecondary = WhiteGray,
     secondaryContainer = LightGray,
-    onSecondaryContainer = DarkBlue
+    onSecondaryContainer = DarkBlue,
+    favorite = FavoriteRed,
+    notFavorite = NotFavoriteRed,
 )
 
 internal val paletteDark = Palette(
@@ -26,7 +30,9 @@ internal val paletteDark = Palette(
     onBackground = White,
     onSecondary = WhiteGray,
     secondaryContainer = DarkBlue,
-    onSecondaryContainer = White
+    onSecondaryContainer = White,
+    favorite = FavoriteRed,
+    notFavorite = NotFavoriteRed,
 )
 
 data class FixedPalette(
