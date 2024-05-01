@@ -2,7 +2,7 @@ package com.artemissoftware.pokeconnect.core.network.source
 
 import com.artemissoftware.pokeconnect.core.network.HandleApi
 import com.artemissoftware.pokeconnect.core.network.PokeApi
-import com.artemissoftware.pokeconnect.core.network.dto.PokemonDto
+import com.artemissoftware.pokeconnect.core.network.dto.pokemon.PokemonDto
 import com.artemissoftware.pokeconnect.core.network.dto.pokedex.PokedexPageDto
 import javax.inject.Inject
 

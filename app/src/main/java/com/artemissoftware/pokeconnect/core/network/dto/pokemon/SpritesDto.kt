@@ -14,7 +14,7 @@ data class SpritesDto(
     @field:Json(name = "back_shiny_female")
     val backShinyFemale: String? = null,
     @field:Json(name = "front_default")
-    val frontDefaul: String? = null,
+    val frontDefault: String = "",
     @field:Json(name = "front_female")
     val frontFemale: String? = null,
     @field:Json(name = "front_shiny")

@@ -1,8 +1,6 @@
-package com.artemissoftware.pokeconnect.core.network.dto
+package com.artemissoftware.pokeconnect.core.network.dto.pokemon
 
 
-import com.artemissoftware.pokeconnect.core.network.dto.pokemon.AbilityDto
-import com.artemissoftware.pokeconnect.core.network.dto.pokemon.MoveDto
 import com.squareup.moshi.Json
 
 data class PokemonDto(
@@ -21,7 +19,7 @@ data class PokemonDto(
 //    @field:Json(name = "held_items")
 //    val heldItems: List<Any> = listOf(), // TODO: encontrar exemplo
     @field:Json(name = "id")
-    val id: Int = 0,
+    val id: Int,
     @field:Json(name = "is_default")
     val isDefault: Boolean = false,
     @field:Json(name = "location_area_encounters")
@@ -29,7 +27,7 @@ data class PokemonDto(
     @field:Json(name = "moves")
     val moves: List<MoveDto> = emptyList(),
     @field:Json(name = "name")
-    val name: String = "",
+    val name: String,
     @field:Json(name = "order")
     val order: Int = 0,
 //    @field:Json(name = "past_abilities")
@@ -38,12 +36,12 @@ data class PokemonDto(
 //    val pastTypes: List<Any> = listOf(), // TODO: encontrar exemplo
 //    @field:Json(name = "species")
 //    val species: UrlNameDto = UrlNameDto(),
-//    @field:Json(name = "sprites")
-//    val sprites: SpritesDto = SpritesDto(),
-//    @Json(name = "stats")
-//    val stats: List<StatDto> = emptyList(),
+    @field:Json(name = "sprites")
+    val sprites: SpritesDto = SpritesDto(),
+    @field:Json(name = "stats")
+    val stats: List<StatDto> = emptyList(),
 //    @Json(name = "types")
 //    val types: List<TypeDto> = emptyList(),
-//    @field:Json(name = "weight")
+    @field:Json(name = "weight")
     val weight: Int = 0
 )
