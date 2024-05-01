@@ -1,5 +1,9 @@
 package com.artemissoftware.pokeconnect.data
 
+import com.artemissoftware.pokeconnect.core.database.entities.AbilityEntity
+import com.artemissoftware.pokeconnect.core.database.entities.PokemonEntity
+import com.artemissoftware.pokeconnect.core.database.entities.StatEntity
+import com.artemissoftware.pokeconnect.core.database.relations.PokemonRelation
 import com.artemissoftware.pokeconnect.core.models.PokedexEntry
 import com.artemissoftware.pokeconnect.core.models.Pokemon
 import com.artemissoftware.pokeconnect.core.models.Stat
@@ -46,19 +50,21 @@ object TestMockData {
         imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" + 1 + ".png",
     )
 
+    val stat =  Stat(
+        description = "hp",
+        value = 45,
+    )
+
+    val abilities = listOf("torrent")
+
     val pokemon = Pokemon(
         id = 1,
         name = "bulbasaur",
         height = 16,
         weight = 69,
         imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
-        stats = listOf(
-            Stat(
-                description = "hp",
-                value = 45,
-            )
-        ),
-        abilities = listOf("torrent")
+        stats = listOf(stat),
+        abilities = abilities
     )
 
     val pokemonDto = PokemonDto(
@@ -144,4 +150,31 @@ object TestMockData {
             )
         )
     }
+
+    val pokemonEntity = PokemonEntity(
+        id = 1,
+        name = "bulbasaur",
+        height = 16,
+        weight = 69,
+        imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+        description = ""
+    )
+
+    val statEntry = StatEntity(
+        pokemonId = 1,
+        description = "hp",
+        value = 45,
+    )
+
+
+    val abilityEntity = AbilityEntity(
+        pokemonId = 1,
+        description = "torrent",
+    )
+
+    val pokemonRelation = PokemonRelation(
+        pokemon = pokemonEntity,
+        stats = listOf(statEntry),
+        abilities = listOf(abilityEntity)
+    )
 }

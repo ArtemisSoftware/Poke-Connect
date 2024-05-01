@@ -16,10 +16,10 @@ interface PokemonDao {
     suspend fun insert(pokemonEntity: PokemonEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(abilityEntities: List<AbilityEntity>)
+    suspend fun insertAbilities(abilityEntities: List<AbilityEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(statsEntities: List<StatEntity>)
+    suspend fun insertStats(statsEntities: List<StatEntity>)
 
     @Transaction
     @Query("SELECT * FROM PokemonEntity WHERE id = :id")
@@ -28,8 +28,8 @@ interface PokemonDao {
     @Transaction
     suspend fun insert(pokemonEntity: PokemonEntity, statsEntities: List<StatEntity>, abilityEntities: List<AbilityEntity>) {
         insert(pokemonEntity = pokemonEntity)
-        insert(statsEntities = statsEntities)
-        insert(abilityEntities = abilityEntities)
+        insertStats(statsEntities = statsEntities)
+        insertAbilities(abilityEntities = abilityEntities)
     }
 
     @Query("DELETE FROM PokemonEntity WHERE id = :id")

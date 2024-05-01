@@ -1,5 +1,9 @@
 package com.artemissoftware.pokeconnect.core.data.mappers
 
+import com.artemissoftware.pokeconnect.core.database.entities.AbilityEntity
+import com.artemissoftware.pokeconnect.core.database.entities.PokemonEntity
+import com.artemissoftware.pokeconnect.core.database.entities.StatEntity
+import com.artemissoftware.pokeconnect.core.database.relations.PokemonRelation
 import com.artemissoftware.pokeconnect.core.models.PokedexEntry
 import com.artemissoftware.pokeconnect.core.models.Pokemon
 import com.artemissoftware.pokeconnect.core.models.Stat
@@ -28,6 +32,55 @@ fun PokemonDto.toPokemon(): Pokemon {
         abilities = abilities.map { it.ability.name },
         imageUrl = sprites.other.officialArtwork.toUrl(default = sprites.frontDefault)
     )
+}
+
+fun PokemonRelation.toPokemon(): Pokemon{
+    return Pokemon(
+        id = pokemon.id,
+        name = pokemon.name,
+        height = pokemon.height,
+        weight = pokemon.weight,
+        imageUrl = pokemon.imageUrl,
+        abilities = abilities.map { it.description },
+        stats = stats.map { it.toStat() }
+    )
+}
+
+fun Pokemon.toEntity(): PokemonEntity{
+    return PokemonEntity(
+        id = id,
+        name = name,
+        height = height,
+        weight = weight,
+        imageUrl = imageUrl,
+        description = "", // TODO: mudar isto
+    )
+}
+
+fun Pokemon.toAbilitiesEntity(): List<AbilityEntity>{
+    return abilities.map {
+        AbilityEntity(
+            pokemonId = id,
+            description = it,
+        )
+    }
+}
+
+fun StatEntity.toStat(): Stat{
+    return Stat(
+        description = description,
+        value = value,
+    )
+}
+
+fun Pokemon.toStatsEntity(): List<StatEntity>{
+    return stats.map {
+        StatEntity(
+            pokemonId = id,
+            description = it.description,
+            value = it.value,
+        )
+    }
 }
 
 private fun OfficialArtworkDto.toUrl(default: String): String{
