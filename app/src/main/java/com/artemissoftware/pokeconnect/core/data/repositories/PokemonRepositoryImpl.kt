@@ -4,10 +4,14 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
+import com.artemissoftware.pokeconnect.core.data.HandleNetwork
 import com.artemissoftware.pokeconnect.core.data.mappers.toPokedexEntry
+import com.artemissoftware.pokeconnect.core.data.mappers.toPokemon
 import com.artemissoftware.pokeconnect.core.data.pagination.PokemonListPagingSource
+import com.artemissoftware.pokeconnect.core.domain.Resource
 import com.artemissoftware.pokeconnect.core.domain.repositories.PokemonRepository
 import com.artemissoftware.pokeconnect.core.models.PokedexEntry
+import com.artemissoftware.pokeconnect.core.models.Pokemon
 import com.artemissoftware.pokeconnect.core.network.PokeApi
 import com.artemissoftware.pokeconnect.core.network.dto.pokedex.PokedexEntryDto
 import com.artemissoftware.pokeconnect.core.network.source.PokeApiSource
@@ -31,5 +35,11 @@ class PokemonRepositoryImpl @Inject constructor(
             .map { value: PagingData<PokedexEntryDto> ->
                 value.map { it.toPokedexEntry() }
             }
+    }
+
+    override suspend fun getPokemon(query: String): Resource<Pokemon> {
+        return HandleNetwork.safeNetworkCall {
+            pokeApiSource.getPokemon(query = query).toPokemon()
+        }
     }
 }

@@ -1,9 +1,13 @@
 package com.artemissoftware.pokeconnect.core.domain.repositories
 
 import androidx.paging.PagingData
+import com.artemissoftware.pokeconnect.core.domain.Resource
 import com.artemissoftware.pokeconnect.core.models.PokedexEntry
+import com.artemissoftware.pokeconnect.core.models.Pokemon
 import kotlinx.coroutines.flow.Flow
 
 interface PokemonRepository {
     fun getPokemonList(): Flow<PagingData<PokedexEntry>>
+
+    suspend fun getPokemon(query: String): Resource<Pokemon>
 }

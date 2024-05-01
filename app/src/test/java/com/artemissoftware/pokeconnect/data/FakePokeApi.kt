@@ -1,9 +1,10 @@
 package com.artemissoftware.pokeconnect.data
 
 import com.artemissoftware.pokeconnect.core.network.PokeApi
-import com.artemissoftware.pokeconnect.core.network.dto.pokemon.PokemonDto
 import com.artemissoftware.pokeconnect.core.network.dto.pokedex.PokedexPageDto
+import com.artemissoftware.pokeconnect.core.network.dto.pokemon.PokemonDto
 import com.artemissoftware.pokeconnect.data.TestMockData.pokedexPageDto
+import com.artemissoftware.pokeconnect.data.TestMockData.pokemonDto
 
 class FakePokeApi : PokeApi {
 
@@ -19,6 +20,11 @@ class FakePokeApi : PokeApi {
     }
 
     override suspend fun getPokemon(name: String): PokemonDto {
-        TODO("Not yet implemented")
+        if(callShouldReturnError){
+            throw RuntimeException()
+        }
+        else {
+            return pokemonDto
+        }
     }
 }
