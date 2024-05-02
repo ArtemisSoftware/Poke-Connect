@@ -12,7 +12,7 @@ import com.artemissoftware.pokeconnect.core.data.mappers.toPokemon
 import com.artemissoftware.pokeconnect.core.data.mappers.toStatsEntity
 import com.artemissoftware.pokeconnect.core.data.pagination.PokemonListPagingSource
 import com.artemissoftware.pokeconnect.core.database.dao.PokemonDao
-import com.artemissoftware.pokeconnect.core.database.relations.PokemonRelation
+import com.artemissoftware.pokeconnect.core.database.entities.PokemonEntity
 import com.artemissoftware.pokeconnect.core.domain.Resource
 import com.artemissoftware.pokeconnect.core.domain.repositories.PokemonRepository
 import com.artemissoftware.pokeconnect.core.models.PokedexEntry
@@ -61,7 +61,7 @@ class PokemonRepositoryImpl @Inject constructor(
         pokemonDao.delete(pokemon.toEntity())
     }
 
-    override fun getAll(): Flow<PagingData<Pokemon>> {
+    override fun getAll(): Flow<PagingData<PokedexEntry>> {
         return Pager(
             config = PagingConfig(
                 pageSize = 10,
@@ -71,9 +71,29 @@ class PokemonRepositoryImpl @Inject constructor(
                 pokemonDao.getAll()
             },
         ).flow
-            .map { value: PagingData<PokemonRelation> ->
-                value.map { it.toPokemon() }
+            .map { value: PagingData<PokemonEntity> ->
+                value.map { it.toPokedexEntry() }
             }
     }
 
+    override fun search(query: String): Flow<PagingData<PokedexEntry>> {
+        val (id, name) = getIdAndName(query)
+        return Pager(
+            config = PagingConfig(
+                pageSize = 10,
+                prefetchDistance = 20,
+            ),
+            pagingSourceFactory = {
+                pokemonDao.findPokemonByIdOrName(id = id, name = name)
+            },
+        ).flow
+            .map { value: PagingData<PokemonEntity> ->
+                value.map { it.toPokedexEntry() }
+            }
+    }
+
+    private fun getIdAndName(query: String): Pair<Int, String>{
+        val id: Int = query.toIntOrNull() ?: 0
+        return id to query
+    }
 }

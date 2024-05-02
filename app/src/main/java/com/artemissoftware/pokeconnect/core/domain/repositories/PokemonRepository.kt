@@ -15,5 +15,7 @@ interface PokemonRepository {
 
     suspend fun delete(pokemon: Pokemon)
 
-    fun getAll(): Flow<PagingData<Pokemon>>
+    fun getAll(): Flow<PagingData<PokedexEntry>>
+
+    fun search(query: String): Flow<PagingData<PokedexEntry>>
 }

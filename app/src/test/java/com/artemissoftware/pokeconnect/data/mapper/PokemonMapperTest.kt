@@ -90,4 +90,9 @@ class PokemonMapperTest {
     fun `Map Pokemon to PokemonEntity`() {
         assertThat(pokemon.toEntity()).isEqualTo(pokemonEntity)
     }
+
+    @Test
+    fun `Map PokemonEntity to PokedexEntry`() {
+        assertThat(pokemonEntity.toPokedexEntry()).isEqualTo(pokedexEntry)
+    }
 }

@@ -84,6 +84,14 @@ fun Pokemon.toStatsEntity(): List<StatEntity>{
     }
 }
 
+fun PokemonEntity.toPokedexEntry(): PokedexEntry{
+    return PokedexEntry(
+        id = id,
+        name = name,
+        imageUrl = imageUrl
+    )
+}
+
 private fun OfficialArtworkDto.toUrl(default: String): String{
     return when{
         frontDefault != null -> frontDefault

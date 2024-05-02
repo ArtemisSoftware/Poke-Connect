@@ -35,7 +35,10 @@ interface PokemonDao {
     suspend fun getPokemon(id: Int): PokemonRelation
 
     @Query("SELECT * FROM PokemonEntity ORDER BY id ASC")
-    fun getAll(): PagingSource<Int, PokemonRelation>
+    fun getAll(): PagingSource<Int, PokemonEntity>
+
+    @Query("SELECT * FROM PokemonEntity WHERE id = :id OR name LIKE :name ORDER BY id ASC")
+    fun findPokemonByIdOrName(id: Int, name: String): PagingSource<Int, PokemonEntity>
 
     @Delete
     suspend fun delete(pokemonEntity: PokemonEntity)
