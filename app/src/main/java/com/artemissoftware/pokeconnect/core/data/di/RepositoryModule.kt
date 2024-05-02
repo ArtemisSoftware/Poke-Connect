@@ -1,6 +1,7 @@
 package com.artemissoftware.pokeconnect.core.data.di
 
 import com.artemissoftware.pokeconnect.core.data.repositories.PokemonRepositoryImpl
+import com.artemissoftware.pokeconnect.core.database.dao.PokemonDao
 import com.artemissoftware.pokeconnect.core.domain.repositories.PokemonRepository
 import com.artemissoftware.pokeconnect.core.network.source.PokeApiSource
 import dagger.Module
@@ -15,7 +16,7 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun providePokemonRepository(pokeApiSource: PokeApiSource): PokemonRepository {
-        return PokemonRepositoryImpl(pokeApiSource = pokeApiSource)
+    fun providePokemonRepository(pokeApiSource: PokeApiSource, pokemonDao: PokemonDao): PokemonRepository {
+        return PokemonRepositoryImpl(pokeApiSource = pokeApiSource, pokemonDao = pokemonDao)
     }
 }
