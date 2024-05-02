@@ -4,9 +4,9 @@ import com.artemissoftware.pokeconnect.core.domain.repositories.PokemonRepositor
 import com.artemissoftware.pokeconnect.core.models.Pokemon
 import javax.inject.Inject
 
-class SetFavoriteUseCase @Inject constructor(private val pokemonRepository: PokemonRepository) {
-    suspend operator fun invoke(pokemon: Pokemon, isFavorite: Boolean){
-        if(isFavorite){
+class UpdateFavoriteUseCase @Inject constructor(private val pokemonRepository: PokemonRepository) {
+    suspend operator fun invoke(pokemon: Pokemon){
+        if(pokemon.isFavorite){
             pokemonRepository.delete(pokemon = pokemon)
         }
         else {

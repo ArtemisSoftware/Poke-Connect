@@ -13,4 +13,6 @@
     <string name="unknown_error">Unknown error</string>
     <string name="unknown_host_error">Unknown host error</string>
     <string name="error_not_mapped">Error not mapped</string>
+    <string name="search">Search</string>
+    <string name="search_name_number">Search by name or number</string>
 </resources>

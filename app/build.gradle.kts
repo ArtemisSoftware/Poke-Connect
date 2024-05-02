@@ -63,10 +63,13 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
 
+    implementation(libs.lifecycle.runtime.compose)
+
     implementation(libs.retrofit)
     implementation(libs.converter.moshi)
 
     implementation(libs.hilt.android)
+    implementation(libs.hilt.navigation.compose)
     ksp(libs.hilt.android.compiler)
 
     implementation(libs.paging.compose)
