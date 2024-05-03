@@ -20,6 +20,7 @@ coil-compose = "2.5.0"
 kotlinPlugin = "1.8.10"
 room = "2.4.3"
 lifecycle-runtime-compose = "2.7.0"
+palette = "1.0.0"
 
 # test
 
@@ -79,6 +80,9 @@ room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room"  }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room"  }
 room-paging = { group = "androidx.room", name = "room-paging", version.ref = "room" }
+
+palette = { group = "androidx.palette", name = "palette-ktx", version.ref = "palette" }
+
 
 # Test
 
