@@ -10,6 +10,7 @@ import androidx.room.Transaction
 import com.artemissoftware.pokeconnect.core.database.entities.AbilityEntity
 import com.artemissoftware.pokeconnect.core.database.entities.PokemonEntity
 import com.artemissoftware.pokeconnect.core.database.entities.StatEntity
+import com.artemissoftware.pokeconnect.core.database.entities.TypeEntity
 import com.artemissoftware.pokeconnect.core.database.relations.PokemonRelation
 
 @Dao
@@ -23,16 +24,25 @@ interface PokemonDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertStats(statsEntities: List<StatEntity>)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertTypes(typesEntities: List<TypeEntity>)
+
     @Transaction
-    suspend fun insert(pokemonEntity: PokemonEntity, statsEntities: List<StatEntity>, abilityEntities: List<AbilityEntity>) {
+    suspend fun insert(
+        pokemonEntity: PokemonEntity,
+        statsEntities: List<StatEntity>,
+        abilityEntities: List<AbilityEntity>,
+        typesEntities: List<TypeEntity>,
+    ) {
         insertPokemon(pokemonEntity = pokemonEntity)
         insertStats(statsEntities = statsEntities)
         insertAbilities(abilityEntities = abilityEntities)
+        insertTypes(typesEntities = typesEntities)
     }
 
     @Transaction
     @Query("SELECT * FROM PokemonEntity WHERE id = :id")
-    suspend fun getPokemon(id: Int): PokemonRelation
+    suspend fun getPokemon(id: Int): PokemonRelation?
 
     @Query("SELECT * FROM PokemonEntity ORDER BY id ASC")
     fun getAll(): PagingSource<Int, PokemonEntity>
