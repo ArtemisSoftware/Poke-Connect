@@ -101,6 +101,7 @@ dependencies {
     androidTestImplementation(libs.assertk)
     androidTestImplementation(libs.core.testing)
     androidTestImplementation(libs.hilt.android.testing)
+    androidTestImplementation(libs.junit.jupiter.api)
 
     kspAndroidTest(libs.hilt.android.compiler)
 
