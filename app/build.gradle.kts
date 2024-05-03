@@ -67,6 +67,9 @@ dependencies {
 
     implementation(libs.lifecycle.runtime.compose)
 
+    implementation(libs.navigation.compose)
+    implementation(libs.gson)
+
     implementation(libs.retrofit)
     implementation(libs.converter.moshi)
 
