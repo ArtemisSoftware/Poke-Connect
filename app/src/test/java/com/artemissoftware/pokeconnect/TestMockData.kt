@@ -63,7 +63,7 @@ object TestMockData {
     val types = listOf(PokemonType.GRASS)
 
 
-    val pokemon = Pokemon(
+    val pokemonFromApi = Pokemon(
         id = 1,
         name = "bulbasaur",
         height = 16,
@@ -74,7 +74,7 @@ object TestMockData {
         types = types,
     )
 
-    val pokemon2 = Pokemon(
+    val pokemonFromDb = Pokemon(
         id = 1,
         name = "bulbasaur",
         height = 16,
