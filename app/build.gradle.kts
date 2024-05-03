@@ -12,13 +12,14 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.artemissoftware.pokeconnect.HiltTestRunner"
-        minSdk = 33
+        applicationId = "com.artemissoftware.pokeconnect"
+        minSdk = 31
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        //testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.artemissoftware.pokeconnect.HiltTestRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
