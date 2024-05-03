@@ -12,7 +12,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.artemissoftware.pokeconnect"
+        applicationId = "com.artemissoftware.pokeconnect.HiltTestRunner"
         minSdk = 33
         targetSdk = 34
         versionCode = 1
