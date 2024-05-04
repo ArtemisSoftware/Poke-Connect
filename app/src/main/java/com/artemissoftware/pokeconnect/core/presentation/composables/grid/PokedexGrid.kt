@@ -3,37 +3,48 @@ package com.artemissoftware.pokeconnect.core.presentation.composables.grid
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.itemContentType
+import androidx.paging.compose.itemKey
 import com.artemissoftware.pokeconnect.core.designsystem.PokeConnectTheme
 import com.artemissoftware.pokeconnect.core.designsystem.ThemePreviews
 import com.artemissoftware.pokeconnect.core.designsystem.spacing
+import com.artemissoftware.pokeconnect.core.designsystem.window
 import com.artemissoftware.pokeconnect.core.models.PokedexEntry
 import com.artemissoftware.pokeconnect.core.presentation.composables.card.PokedexEntryCard
 import com.artemissoftware.pokeconnect.core.presentation.composables.card.ShimmerPokedexEntryCard
-import com.artemissoftware.pokeconnect.features.PreviewData
 
 @Composable
 fun PokedexGrid(
-    pokedexEntries: List<PokedexEntry>,
+    state: LazyGridState,
+    pokedexEntries: LazyPagingItems<PokedexEntry>,
     onClick: (PokedexEntry) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyVerticalGrid(
+        state = state,
         modifier = modifier,
-        columns = GridCells.Fixed(2),
+        columns = GridCells.Fixed(getGridItemCount()),
         horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.spacing1_5),
         verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.spacing1_5),
     ) {
-        items(pokedexEntries){ entry ->
-            PokedexEntryCard(
-                pokedexEntry = entry,
-                modifier = Modifier.fillMaxWidth(),
-                onClick = { onClick(entry) },
-            )
+        items(
+            count = pokedexEntries.itemCount,
+            key = pokedexEntries.itemKey { it.id },
+            contentType = pokedexEntries.itemContentType { "pokemon" },
+        ) {
+            pokedexEntries[it]?.let { entry ->
+                PokedexEntryCard(
+                    pokedexEntry = entry,
+                    modifier = Modifier.fillMaxWidth(),
+                    onClick = { onClick(entry) },
+                )
+            }
         }
     }
 }
@@ -44,7 +55,7 @@ fun ShimmerPokedexGrid(
 ) {
     LazyVerticalGrid(
         modifier = modifier,
-        columns = GridCells.Fixed(2),
+        columns = GridCells.Fixed(getGridItemCount()),
         horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.spacing1_5),
         verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.spacing1_5),
     ) {
@@ -56,15 +67,13 @@ fun ShimmerPokedexGrid(
     }
 }
 
-@ThemePreviews
 @Composable
-private fun PokedexGridPreview() {
-    PokeConnectTheme {
-        PokedexGrid(
-            pokedexEntries = PreviewData.pokedexEntries,
-            modifier = Modifier.fillMaxWidth(),
-            onClick = {},
-        )
+private fun getGridItemCount(): Int{
+    return if(MaterialTheme.window.isLandScape()){
+        4
+    }
+    else{
+        2
     }
 }
 
