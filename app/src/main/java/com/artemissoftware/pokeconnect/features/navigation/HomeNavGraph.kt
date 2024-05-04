@@ -2,7 +2,9 @@ package com.artemissoftware.pokeconnect.features.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NamedNavArgument
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import androidx.navigation.NavOptions
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -11,12 +13,16 @@ import com.artemissoftware.pokeconnect.features.detail.DetailScreen
 import com.artemissoftware.pokeconnect.features.favorites.FavoritesScreen
 import com.artemissoftware.pokeconnect.features.pokedex.PokedexScreen
 
+const val HOME_GRAPH = "home_graph"
+
 @Composable
-fun RootNavGraph(
+fun HomeNavGraph(
     navController: NavHostController,
+    startDestination: String,
 ) {
     NavHost(
-        startDestination = Route.Pokedex.fullRoute(),
+        startDestination = startDestination,
+        route = HOME_GRAPH,
         navController = navController,
     ) {
 
@@ -55,6 +61,9 @@ fun RootNavGraph(
 
     }
 }
+
+fun NavController.navigateToPokedex(navOptions: NavOptions) = navigate(Route.Pokedex.fullRoute(), navOptions)
+fun NavController.navigateToFavorites(navOptions: NavOptions) = navigate(Route.Favorites.fullRoute(), navOptions)
 
 fun NavHostController.navigateToDetail(query: String) = this.navigate(Route.Detail.withCustomArgs(query))
 
