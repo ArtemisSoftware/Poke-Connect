@@ -1,14 +1,17 @@
 package com.artemissoftware.pokeconnect.features.detail
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ScrollableTabRow
@@ -33,7 +36,9 @@ import com.artemissoftware.pokeconnect.R
 import com.artemissoftware.pokeconnect.core.designsystem.PokeConnectTheme
 import com.artemissoftware.pokeconnect.core.designsystem.ThemePreviews
 import com.artemissoftware.pokeconnect.core.designsystem.spacing
+import com.artemissoftware.pokeconnect.core.designsystem.window.WindowContent
 import com.artemissoftware.pokeconnect.core.presentation.composables.scaffold.PCScaffold
+import com.artemissoftware.pokeconnect.core.presentation.composables.scaffold.PCScaffoldDouble
 import com.artemissoftware.pokeconnect.core.ui.palette.PaletteColor
 import com.artemissoftware.pokeconnect.core.ui.panel.Panel
 import com.artemissoftware.pokeconnect.core.ui.placeholder.PlaceHolderContent
@@ -85,12 +90,45 @@ private fun DetailScreenContent(
         mutableStateOf( PaletteColor())
     }
 
-    LaunchedEffect(key1 = state.pokemon) {
+    val isDarkMode = isSystemInDarkTheme()
+
+    LaunchedEffect(key1 = state.pokemon, key2 = isDarkMode) {
         state.pokemon?.let {
-            paletteColor = PaletteUtil.getPaletteFromImageUrl(context = context, imageUrl = it.imageUrl)
+            paletteColor = PaletteUtil.getPaletteFromImageUrl(context = context, imageUrl = it.imageUrl, isDarkMode)
         }
     }
 
+    WindowContent(
+        landScapeContent = {
+            LandScapeContent(
+                state = state,
+                pagerState = pagerState,
+                paletteColor = paletteColor,
+                event = event,
+                onPopBack = onPopBack,
+            )
+        },
+        portraitContent = {
+            PortraitContent(
+                state = state,
+                pagerState = pagerState,
+                paletteColor = paletteColor,
+                event = event,
+                onPopBack = onPopBack,
+            )
+        }
+    )
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+private fun PortraitContent(
+    state: DetailState,
+    pagerState: PagerState,
+    paletteColor: PaletteColor,
+    event: (DetailEvent) -> Unit,
+    onPopBack: () -> Unit,
+) {
     PCScaffold(
         isLoading = state.isLoading,
         content = {
@@ -105,7 +143,9 @@ private fun DetailScreenContent(
 
             if (state.pokemon != null) {
                 Column(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .navigationBarsPadding(),
                     verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.spacing1_5)
                 ) {
                     DetailTopBar(
@@ -179,6 +219,119 @@ private fun DetailScreenContent(
             }
         },
         error = state.error,
+    )
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+private fun LandScapeContent(
+    state: DetailState,
+    pagerState: PagerState,
+    paletteColor: PaletteColor,
+    event: (DetailEvent) -> Unit,
+    onPopBack: () -> Unit,
+) {
+    PCScaffoldDouble(
+        isLoading = state.isLoading,
+        error = state.error,
+        contentLeft = {
+            Box(modifier = Modifier.fillMaxSize()) {
+                Panel(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight(0.6F),
+                    color = paletteColor.background,
+                )
+            }
+            state.pokemon?.let {
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .navigationBarsPadding(),
+                    verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.spacing1_5)
+                ) {
+                    DetailTopBar(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = MaterialTheme.spacing.spacing0_5),
+                        name = state.pokemon.name,
+                        isFavorite = state.pokemon.isFavorite,
+                        onBackClick = onPopBack,
+                        palette = paletteColor,
+                        onFavoriteClick = {
+                            event(DetailEvent.UpdateFavorite)
+                        },
+                    )
+
+                    Display(
+                        paletteColor = paletteColor,
+                        pokemon = state.pokemon,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                }
+            }
+        },
+        contentRight = {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .navigationBarsPadding(),
+                verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.spacing1_5)
+            ) {
+                state.pokemon?.let {
+                    ScrollableTabRow(
+                        modifier = Modifier.fillMaxWidth(),
+                        selectedTabIndex = state.selectedTabIndex,
+                        edgePadding = 0.dp
+                    ) {
+                        state.tabs.forEachIndexed { index, tabItem ->
+                            Tab(
+                                selected = index == state.selectedTabIndex,
+                                onClick = {
+                                    event(DetailEvent.UpdateSelectedTab(index))
+                                },
+                                text = {
+                                    val alpha = if (index == state.selectedTabIndex) 1F else 0.3f
+                                    Text(
+                                        modifier = Modifier.alpha(alpha),
+                                        text = stringResource(id = tabItem.title),
+                                        textAlign = TextAlign.Center,
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        fontWeight = FontWeight.Bold,
+                                    )
+                                },
+                            )
+                        }
+                    }
+                    HorizontalPager(
+                        state = pagerState,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                    ) { index ->
+                        when (DetailTab.getTabByIndex(index)) {
+                            ABOUT -> AboutPage(
+                                pokemon = it,
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(all = MaterialTheme.spacing.spacing3),
+                            )
+
+                            STATS -> StatsPage(
+                                paletteColor = paletteColor,
+                                stats = it.stats,
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(all = MaterialTheme.spacing.spacing3),
+                            )
+
+                            NOT_FOUND -> PlaceHolderContent(
+                                message = stringResource(id = R.string.page_not_found)
+                            )
+                        }
+                    }
+                }
+            }
+        },
     )
 }
 
