@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -45,6 +46,28 @@ fun PokedexGrid(
                     onClick = { onClick(entry) },
                 )
             }
+        }
+    }
+}
+
+@Composable
+fun PokedexGrid(
+    pokedexEntries: List<PokedexEntry>,
+    onClick: (PokedexEntry) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    LazyVerticalGrid(
+        modifier = modifier,
+        columns = GridCells.Fixed(getGridItemCount()),
+        horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.spacing1_5),
+        verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.spacing1_5),
+    ) {
+        items(pokedexEntries) { entry ->
+            PokedexEntryCard(
+                pokedexEntry = entry,
+                modifier = Modifier.fillMaxWidth(),
+                onClick = { onClick(entry) },
+            )
         }
     }
 }

@@ -4,7 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.artemissoftware.pokeconnect.R
-import com.artemissoftware.pokeconnect.core.domain.usecases.GetPokemonUseCase
+import com.artemissoftware.pokeconnect.core.domain.usecases.SearchPokemonUseCase
 import com.artemissoftware.pokeconnect.core.domain.usecases.UpdateFavoriteUseCase
 import com.artemissoftware.pokeconnect.core.presentation.models.ErrorData
 import com.artemissoftware.pokeconnect.core.presentation.util.extensions.toUiText
@@ -20,7 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 internal class DetailViewModel @Inject constructor(
-    private val getPokemonUseCase: GetPokemonUseCase,
+    private val searchPokemonUseCase: SearchPokemonUseCase,
     private val updateFavoriteUseCase: UpdateFavoriteUseCase,
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
@@ -55,10 +55,10 @@ internal class DetailViewModel @Inject constructor(
         updateLoading(true)
 
         viewModelScope.launch {
-            getPokemonUseCase(query = id)
+            searchPokemonUseCase(query = id)
                 .onSuccess { pokemon ->
                     updateState {
-                        it.copy(pokemon = pokemon, isLoading = false, error = null)
+                        it.copy(pokemon = pokemon.first(), isLoading = false, error = null)
                     }
                 }
                 .onFailure { error ->

@@ -57,7 +57,7 @@ internal object PreviewData {
 
     val pokedexState_search_complete = PokedexState(
         isSearching = false,
-        searchResult = pokemon,
+        searchResult = listOf(pokemon),
         searchQuery = pokemon.name,
     )
 

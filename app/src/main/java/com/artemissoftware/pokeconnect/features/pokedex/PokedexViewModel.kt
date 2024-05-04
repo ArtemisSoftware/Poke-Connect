@@ -6,7 +6,6 @@ import androidx.paging.cachedIn
 import com.artemissoftware.pokeconnect.R
 import com.artemissoftware.pokeconnect.core.domain.usecases.GetPokedexUseCase
 import com.artemissoftware.pokeconnect.core.domain.usecases.SearchPokemonUseCase
-import com.artemissoftware.pokeconnect.core.domain.usecases.UpdateFavoriteUseCase
 import com.artemissoftware.pokeconnect.core.presentation.models.ErrorData
 import com.artemissoftware.pokeconnect.core.presentation.util.extensions.toUiText
 import com.artemissoftware.pokeconnect.core.ui.text.UiText
@@ -22,7 +21,6 @@ import javax.inject.Inject
 internal class PokedexViewModel @Inject constructor(
     private val getPokedexUseCase: GetPokedexUseCase,
     private val searchPokemonUseCase: SearchPokemonUseCase,
-    private val updateFavoriteUseCase: UpdateFavoriteUseCase,
 ): ViewModel() {
 
     private val _state = MutableStateFlow(PokedexState())
@@ -43,11 +41,6 @@ internal class PokedexViewModel @Inject constructor(
             is PokedexEvent.UpdateSearchQuery -> {
                 updateSearchQuery(searchQuery = event.searchQuery)
             }
-
-            PokedexEvent.UpdateFavorite -> {
-                updateFavorite()
-            }
-
             PokedexEvent.ClearSearch -> clearSearch()
         }
     }
@@ -75,7 +68,7 @@ internal class PokedexViewModel @Inject constructor(
                 .onFailure { error ->
                     update {
                         it.copy(
-                            searchResult = null,
+                            searchResult = emptyList(),
                             isLoading = false,
                             error = ErrorData(
                                 message = error.toUiText(),
@@ -92,18 +85,6 @@ internal class PokedexViewModel @Inject constructor(
 
     private fun reloadSearch(){ search() }
 
-    private fun updateFavorite() = with(_state) {
-        viewModelScope.launch {
-            value.searchResult?.let { result ->
-                updateFavoriteUseCase(result)
-
-                val pokemon = result.copy(isFavorite = !result.isFavorite)
-                update {
-                    it.copy(searchResult = pokemon)
-                }
-            }
-        }
-    }
 
     private fun updateSearchQuery(searchQuery: String) = with(_state) {
         update {

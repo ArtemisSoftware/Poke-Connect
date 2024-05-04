@@ -44,12 +44,20 @@ interface PokemonDao {
     @Query("SELECT * FROM PokemonEntity WHERE id = :id")
     suspend fun getPokemon(id: Int): PokemonRelation?
 
+    @Transaction
+    @Query("SELECT * FROM PokemonEntity WHERE id = :id OR name LIKE '%' || :name || '%' ORDER BY id ASC")
+    suspend fun getPokemon(id: Int, name: String): List<PokemonRelation>
+
     @Query("SELECT * FROM PokemonEntity ORDER BY id ASC")
     fun getAll(): PagingSource<Int, PokemonEntity>
+
 
     @Query("SELECT * FROM PokemonEntity WHERE id = :id OR name LIKE '%' || :name || '%' ORDER BY id ASC")
     fun findPokemonByIdOrName(id: Int, name: String): PagingSource<Int, PokemonEntity>
 
     @Delete
     suspend fun delete(pokemonEntity: PokemonEntity)
+
+    @Query("SELECT EXISTS(SELECT 1 FROM PokemonEntity WHERE id = :id)")
+    suspend fun doesItemExist(id: Int): Boolean
 }

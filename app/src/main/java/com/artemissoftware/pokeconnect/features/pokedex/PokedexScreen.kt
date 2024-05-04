@@ -41,14 +41,12 @@ import com.artemissoftware.pokeconnect.core.designsystem.palette
 import com.artemissoftware.pokeconnect.core.designsystem.shape
 import com.artemissoftware.pokeconnect.core.designsystem.spacing
 import com.artemissoftware.pokeconnect.core.designsystem.window.WindowContent
-import com.artemissoftware.pokeconnect.core.designsystem.window.WindowSize
 import com.artemissoftware.pokeconnect.core.presentation.composables.grid.PokedexGrid
 import com.artemissoftware.pokeconnect.core.presentation.composables.grid.ShimmerPokedexGrid
 import com.artemissoftware.pokeconnect.core.presentation.composables.pagination.PaginationContent
 import com.artemissoftware.pokeconnect.core.presentation.composables.scaffold.PCScaffold
 import com.artemissoftware.pokeconnect.core.ui.placeholder.PlaceHolderContent
 import com.artemissoftware.pokeconnect.features.PreviewData
-import com.artemissoftware.pokeconnect.features.pokedex.composables.SearchContent
 
 @Composable
 internal fun PokedexScreen(
@@ -73,7 +71,6 @@ private fun PokedexScreenContent(
     event: (PokedexEvent) -> Unit,
     navigateToDetails: (String) -> Unit,
     navigateToFavorites: () -> Unit,
-    windowSize: WindowSize? = null,
 ) {
 
     val gridState = rememberLazyGridState()
@@ -191,18 +188,15 @@ private fun PokedexScreenContent(
                     exit = fadeOut()
                 ) {
                     if (state.searchQuery.isNotEmpty()) {
-                        SearchContent(
-                            isLoading = state.isLoading,
-                            pokemon = state.searchResult,
-                            onClick = {
-                                navigateToDetails(it.toString())
-                            },
-                            onFavorite = {
-                                event(PokedexEvent.UpdateFavorite)
-                            },
+
+                        PokedexGrid(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(horizontal = MaterialTheme.spacing.spacing3),
+                            pokedexEntries = state.searchPokedexResult(),
+                            onClick = { entry ->
+                                navigateToDetails(entry.id.toString())
+                            },
                         )
                     } else {
                         state.pokedex?.let {

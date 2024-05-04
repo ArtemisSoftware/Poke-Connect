@@ -1,5 +1,9 @@
 package com.artemissoftware.pokeconnect.core.models
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Pokemon(
     val id: Int,
     val description: String = "", // TODO: alterar depois
@@ -11,4 +15,4 @@ data class Pokemon(
     val stats: List<Stat> = emptyList(),
     val abilities: List<String> = emptyList(),
     val types: List<PokemonType> = emptyList(),
-)
+): Parcelable

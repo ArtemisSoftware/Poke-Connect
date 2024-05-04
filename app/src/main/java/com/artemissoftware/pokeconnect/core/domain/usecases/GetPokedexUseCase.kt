@@ -4,5 +4,5 @@ import com.artemissoftware.pokeconnect.core.domain.repositories.PokemonRepositor
 import javax.inject.Inject
 
 class GetPokedexUseCase @Inject constructor(private val pokemonRepository: PokemonRepository) {
-    operator fun invoke() = pokemonRepository.getPokemonList()
+    operator fun invoke() = pokemonRepository.getPokedex()
 }

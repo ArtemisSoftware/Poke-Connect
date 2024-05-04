@@ -15,6 +15,7 @@ import com.artemissoftware.pokeconnect.core.network.dto.pokedex.PokedexEntryDto
 import com.artemissoftware.pokeconnect.core.network.dto.pokemon.OfficialArtworkDto
 import com.artemissoftware.pokeconnect.core.network.dto.pokemon.PokemonDto
 import com.artemissoftware.pokeconnect.core.network.dto.pokemon.StatDto
+import com.artemissoftware.pokeconnect.core.network.dto.species.SpeciesDto
 import java.util.Locale
 
 internal fun PokedexEntryDto.toPokedexEntry(): PokedexEntry{
@@ -39,6 +40,20 @@ internal fun PokemonDto.toPokemon(): Pokemon {
     )
 }
 
+internal fun PokemonDto.toPokemon(speciesDto: SpeciesDto): Pokemon {
+    return Pokemon(
+        id = id,
+        name = name,
+        height = height,
+        weight = weight,
+        stats = stats.map { it.toStat() },
+        abilities = abilities.map { it.ability.name },
+        imageUrl = sprites.other.officialArtwork.toUrl(default = sprites.frontDefault),
+        types = types.map { PokemonType.getType(it.type.name) },
+        description = speciesDto.toDescription()
+    )
+}
+
 internal fun PokemonRelation.toPokemon(): Pokemon{
     return Pokemon(
         id = pokemon.id,
@@ -49,7 +64,8 @@ internal fun PokemonRelation.toPokemon(): Pokemon{
         isFavorite = true,
         abilities = abilities.map { it.description },
         stats = stats.map { it.toStat() },
-        types = types.map { PokemonType.getType(it.description) }
+        types = types.map { PokemonType.getType(it.description) },
+        description = pokemon.description
     )
 }
 
@@ -60,7 +76,7 @@ internal fun Pokemon.toEntity(): PokemonEntity{
         height = height,
         weight = weight,
         imageUrl = imageUrl,
-        description = "", // TODO: mudar isto
+        description = description,
     )
 }
 
@@ -87,6 +103,10 @@ private fun StatDto.toStat(): Stat{
         value = baseStat,
         description = stat.name
     )
+}
+
+private fun SpeciesDto.toDescription(): String{
+    return (this.flavorTextEntries.firstOrNull() { it.language.name == "en" }?.flavorText ?: "").replace("\n", " ")
 }
 
 private fun String.toAbbreviation(): String {

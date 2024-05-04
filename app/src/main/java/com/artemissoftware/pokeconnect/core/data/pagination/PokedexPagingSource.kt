@@ -10,7 +10,7 @@ import com.artemissoftware.pokeconnect.core.network.PokeApi
 import com.artemissoftware.pokeconnect.core.network.dto.pokedex.PokedexEntryDto
 import com.artemissoftware.pokeconnect.core.network.source.PokeApiSource
 
-class PokemonListPagingSource(
+class PokedexPagingSource(
     private val pokeApiSource: PokeApiSource,
 ) : PagingSource<Int, PokedexEntryDto>() {
 
