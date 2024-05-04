@@ -14,95 +14,73 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.sp
 import com.artemissoftware.pokeconnect.R
 
-private val fontFamily: FontFamily = FontFamily(
+private val poppinsFamily: FontFamily = FontFamily(
     listOf(
-        Font(R.font.poppins_bold),
+        //Font(R.font.poppins_bold),
         Font(R.font.poppins_regular),
-        Font(R.font.poppins_semibold),
+        //Font(R.font.poppins_semibold),
     ),
 )
 
 private val undefined = TextStyle()
 
-internal val displayMedium = TextStyle(
-    fontSize = 32.sp,
-    fontFamily = fontFamily,
-    fontWeight = FontWeight.Normal,
-)
-internal val displaySmall = TextStyle(
-    fontSize = 24.sp,
-    fontFamily = fontFamily,
-    fontWeight = FontWeight.Normal,
-)
+private val defaultTypography = Typography()
 
-internal val bodyMedium = TextStyle(
-    fontSize = 16.sp,
-    fontFamily = fontFamily,
-    fontWeight = FontWeight.Normal,
-)
-internal val bodySmall = TextStyle(
-    fontSize = 14.sp,
-    fontFamily = fontFamily,
-    fontWeight = FontWeight.Normal,
-)
+val Typography = Typography(
+    displayLarge = defaultTypography.displayLarge.copy(fontFamily = poppinsFamily),
+    displayMedium = defaultTypography.displayMedium.copy(fontFamily = poppinsFamily),
+    displaySmall = defaultTypography.displaySmall.copy(fontFamily = poppinsFamily),
 
-internal val labelSmall = TextStyle(
-    fontSize = 8.sp,
-    fontFamily = fontFamily,
-    fontWeight = FontWeight.Normal,
-)
+    headlineLarge = defaultTypography.headlineLarge.copy(fontFamily = poppinsFamily),
+    headlineMedium = defaultTypography.headlineMedium.copy(fontFamily = poppinsFamily),
+    headlineSmall = defaultTypography.headlineSmall.copy(fontFamily = poppinsFamily),
 
-internal val Typography = Typography(
-    displayLarge = undefined,
-    displayMedium = displayMedium,
-    displaySmall = displaySmall,
+    titleLarge = defaultTypography.titleLarge.copy(fontFamily = poppinsFamily),
+    titleMedium = defaultTypography.titleMedium.copy(fontFamily = poppinsFamily),
+    titleSmall = defaultTypography.titleSmall.copy(fontFamily = poppinsFamily),
 
-    headlineLarge = undefined,
-    headlineMedium = undefined,
-    headlineSmall = undefined,
+    bodyLarge = defaultTypography.bodyLarge.copy(fontFamily = poppinsFamily),
+    bodyMedium = defaultTypography.bodyMedium.copy(fontFamily = poppinsFamily),
+    bodySmall = defaultTypography.bodySmall.copy(fontFamily = poppinsFamily),
 
-    titleLarge = undefined,
-    titleMedium = undefined,
-    titleSmall = undefined,
-
-    bodyLarge = undefined,
-    bodyMedium = bodyMedium,
-    bodySmall = bodySmall,
-
-    labelLarge = undefined,
-    labelMedium = undefined,
-    labelSmall = labelSmall,
+    labelLarge = defaultTypography.labelLarge.copy(fontFamily = poppinsFamily),
+    labelMedium = defaultTypography.labelMedium.copy(fontFamily = poppinsFamily),
+    labelSmall = defaultTypography.labelSmall.copy(fontFamily = poppinsFamily)
 )
 
 @ThemePreviews
 @Composable
 private fun TypographyPreview() {
-    val typography = mapOf(
-        "undefined" to undefined,
-        "displayMedium" to displayMedium,
-        "displaySmall" to displaySmall,
-        "bodyMedium" to bodyMedium,
-        "bodySmall" to bodySmall,
-        "labelSmall" to labelSmall,
-    )
+    with(Typography){
+        val typography = mapOf(
+            "undefined" to undefined,
+            "displayMedium" to displayMedium,
+            "displaySmall" to displaySmall,
+            "bodyMedium" to bodyMedium,
+            "bodySmall" to bodySmall,
+            "labelLarge" to labelLarge,
+            "labelMedium" to labelMedium,
+            "labelSmall" to labelSmall,
 
-    PokeConnectTheme {
-        Surface {
-            LazyColumn(
-                modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.spacedBy(space = MaterialTheme.spacing.spacing0_5),
-            ) {
-                items(typography.toList()) { pair ->
-                    TypographyDescription(
-                        text = pair.first,
-                        textStyle = pair.second,
-                        modifier = Modifier.fillMaxWidth(),
-                    )
+
+)
+
+        PokeConnectTheme {
+            Surface {
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize(),
+                    verticalArrangement = Arrangement.spacedBy(space = MaterialTheme.spacing.spacing0_5),
+                ) {
+                    items(typography.toList()) { pair ->
+                        TypographyDescription(
+                            text = pair.first,
+                            textStyle = pair.second,
+                            modifier = Modifier.fillMaxWidth(),
+                        )
+                    }
                 }
             }
         }

@@ -1,7 +1,6 @@
 package com.artemissoftware.pokeconnect.core.network.dto.pokemon
 
 
-import com.artemissoftware.pokeconnect.core.network.dto.VersionsDto
 import com.squareup.moshi.Json
 
 data class SpritesDto(
@@ -23,6 +22,6 @@ data class SpritesDto(
     val frontShinyFemale: String? = null,
     @field:Json(name = "other")
     val other: OtherDto = OtherDto(),
-    @field:Json(name = "versions")
-    val versions: VersionsDto = VersionsDto()
+//    @field:Json(name = "versions")
+//    val versions: VersionsDto = VersionsDto()
 )

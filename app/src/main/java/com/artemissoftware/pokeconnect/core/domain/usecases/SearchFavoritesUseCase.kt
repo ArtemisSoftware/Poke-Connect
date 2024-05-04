@@ -1,8 +1,8 @@
 package com.artemissoftware.pokeconnect.core.domain.usecases
 
-import com.artemissoftware.pokeconnect.core.domain.repositories.PokemonRepository
+import com.artemissoftware.pokeconnect.core.domain.repositories.FavoritesRepository
 import javax.inject.Inject
 
-class SearchFavoritesUseCase @Inject constructor(private val pokemonRepository: PokemonRepository) {
-    operator fun invoke(query: String) = pokemonRepository.search(query)
+class SearchFavoritesUseCase @Inject constructor(private val favoritesRepository: FavoritesRepository) {
+    operator fun invoke(query: String) = favoritesRepository.search(query)
 }
