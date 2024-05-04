@@ -7,8 +7,9 @@ import androidx.paging.map
 import com.artemissoftware.pokeconnect.core.data.HandleNetwork
 import com.artemissoftware.pokeconnect.core.data.mappers.toPokedexEntry
 import com.artemissoftware.pokeconnect.core.data.mappers.toPokemon
-import com.artemissoftware.pokeconnect.core.data.pagination.PokemonListPagingSource
+import com.artemissoftware.pokeconnect.core.data.pagination.PokedexPagingSource
 import com.artemissoftware.pokeconnect.core.database.dao.PokemonDao
+import com.artemissoftware.pokeconnect.core.database.relations.PokemonRelation
 import com.artemissoftware.pokeconnect.core.domain.Resource
 import com.artemissoftware.pokeconnect.core.domain.repositories.PokemonRepository
 import com.artemissoftware.pokeconnect.core.models.PokedexEntry
@@ -16,6 +17,8 @@ import com.artemissoftware.pokeconnect.core.models.Pokemon
 import com.artemissoftware.pokeconnect.core.network.PokeApi
 import com.artemissoftware.pokeconnect.core.network.dto.pokedex.PokedexEntryDto
 import com.artemissoftware.pokeconnect.core.network.source.PokeApiSource
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import java.util.Locale
@@ -26,11 +29,11 @@ class PokemonRepositoryImpl @Inject constructor(
     private val pokemonDao: PokemonDao,
 ) : PokemonRepository {
 
-    override fun getPokemonList(): Flow<PagingData<PokedexEntry>> {
+    override fun getPokedex(): Flow<PagingData<PokedexEntry>> {
         return Pager(
             config = PagingConfig(pageSize = PokeApi.PAGE_SIZE),
             pagingSourceFactory = {
-                PokemonListPagingSource(
+                PokedexPagingSource(
                     pokeApiSource = pokeApiSource,
                 )
             },
@@ -40,21 +43,56 @@ class PokemonRepositoryImpl @Inject constructor(
             }
     }
 
-    override suspend fun getPokemon(query: String): Resource<Pokemon> {
+    override suspend fun searchPokedex(query: String): Resource<List<Pokemon>> {
+        val searchQuery = query.lowercase(Locale.ROOT)
 
-        val (id, name) = getIdAndName(query)
-        val pokemon = pokemonDao.getPokemon(id)
+        val result = searchLocally(searchQuery)
 
-        if(pokemon != null){
-            return Resource.Success(pokemon.toPokemon())
+        return if(result.isNotEmpty()){
+            Resource.Success(result.map { it.toPokemon() })
         }
-
-        return HandleNetwork.safeNetworkCall {
-            pokeApiSource.getPokemon(query = query.lowercase(Locale.ROOT)).toPokemon()
+        else {
+            searchRemotely(query = searchQuery)
         }
     }
 
+    private suspend fun searchLocally(query: String): List<PokemonRelation>{
+        val (id, name) = getIdAndName(query)
+        return pokemonDao.getPokemon(id = id, name = name)
+    }
 
+    private suspend fun searchRemotely(query: String): Resource<List<Pokemon>> {
+        return coroutineScope {
+
+            val deferredPokemon = async {
+                HandleNetwork.safeNetworkCall {
+                    pokeApiSource.getPokemon(query = query.lowercase(Locale.ROOT))
+                }
+            }
+
+            val deferredSpecies = async {
+                HandleNetwork.safeNetworkCall {
+                    pokeApiSource.getSpecies(query = query.lowercase(Locale.ROOT))
+                }
+            }
+
+            // Await the results of both async tasks
+            val resultPokemon = deferredPokemon.await()
+            val resultSpecies = deferredSpecies.await()
+
+            when{
+                resultPokemon is Resource.Success && resultSpecies is Resource.Success ->{
+                    Resource.Success(listOf(resultPokemon.data.toPokemon(resultSpecies.data)))
+                }
+                resultPokemon is Resource.Success ->{
+                    Resource.Success(listOf(resultPokemon.data.toPokemon()))
+                }
+                else -> {
+                    Resource.Failure((resultPokemon as Resource.Failure).error)
+                }
+            }
+        }
+    }
 
     private fun getIdAndName(query: String): Pair<Int, String>{
         val id: Int = query.toIntOrNull() ?: 0
