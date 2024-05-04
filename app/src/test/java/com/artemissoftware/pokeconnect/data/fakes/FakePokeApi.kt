@@ -1,10 +1,10 @@
-package com.artemissoftware.pokeconnect.data
+package com.artemissoftware.pokeconnect.data.fakes
 
 import com.artemissoftware.pokeconnect.core.network.PokeApi
 import com.artemissoftware.pokeconnect.core.network.dto.pokedex.PokedexPageDto
 import com.artemissoftware.pokeconnect.core.network.dto.pokemon.PokemonDto
-import com.artemissoftware.pokeconnect.data.TestMockData.pokedexPageDto
-import com.artemissoftware.pokeconnect.data.TestMockData.pokemonDto
+import com.artemissoftware.pokeconnect.TestMockData.pokedexPageDto
+import com.artemissoftware.pokeconnect.TestMockData.pokemonDto
 
 class FakePokeApi : PokeApi {
 
