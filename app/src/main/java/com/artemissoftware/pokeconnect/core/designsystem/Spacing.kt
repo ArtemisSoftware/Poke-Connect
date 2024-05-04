@@ -13,6 +13,7 @@ data class Spacing(
     val spacing2: Dp,
     val spacing3: Dp,
     val spacing4: Dp,
+    val spacing10: Dp,
 )
 
 internal val spacing = Spacing(
@@ -22,6 +23,7 @@ internal val spacing = Spacing(
     spacing2 = 16.dp,
     spacing3 = 24.dp,
     spacing4 = 32.dp,
+    spacing10 = 80.dp,
 )
 
 internal val localSpacing = staticCompositionLocalOf<Spacing> { throw IllegalStateException("No theme installed") }

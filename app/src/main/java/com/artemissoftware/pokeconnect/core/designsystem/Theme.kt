@@ -1,5 +1,6 @@
 package com.artemissoftware.pokeconnect.core.designsystem
 
+import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -7,13 +8,14 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalContext
 import com.artemissoftware.pokeconnect.core.designsystem.palette.pokemon.localPokemonPalette
 import com.artemissoftware.pokeconnect.core.designsystem.palette.pokemon.pokemonPalette
-import com.artemissoftware.pokeconnect.core.designsystem.window.WindowSize
-import com.artemissoftware.pokeconnect.core.designsystem.window.rememberWindowSize
 
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80,
@@ -37,10 +39,10 @@ private val LightColorScheme = lightColorScheme(
     */
 )
 
+@OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
 @Composable
 fun PokeConnectTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    windowSize: WindowSize = rememberWindowSize(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
@@ -63,10 +65,14 @@ fun PokeConnectTheme(
 //        }
 //    }
 
+    val context = LocalContext.current
+    val windowClass = calculateWindowSizeClass(context as Activity)
+    val isLandScape = windowClass.widthSizeClass != WindowWidthSizeClass.Compact //is land
+
     CompositionLocalProvider(
-        localWindow provides if(windowSize.isLandScape()) landScape else portrait,
+        localWindow provides if(isLandScape) landScape else portrait,
         localSpacing provides spacing,
-        localDimension provides if(windowSize.isLandScape()) dimensionLandScape else dimensionPortrait,
+        localDimension provides if(isLandScape) dimensionLandScape else dimensionPortrait,
         localShape provides shape,
         localPalette provides if (darkTheme) paletteDark else paletteLight,
         localFixedPalette provides fixedPalette,

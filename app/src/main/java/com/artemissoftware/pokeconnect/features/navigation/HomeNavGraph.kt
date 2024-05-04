@@ -1,6 +1,7 @@
 package com.artemissoftware.pokeconnect.features.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
@@ -9,6 +10,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.artemissoftware.pokeconnect.core.presentation.navigation.BaseDestination
 import com.artemissoftware.pokeconnect.features.detail.DetailScreen
 import com.artemissoftware.pokeconnect.features.favorites.FavoritesScreen
 import com.artemissoftware.pokeconnect.features.pokedex.PokedexScreen
@@ -19,8 +21,10 @@ const val HOME_GRAPH = "home_graph"
 fun HomeNavGraph(
     navController: NavHostController,
     startDestination: String,
+    modifier: Modifier = Modifier,
 ) {
     NavHost(
+        modifier = modifier,
         startDestination = startDestination,
         route = HOME_GRAPH,
         navController = navController,
@@ -31,17 +35,11 @@ fun HomeNavGraph(
                 navigateToDetails = {
                     navController.navigateToDetail(it)
                 },
-                navigateToFavorites = {
-                    navController.navigate(Route.Favorites.fullRoute())
-                },
             )
         }
 
         composable(route = Route.Favorites.fullRoute()) {
             FavoritesScreen(
-                onPopBack = {
-                    navController.popBackStack()
-                },
                 navigateToDetails = {
                     navController.navigateToDetail(it)
                 },

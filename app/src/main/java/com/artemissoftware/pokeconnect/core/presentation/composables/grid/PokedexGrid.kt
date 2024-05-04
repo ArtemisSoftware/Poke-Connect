@@ -93,7 +93,7 @@ fun ShimmerPokedexGrid(
 @Composable
 private fun getGridItemCount(): Int{
     return if(MaterialTheme.window.isLandScape()){
-        4
+        3
     }
     else{
         2

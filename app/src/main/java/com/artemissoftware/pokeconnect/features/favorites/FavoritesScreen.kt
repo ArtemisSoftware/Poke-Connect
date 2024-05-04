@@ -6,7 +6,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.animation.slideOutHorizontally
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,12 +15,10 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -44,7 +41,6 @@ import com.artemissoftware.pokeconnect.features.PreviewData
 
 @Composable
 internal fun FavoritesScreen(
-    onPopBack: () -> Unit,
     navigateToDetails: (String) -> Unit,
     viewModel: FavoritesViewModel = hiltViewModel(),
 ) {
@@ -55,7 +51,6 @@ internal fun FavoritesScreen(
         state = state,
         event = viewModel::onTriggerEvent,
         navigateToDetails = navigateToDetails,
-        onPopBack = onPopBack,
     )
 }
 
@@ -64,7 +59,6 @@ private fun FavoritesScreenContent(
     state: FavoritesState,
     event: (FavoriteEvent) -> Unit,
     navigateToDetails: (String) -> Unit,
-    onPopBack: () -> Unit,
 ) {
     val gridState = rememberLazyGridState()
     val searchBarSize = animateDpAsState(
@@ -102,7 +96,6 @@ private fun FavoritesScreenContent(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .padding(horizontal = MaterialTheme.spacing.spacing3),
-                                onPopBack = onPopBack
                             )
                         }
                     }
@@ -181,7 +174,6 @@ private fun FavoritesScreenContent(
 
 @Composable
 private fun Header(
-    onPopBack: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Row(
@@ -202,13 +194,6 @@ private fun Header(
                 style = MaterialTheme.typography.bodySmall,
             )
         }
-        Icon(
-            modifier = Modifier.clickable {
-                onPopBack()
-            },
-            painter = painterResource(id = R.drawable.ic_close),
-            contentDescription = null,
-        )
     }
 }
 
@@ -220,7 +205,6 @@ private fun FavoritesScreenContentPreview() {
             state = PreviewData.favoriteState,
             event = {},
             navigateToDetails = {},
-            onPopBack = {},
         )
     }
 }

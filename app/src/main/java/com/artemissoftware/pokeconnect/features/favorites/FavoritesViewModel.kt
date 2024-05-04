@@ -64,9 +64,6 @@ internal class FavoritesViewModel @Inject constructor(
         update {
             it.copy(searchQuery = searchQuery)
         }
-        if(searchQuery.isEmpty()){
-            activateSearch(isActive = false)
-        }
     }
 
     private fun updateHistory() = with(_state) {

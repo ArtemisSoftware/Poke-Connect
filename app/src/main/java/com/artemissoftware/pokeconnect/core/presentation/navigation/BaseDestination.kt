@@ -1,4 +1,4 @@
-package com.artemissoftware.pokeconnect.features.navigation
+package com.artemissoftware.pokeconnect.core.presentation.navigation
 
 import android.net.Uri
 import androidx.navigation.NamedNavArgument

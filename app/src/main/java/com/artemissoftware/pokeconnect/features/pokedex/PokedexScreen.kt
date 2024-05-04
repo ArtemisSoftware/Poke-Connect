@@ -6,26 +6,18 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.animation.slideOutHorizontally
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -36,9 +28,6 @@ import com.artemissoftware.pokeconnect.R
 import com.artemissoftware.pokeconnect.core.designsystem.PokeConnectTheme
 import com.artemissoftware.pokeconnect.core.designsystem.ThemePreviews
 import com.artemissoftware.pokeconnect.core.designsystem.composables.search.PCSearchBar
-import com.artemissoftware.pokeconnect.core.designsystem.dimension
-import com.artemissoftware.pokeconnect.core.designsystem.palette
-import com.artemissoftware.pokeconnect.core.designsystem.shape
 import com.artemissoftware.pokeconnect.core.designsystem.spacing
 import com.artemissoftware.pokeconnect.core.designsystem.window.WindowContent
 import com.artemissoftware.pokeconnect.core.presentation.composables.grid.PokedexGrid
@@ -51,7 +40,6 @@ import com.artemissoftware.pokeconnect.features.PreviewData
 @Composable
 internal fun PokedexScreen(
     navigateToDetails: (String) -> Unit,
-    navigateToFavorites: () -> Unit,
     viewModel: PokedexViewModel = hiltViewModel()
 ) {
 
@@ -61,7 +49,6 @@ internal fun PokedexScreen(
         state = state,
         event = viewModel::onTriggerEvent,
         navigateToDetails = navigateToDetails,
-        navigateToFavorites = navigateToFavorites,
     )
 }
 
@@ -70,7 +57,6 @@ private fun PokedexScreenContent(
     state: PokedexState,
     event: (PokedexEvent) -> Unit,
     navigateToDetails: (String) -> Unit,
-    navigateToFavorites: () -> Unit,
 ) {
 
     val gridState = rememberLazyGridState()
@@ -94,52 +80,7 @@ private fun PokedexScreenContent(
             ) {
 
                 WindowContent(
-                    landScapeContent = {
-
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceEvenly
-                        ) {
-                            PCSearchBar(
-                                modifier = Modifier
-                                    .weight(0.7F)
-                                    .padding(horizontal = searchBarSize.value),
-                                historyItems = state.searchHistory,
-                                text = state.searchQuery,
-                                placeHolderText = stringResource(id = R.string.name_number),
-                                isSearching = state.isSearching,
-                                onQueryChange = {
-                                    event(PokedexEvent.UpdateSearchQuery(searchQuery = it))
-                                },
-                                onSearch = {
-                                    event(PokedexEvent.SearchPokemon)
-                                },
-                                onActiveChange = {
-                                    event(PokedexEvent.ActivateSearch(isActive = it))
-                                },
-                                onClearSearch = {
-                                    event(PokedexEvent.ClearSearch)
-                                }
-                            )
-
-                            Image(
-                                painter = painterResource(R.drawable.ic_favourite_pokemon),
-                                contentDescription = "avatar",
-                                contentScale = ContentScale.Crop,
-                                modifier = Modifier
-                                    .size(MaterialTheme.dimension.iconSize)
-                                    .clip(MaterialTheme.shape.circular)
-                                    .border(
-                                        width = MaterialTheme.dimension.iconBorderWidth,
-                                        color = MaterialTheme.palette.onSecondary,
-                                        shape = MaterialTheme.shape.circular,
-                                    )
-                                    .clickable {
-                                        navigateToFavorites()
-                                    }
-                            )
-                        }
-                    },
+                    landScapeContent = {},
                     portraitContent = {
                         AnimatedVisibility(
                             visible = !state.isSearching,
@@ -154,31 +95,30 @@ private fun PokedexScreenContent(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .padding(horizontal = MaterialTheme.spacing.spacing3),
-                                navigateToFavorites = navigateToFavorites,
                             )
                         }
+                    }
+                )
 
-                        PCSearchBar(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(horizontal = searchBarSize.value),
-                            historyItems = state.searchHistory,
-                            text = state.searchQuery,
-                            placeHolderText = stringResource(id = R.string.name_number),
-                            isSearching = state.isSearching,
-                            onQueryChange = {
-                                event(PokedexEvent.UpdateSearchQuery(searchQuery = it))
-                            },
-                            onSearch = {
-                                event(PokedexEvent.SearchPokemon)
-                            },
-                            onActiveChange = {
-                                event(PokedexEvent.ActivateSearch(isActive = it))
-                            },
-                            onClearSearch = {
-                                event(PokedexEvent.ClearSearch)
-                            }
-                        )
+                PCSearchBar(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = searchBarSize.value),
+                    historyItems = state.searchHistory,
+                    text = state.searchQuery,
+                    placeHolderText = stringResource(id = R.string.name_number),
+                    isSearching = state.isSearching,
+                    onQueryChange = {
+                        event(PokedexEvent.UpdateSearchQuery(searchQuery = it))
+                    },
+                    onSearch = {
+                        event(PokedexEvent.SearchPokemon)
+                    },
+                    onActiveChange = {
+                        event(PokedexEvent.ActivateSearch(isActive = it))
+                    },
+                    onClearSearch = {
+                        event(PokedexEvent.ClearSearch)
                     }
                 )
 
@@ -228,7 +168,6 @@ private fun PokedexScreenContent(
                         }
                     }
                 }
-
             }
         },
         isLoading = state.isLoading,
@@ -238,42 +177,20 @@ private fun PokedexScreenContent(
 
 @Composable
 private fun Header(
-    navigateToFavorites: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Row(
+    Column(
         modifier = modifier,
-        horizontalArrangement = Arrangement.SpaceBetween,
-    ){
-        Column(
-            modifier = Modifier.weight(0.55F),
-            verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.spacing0_5)
-        ) {
-            Text(
-                text = stringResource(id = R.string.pokedex),
-                style = MaterialTheme.typography.titleLarge,
-                fontWeight = FontWeight.Bold,
-            )
-            Text(
-                text = stringResource(id = R.string.search_pokemon_by_name_number),
-                style = MaterialTheme.typography.bodySmall,
-            )
-        }
-        Image(
-            painter = painterResource(R.drawable.ic_favourite_pokemon),
-            contentDescription = "avatar",
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .size(MaterialTheme.dimension.iconSize)
-                .clip(MaterialTheme.shape.circular)
-                .border(
-                    width = MaterialTheme.dimension.iconBorderWidth,
-                    color = MaterialTheme.palette.onSecondary,
-                    shape = MaterialTheme.shape.circular,
-                )
-                .clickable {
-                    navigateToFavorites()
-                }
+        verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.spacing0_5)
+    ) {
+        Text(
+            text = stringResource(id = R.string.pokedex),
+            style = MaterialTheme.typography.titleLarge,
+            fontWeight = FontWeight.Bold,
+        )
+        Text(
+            text = stringResource(id = R.string.search_pokemon_by_name_number),
+            style = MaterialTheme.typography.bodySmall,
         )
     }
 }
@@ -286,7 +203,6 @@ private fun PokedexScreenContentPreview() {
             state = PreviewData.pokedexState,
             event = {},
             navigateToDetails = {},
-            navigateToFavorites = {},
         )
     }
 }
@@ -299,7 +215,6 @@ private fun PokedexScreenContent_SearchComplete_Preview() {
             state = PreviewData.pokedexState_search_complete,
             event = {},
             navigateToDetails = {},
-            navigateToFavorites = {},
         )
     }
 }
@@ -312,7 +227,6 @@ private fun PokedexScreenContent_Searching_Preview() {
             state = PreviewData.pokedexState_searching,
             event = {},
             navigateToDetails = {},
-            navigateToFavorites = {},
         )
     }
 }
