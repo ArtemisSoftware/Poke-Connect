@@ -2,10 +2,13 @@ package com.artemissoftware.pokeconnect.features
 
 import com.artemissoftware.pokeconnect.core.models.PokedexEntry
 import com.artemissoftware.pokeconnect.core.models.Pokemon
+import com.artemissoftware.pokeconnect.core.models.PokemonType
 import com.artemissoftware.pokeconnect.core.models.Stat
 import com.artemissoftware.pokeconnect.features.detail.DetailState
+import com.artemissoftware.pokeconnect.features.favorites.FavoritesState
+import com.artemissoftware.pokeconnect.features.pokedex.PokedexState
 
-object PreviewData {
+internal object PreviewData {
 
     val pokedexEntries = listOf(
         PokedexEntry(
@@ -34,15 +37,35 @@ object PreviewData {
         imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
         stats = listOf(
             Stat(
+                abbreviation = "Hp",
                 description = "hp",
                 value = 45,
             )
         ),
+        types = listOf(PokemonType.GRASS, PokemonType.POISON),
         abilities = listOf("overgrow", "chlorophyll")
     )
 
     val detailState = DetailState(
         selectedTabIndex = 0,
         pokemon = pokemon
+    )
+
+    val pokedexState_searching = PokedexState(
+        isSearching = true,
+    )
+
+    val pokedexState_search_complete = PokedexState(
+        isSearching = false,
+        searchResult = pokemon,
+        searchQuery = pokemon.name,
+    )
+
+    val pokedexState = PokedexState(
+        isSearching = false,
+    )
+
+    val favoriteState = FavoritesState(
+        isSearching = false,
     )
 }
