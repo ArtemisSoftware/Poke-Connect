@@ -185,58 +185,56 @@ private fun PokedexScreenContent(
                     }
                 )
 
-                if (state.error == null) {
-
-                    AnimatedVisibility(
-                        modifier = Modifier.padding(top = MaterialTheme.spacing.spacing1_5),
-                        visible = !state.isSearching,
-                        exit = fadeOut()
-                    ) {
-                        if (state.searchQuery.isNotEmpty()) {
-                            SearchContent(
-                                isLoading = state.isLoading,
-                                pokemon = state.searchResult,
-                                onClick = {
-                                    navigateToDetails(it.toString())
+                AnimatedVisibility(
+                    modifier = Modifier.padding(top = MaterialTheme.spacing.spacing1_5),
+                    visible = !state.isSearching && state.error == null,
+                    exit = fadeOut()
+                ) {
+                    if (state.searchQuery.isNotEmpty()) {
+                        SearchContent(
+                            isLoading = state.isLoading,
+                            pokemon = state.searchResult,
+                            onClick = {
+                                navigateToDetails(it.toString())
+                            },
+                            onFavorite = {
+                                event(PokedexEvent.UpdateFavorite)
+                            },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = MaterialTheme.spacing.spacing3),
+                        )
+                    } else {
+                        state.pokedex?.let {
+                            PaginationContent(
+                                items = it.collectAsLazyPagingItems(),
+                                loadingContent = {
+                                    ShimmerPokedexGrid(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(horizontal = MaterialTheme.spacing.spacing3)
+                                    )
                                 },
-                                onFavorite = {
-                                    event(PokedexEvent.UpdateFavorite)
+                                errorContent = { error ->
+                                    PlaceHolderContent(message = error.asString())
                                 },
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(horizontal = MaterialTheme.spacing.spacing3),
+                                content = { pokedexEntries ->
+                                    PokedexGrid(
+                                        state = gridState,
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .padding(horizontal = MaterialTheme.spacing.spacing3),
+                                        pokedexEntries = pokedexEntries,
+                                        onClick = { entry ->
+                                            navigateToDetails(entry.id.toString())
+                                        },
+                                    )
+                                }
                             )
-                        } else {
-                            state.pokedex?.let {
-                                PaginationContent(
-                                    items = it.collectAsLazyPagingItems(),
-                                    loadingContent = {
-                                        ShimmerPokedexGrid(
-                                            modifier = Modifier
-                                                .fillMaxWidth()
-                                                .padding(horizontal = MaterialTheme.spacing.spacing3)
-                                        )
-                                    },
-                                    errorContent = { error ->
-                                        PlaceHolderContent(message = error.asString())
-                                    },
-                                    content = { pokedexEntries ->
-                                        PokedexGrid(
-                                            state = gridState,
-                                            modifier = Modifier
-                                                .fillMaxWidth()
-                                                .padding(horizontal = MaterialTheme.spacing.spacing3),
-                                            pokedexEntries = pokedexEntries,
-                                            onClick = { entry ->
-                                                navigateToDetails(entry.id.toString())
-                                            },
-                                        )
-                                    }
-                                )
-                            }
                         }
                     }
                 }
+
             }
         },
         isLoading = state.isLoading,

@@ -14,7 +14,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.updateAndGet
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -22,10 +22,10 @@ import javax.inject.Inject
 internal class DetailViewModel @Inject constructor(
     private val getPokemonUseCase: GetPokemonUseCase,
     private val updateFavoriteUseCase: UpdateFavoriteUseCase,
-    savedStateHandle: SavedStateHandle
+    private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow(DetailState())
+    private val _state = MutableStateFlow(getState() ?:  DetailState())
     val state: StateFlow<DetailState> = _state.asStateFlow()
 
     private var pokemonId = ""
@@ -36,6 +36,12 @@ internal class DetailViewModel @Inject constructor(
             getPokemon(it)
         }
     }
+
+    private fun updateState(update: (DetailState) -> DetailState) {
+        savedStateHandle["state"] = _state.updateAndGet { update(it) }
+    }
+
+    private fun getState() = (savedStateHandle.get<DetailState>("state"))?.copy(isLoading = false, selectedTabIndex = 0)
 
     fun onTriggerEvent(event: DetailEvent) {
         when (event) {
@@ -51,12 +57,12 @@ internal class DetailViewModel @Inject constructor(
         viewModelScope.launch {
             getPokemonUseCase(query = id)
                 .onSuccess { pokemon ->
-                    update {
+                    updateState {
                         it.copy(pokemon = pokemon, isLoading = false, error = null)
                     }
                 }
                 .onFailure { error ->
-                    update {
+                    updateState {
                         it.copy(
                             pokemon = null,
                             isLoading = false,
@@ -81,7 +87,7 @@ internal class DetailViewModel @Inject constructor(
                 updateFavoriteUseCase(result)
 
                 val pokemon = result.copy(isFavorite = !result.isFavorite)
-                update {
+                updateState {
                     it.copy(pokemon = pokemon)
                 }
             }
@@ -90,13 +96,13 @@ internal class DetailViewModel @Inject constructor(
 
 
     private fun updateSelectedTab(index: Int) = with(_state) {
-        update {
+        updateState {
             it.copy(selectedTabIndex = index)
         }
     }
 
     private fun updateLoading(loading: Boolean) = with(_state) {
-        update {
+        updateState {
             it.copy(isLoading = loading)
         }
     }

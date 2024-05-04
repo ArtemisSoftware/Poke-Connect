@@ -63,7 +63,7 @@ internal class PokedexViewModel @Inject constructor(
 
     private fun search() = with(_state) {
         updateHistory()
-        updateStartSearch(true)
+        updateStartSearch()
 
         viewModelScope.launch {
             searchPokemonUseCase(query = value.searchQuery)
@@ -81,7 +81,7 @@ internal class PokedexViewModel @Inject constructor(
                                 message = error.toUiText(),
                                 buttonText = UiText.StringResource(R.string.try_again),
                                 onClick = {
-                                    reload()
+                                    reloadSearch()
                                 }
                             ),
                         )
@@ -90,7 +90,7 @@ internal class PokedexViewModel @Inject constructor(
         }
     }
 
-    private fun reload(){ search() }
+    private fun reloadSearch(){ search() }
 
     private fun updateFavorite() = with(_state) {
         viewModelScope.launch {
@@ -139,9 +139,9 @@ internal class PokedexViewModel @Inject constructor(
         }
     }
 
-    private fun updateStartSearch(isLoading: Boolean) = with(_state) {
+    private fun updateStartSearch() = with(_state) {
         update {
-            it.copy(isLoading = isLoading, error = null)
+            it.copy(isLoading = true, error = null)
         }
     }
 }

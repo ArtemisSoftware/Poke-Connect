@@ -9,5 +9,6 @@ data class Pokemon(
     val imageUrl: String,
     val isFavorite: Boolean = false,
     val stats: List<Stat> = emptyList(),
-    val abilities: List<String> = emptyList()
+    val abilities: List<String> = emptyList(),
+    val types: List<PokemonType> = emptyList(),
 )
