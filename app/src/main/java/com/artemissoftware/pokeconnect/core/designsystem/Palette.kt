@@ -37,11 +37,13 @@ internal val paletteDark = Palette(
 
 data class FixedPalette(
     val shimmer: List<Color>,
+    val iconBackground: Color,
 )
 
 
 internal val fixedPalette = FixedPalette(
     shimmer = listOf(GrayShimmer1, GrayShimmer2, GrayShimmer1),
+    iconBackground = LightGray,
 )
 
 internal val localPalette = staticCompositionLocalOf<Palette> { throw IllegalStateException("No theme installed") }

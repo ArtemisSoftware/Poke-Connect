@@ -33,6 +33,8 @@ import com.artemissoftware.pokeconnect.core.designsystem.PokeConnectTheme
 import com.artemissoftware.pokeconnect.core.designsystem.ThemePreviews
 import com.artemissoftware.pokeconnect.core.designsystem.composables.search.PCSearchBar
 import com.artemissoftware.pokeconnect.core.designsystem.spacing
+import com.artemissoftware.pokeconnect.core.designsystem.window
+import com.artemissoftware.pokeconnect.core.designsystem.window.WindowContent
 import com.artemissoftware.pokeconnect.core.presentation.composables.grid.PokedexGrid
 import com.artemissoftware.pokeconnect.core.presentation.composables.grid.ShimmerPokedexGrid
 import com.artemissoftware.pokeconnect.core.presentation.composables.pagination.PaginationContent
@@ -84,22 +86,27 @@ private fun FavoritesScreenContent(
                 verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.spacing1_5)
             ) {
 
-                AnimatedVisibility(
-                    visible = !state.isSearching,
-                    exit = slideOutHorizontally(
-                        targetOffsetX = { -it },
-                        animationSpec = tween(durationMillis = 300)
-                    ) + shrinkVertically(
-                        animationSpec = tween(delayMillis = 300)
-                    )
-                ) {
-                    Header(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = MaterialTheme.spacing.spacing3),
-                        onPopBack = onPopBack
-                    )
-                }
+                WindowContent(
+                    landScapeContent = {},
+                    portraitContent = {
+                        AnimatedVisibility(
+                            visible = !state.isSearching,
+                            exit = slideOutHorizontally(
+                                targetOffsetX = { -it },
+                                animationSpec = tween(durationMillis = 300)
+                            ) + shrinkVertically(
+                                animationSpec = tween(delayMillis = 300)
+                            )
+                        ) {
+                            Header(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(horizontal = MaterialTheme.spacing.spacing3),
+                                onPopBack = onPopBack
+                            )
+                        }
+                    }
+                )
 
                 PCSearchBar(
                     modifier = Modifier
@@ -107,7 +114,7 @@ private fun FavoritesScreenContent(
                         .padding(horizontal = searchBarSize.value),
                     historyItems = state.searchHistory,
                     text = state.searchQuery,
-                    placeHolderText = stringResource(id = R.string.name_number),
+                    placeHolderText = stringResource(id = if(MaterialTheme.window.isLandScape()) R.string.name_number_favorites else R.string.name_number),
                     isSearching = state.isSearching,
                     onQueryChange = {
                         event(FavoriteEvent.UpdateSearchQuery(searchQuery = it))

@@ -10,13 +10,14 @@
     <string name="pokedex">Pokédex</string>
     <string name="connection_error">Connection error</string>
     <string name="connection_socket_time_out">Socket timeout</string>
-    <string name="unknown_error">Unknown error</string>
+    <string name="unknown_error">An error occurred</string>
     <string name="unknown_host_error">Unknown host error</string>
     <string name="error_not_mapped">Error not mapped</string>
     <string name="search">Search</string>
     <string name="name_number">Name or number</string>
+    <string name="name_number_favorites">Favorite name or number</string>
     <string name="search_name_number">Search by name or number</string>
-    <string name="search_pokemon_by_name_number">Search for a Pokémon by name or using it National Pokédex number</string>
+    <string name="search_pokemon_by_name_number">Search for a Pokémon by name or using its National Pokédex number</string>
     <string name="no_favorites_found">No favorites found</string>
     <string name="no_stats_available">No stats available</string>
     <string name="try_again">Try again</string>
