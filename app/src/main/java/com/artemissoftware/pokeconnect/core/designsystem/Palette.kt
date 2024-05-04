@@ -39,6 +39,7 @@ data class FixedPalette(
     val shimmer: List<Color>,
 )
 
+
 internal val fixedPalette = FixedPalette(
     shimmer = listOf(GrayShimmer1, GrayShimmer2, GrayShimmer1),
 )
