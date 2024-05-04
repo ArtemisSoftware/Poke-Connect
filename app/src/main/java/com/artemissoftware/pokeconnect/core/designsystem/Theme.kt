@@ -78,7 +78,6 @@ fun PokeConnectTheme(
         localFixedPalette provides fixedPalette,
         localPokemonPalette provides pokemonPalette,
     ) {
-        //val colorScheme = localPalette.current.toScheme()
 
         MaterialTheme(
             colorScheme = colorScheme,

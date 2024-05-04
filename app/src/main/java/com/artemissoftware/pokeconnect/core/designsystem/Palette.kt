@@ -6,31 +6,16 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 
 data class Palette(
-    val background: Color,
-    val onBackground: Color,
-    val onSecondary: Color,
-    val secondaryContainer: Color,
-    val onSecondaryContainer: Color,
     val favorite: Color,
     val notFavorite: Color,
 )
 
 internal val paletteLight = Palette(
-    background = White,
-    onBackground = Black,
-    onSecondary = WhiteGray,
-    secondaryContainer = LightGray,
-    onSecondaryContainer = DarkBlue,
     favorite = FavoriteRed,
     notFavorite = NotFavoriteRed,
 )
 
 internal val paletteDark = Palette(
-    background = Black,
-    onBackground = White,
-    onSecondary = WhiteGray,
-    secondaryContainer = DarkBlue,
-    onSecondaryContainer = White,
     favorite = FavoriteRed,
     notFavorite = NotFavoriteRed,
 )

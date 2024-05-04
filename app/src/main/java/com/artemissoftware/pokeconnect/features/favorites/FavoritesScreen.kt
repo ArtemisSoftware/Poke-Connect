@@ -62,7 +62,7 @@ private fun FavoritesScreenContent(
 ) {
     val gridState = rememberLazyGridState()
     val searchBarSize = animateDpAsState(
-        targetValue = if (state.isSearching) 0.dp else MaterialTheme.spacing.spacing3,
+        targetValue = if (state.isSearching || MaterialTheme.window.isLandScape()) 0.dp else MaterialTheme.spacing.spacing3,
         animationSpec = tween(
             durationMillis = 1000,
         ),

@@ -12,9 +12,9 @@ import androidx.navigation.navOptions
 import com.artemissoftware.pokeconnect.core.ui.navbar.TopLevelDestination
 import com.artemissoftware.pokeconnect.features.navigation.navigateToFavorites
 import com.artemissoftware.pokeconnect.features.navigation.navigateToPokedex
-import com.artemissoftware.pokeconnect.home.BottomBarDestinations.destinations
-import com.artemissoftware.pokeconnect.home.BottomBarDestinations.favorites
-import com.artemissoftware.pokeconnect.home.BottomBarDestinations.pokedex
+import com.artemissoftware.pokeconnect.home.NavBarDestinations.destinations
+import com.artemissoftware.pokeconnect.home.NavBarDestinations.favorites
+import com.artemissoftware.pokeconnect.home.NavBarDestinations.pokedex
 
 class PCAppState (
     val navController: NavHostController,

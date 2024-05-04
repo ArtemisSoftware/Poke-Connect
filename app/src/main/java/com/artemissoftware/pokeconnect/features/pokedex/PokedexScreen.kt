@@ -29,6 +29,7 @@ import com.artemissoftware.pokeconnect.core.designsystem.PokeConnectTheme
 import com.artemissoftware.pokeconnect.core.designsystem.ThemePreviews
 import com.artemissoftware.pokeconnect.core.designsystem.composables.search.PCSearchBar
 import com.artemissoftware.pokeconnect.core.designsystem.spacing
+import com.artemissoftware.pokeconnect.core.designsystem.window
 import com.artemissoftware.pokeconnect.core.designsystem.window.WindowContent
 import com.artemissoftware.pokeconnect.core.presentation.composables.grid.PokedexGrid
 import com.artemissoftware.pokeconnect.core.presentation.composables.grid.ShimmerPokedexGrid
@@ -61,7 +62,7 @@ private fun PokedexScreenContent(
 
     val gridState = rememberLazyGridState()
     val searchBarSize = animateDpAsState(
-        targetValue = if (state.isSearching) 0.dp else MaterialTheme.spacing.spacing3,
+        targetValue = if (state.isSearching || MaterialTheme.window.isLandScape()) 0.dp else MaterialTheme.spacing.spacing3,
         animationSpec = tween(
             durationMillis = 1000,
         ),

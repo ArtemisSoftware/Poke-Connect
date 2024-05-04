@@ -41,7 +41,7 @@ fun PCScaffold(
     error: ErrorData? = null,
     bottomBar: @Composable() ((Modifier) -> Unit?)? = null,
 ) {
-    val bottomBarHeight = 104.0.dp
+    val bottomBarHeight = 124.0.dp
     val bottomBarHeightPx = with(LocalDensity.current) { bottomBarHeight.roundToPx().toFloat() }
     val bottomBarOffsetHeightPx = remember { mutableFloatStateOf(0f) }
 

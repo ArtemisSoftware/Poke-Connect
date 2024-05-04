@@ -1,9 +1,11 @@
 package com.artemissoftware.pokeconnect.core.ui.navbar
 
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.vector.ImageVector
 
 data class TopLevelDestination(
     val route: String,
-    val title: String,
-    val icon: ImageVector,
+    @StringRes val title: Int,
+    @DrawableRes val icon: Int,
 )
