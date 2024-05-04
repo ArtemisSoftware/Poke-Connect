@@ -21,7 +21,7 @@ class PokemonListPagingSource(
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PokedexEntryDto> {
-        val currentPage = params.key ?: 1
+        val currentPage = params.key ?: 0
 
         val result = HandleNetwork.safeNetworkCall {
             pokeApiSource.getPokemonList(limit = PokeApi.PAGE_SIZE, offset = currentPage * PokeApi.PAGE_SIZE)
@@ -42,7 +42,7 @@ class PokemonListPagingSource(
                 if (totalCount <= pokemonList.count) {
                     val endOfPaginationReached =  currentPage * PokeApi.PAGE_SIZE >= pokemonList.count
                     data = pokemonList.results
-                    prevKey = if (currentPage == 1) null else currentPage - 1
+                    prevKey = if (currentPage == 0) null else currentPage - 1
                     nextKey = if (endOfPaginationReached) null else currentPage + 1
                 }
 

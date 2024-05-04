@@ -24,8 +24,12 @@ abstract class BaseDestination(
     fun withCustomArgs(vararg args: Any?): String {
         return buildString {
             append(route)
-            args.forEachIndexed { index, arg ->
-                val json = Uri.encode(Gson().toJson(arg))
+            args.forEachIndexed { index, argument ->
+                val json = if(argument is String){
+                    Uri.encode(argument)
+                } else {
+                    Uri.encode(Gson().toJson(argument))
+                }
                 val symbol = if (index == 0) "?" else "&"
                 append("$symbol${arguments[index].name}=$json")
             }

@@ -1,7 +1,7 @@
 package com.artemissoftware.pokeconnect.core.network
 
-import com.artemissoftware.pokeconnect.core.network.dto.pokemon.PokemonDto
 import com.artemissoftware.pokeconnect.core.network.dto.pokedex.PokedexPageDto
+import com.artemissoftware.pokeconnect.core.network.dto.pokemon.PokemonDto
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

@@ -47,7 +47,7 @@ interface PokemonDao {
     @Query("SELECT * FROM PokemonEntity ORDER BY id ASC")
     fun getAll(): PagingSource<Int, PokemonEntity>
 
-    @Query("SELECT * FROM PokemonEntity WHERE id = :id OR name LIKE :name ORDER BY id ASC")
+    @Query("SELECT * FROM PokemonEntity WHERE id = :id OR name LIKE '%' || :name || '%' ORDER BY id ASC")
     fun findPokemonByIdOrName(id: Int, name: String): PagingSource<Int, PokemonEntity>
 
     @Delete
