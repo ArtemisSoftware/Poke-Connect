@@ -6,18 +6,19 @@ import com.artemissoftware.pokeconnect.core.data.mappers.toAbilitiesEntity
 import com.artemissoftware.pokeconnect.core.data.mappers.toEntity
 import com.artemissoftware.pokeconnect.core.data.mappers.toPokedexEntry
 import com.artemissoftware.pokeconnect.core.data.mappers.toPokemon
-import com.artemissoftware.pokeconnect.core.data.mappers.toStat
 import com.artemissoftware.pokeconnect.core.data.mappers.toStatsEntity
-import com.artemissoftware.pokeconnect.data.TestMockData.abilityEntity
-import com.artemissoftware.pokeconnect.data.TestMockData.getPokemonDtoWithArt
-import com.artemissoftware.pokeconnect.data.TestMockData.pokedexEntry
-import com.artemissoftware.pokeconnect.data.TestMockData.pokedexEntryDto
-import com.artemissoftware.pokeconnect.data.TestMockData.pokemon
-import com.artemissoftware.pokeconnect.data.TestMockData.pokemonDto
-import com.artemissoftware.pokeconnect.data.TestMockData.pokemonEntity
-import com.artemissoftware.pokeconnect.data.TestMockData.pokemonRelation
-import com.artemissoftware.pokeconnect.data.TestMockData.stat
-import com.artemissoftware.pokeconnect.data.TestMockData.statEntry
+import com.artemissoftware.pokeconnect.core.data.mappers.toTypesEntity
+import com.artemissoftware.pokeconnect.TestMockData.abilityEntity
+import com.artemissoftware.pokeconnect.TestMockData.getPokemonDtoWithArt
+import com.artemissoftware.pokeconnect.TestMockData.pokedexEntry
+import com.artemissoftware.pokeconnect.TestMockData.pokedexEntryDto
+import com.artemissoftware.pokeconnect.TestMockData.pokemonFromApi
+import com.artemissoftware.pokeconnect.TestMockData.pokemonFromDb
+import com.artemissoftware.pokeconnect.TestMockData.pokemonDto
+import com.artemissoftware.pokeconnect.TestMockData.pokemonEntity
+import com.artemissoftware.pokeconnect.TestMockData.pokemonRelation
+import com.artemissoftware.pokeconnect.TestMockData.statEntry
+import com.artemissoftware.pokeconnect.TestMockData.typesEntity
 import org.junit.jupiter.api.Test
 
 class PokemonMapperTest {
@@ -29,7 +30,7 @@ class PokemonMapperTest {
 
     @Test
     fun `Map PokemonDto to Pokemon`() {
-        assertThat(pokemonDto.toPokemon()).isEqualTo(pokemon)
+        assertThat(pokemonDto.toPokemon()).isEqualTo(pokemonFromApi)
     }
 
     @Test
@@ -68,27 +69,27 @@ class PokemonMapperTest {
 
     @Test
     fun `Map Pokemon to a list of StatEntity`() {
-        assertThat(pokemon.toStatsEntity()).isEqualTo(listOf(statEntry))
+        assertThat(pokemonFromApi.toStatsEntity()).isEqualTo(listOf(statEntry))
     }
 
     @Test
     fun `Map Pokemon to a list of AbilityEntity`() {
-        assertThat(pokemon.toAbilitiesEntity()).isEqualTo(listOf(abilityEntity))
+        assertThat(pokemonFromApi.toAbilitiesEntity()).isEqualTo(listOf(abilityEntity))
     }
 
     @Test
-    fun `Map StatEntity to Stat`() {
-        assertThat(statEntry.toStat()).isEqualTo(stat)
+    fun `Map Pokemon to a list of TypeEntity`() {
+        assertThat(pokemonFromApi.toTypesEntity()).isEqualTo(listOf(typesEntity))
     }
 
     @Test
     fun `Map PokemonRelation to Pokemon`() {
-        assertThat(pokemonRelation.toPokemon()).isEqualTo(pokemon)
+        assertThat(pokemonRelation.toPokemon()).isEqualTo(pokemonFromDb)
     }
 
     @Test
     fun `Map Pokemon to PokemonEntity`() {
-        assertThat(pokemon.toEntity()).isEqualTo(pokemonEntity)
+        assertThat(pokemonFromApi.toEntity()).isEqualTo(pokemonEntity)
     }
 
     @Test

@@ -1,19 +1,23 @@
 package com.artemissoftware.pokeconnect.core.data.mappers
 
+import com.artemissoftware.pokeconnect.core.common.util.extensions.upperCaseFirstChar
 import com.artemissoftware.pokeconnect.core.database.entities.AbilityEntity
 import com.artemissoftware.pokeconnect.core.database.entities.PokemonEntity
 import com.artemissoftware.pokeconnect.core.database.entities.StatEntity
+import com.artemissoftware.pokeconnect.core.database.entities.TypeEntity
 import com.artemissoftware.pokeconnect.core.database.relations.PokemonRelation
 import com.artemissoftware.pokeconnect.core.models.PokedexEntry
 import com.artemissoftware.pokeconnect.core.models.Pokemon
+import com.artemissoftware.pokeconnect.core.models.PokemonType
 import com.artemissoftware.pokeconnect.core.models.Stat
 import com.artemissoftware.pokeconnect.core.network.PokeApi
 import com.artemissoftware.pokeconnect.core.network.dto.pokedex.PokedexEntryDto
 import com.artemissoftware.pokeconnect.core.network.dto.pokemon.OfficialArtworkDto
 import com.artemissoftware.pokeconnect.core.network.dto.pokemon.PokemonDto
 import com.artemissoftware.pokeconnect.core.network.dto.pokemon.StatDto
+import java.util.Locale
 
-fun PokedexEntryDto.toPokedexEntry(): PokedexEntry{
+internal fun PokedexEntryDto.toPokedexEntry(): PokedexEntry{
     val id = url.toPokemonId()
     return PokedexEntry(
         id = id.toInt(),
@@ -22,7 +26,7 @@ fun PokedexEntryDto.toPokedexEntry(): PokedexEntry{
     )
 }
 
-fun PokemonDto.toPokemon(): Pokemon {
+internal fun PokemonDto.toPokemon(): Pokemon {
     return Pokemon(
         id = id,
         name = name,
@@ -30,11 +34,12 @@ fun PokemonDto.toPokemon(): Pokemon {
         weight = weight,
         stats = stats.map { it.toStat() },
         abilities = abilities.map { it.ability.name },
-        imageUrl = sprites.other.officialArtwork.toUrl(default = sprites.frontDefault)
+        imageUrl = sprites.other.officialArtwork.toUrl(default = sprites.frontDefault),
+        types = types.map { PokemonType.getType(it.type.name) },
     )
 }
 
-fun PokemonRelation.toPokemon(): Pokemon{
+internal fun PokemonRelation.toPokemon(): Pokemon{
     return Pokemon(
         id = pokemon.id,
         name = pokemon.name,
@@ -43,11 +48,12 @@ fun PokemonRelation.toPokemon(): Pokemon{
         imageUrl = pokemon.imageUrl,
         isFavorite = true,
         abilities = abilities.map { it.description },
-        stats = stats.map { it.toStat() }
+        stats = stats.map { it.toStat() },
+        types = types.map { PokemonType.getType(it.description) }
     )
 }
 
-fun Pokemon.toEntity(): PokemonEntity{
+internal fun Pokemon.toEntity(): PokemonEntity{
     return PokemonEntity(
         id = id,
         name = name,
@@ -58,7 +64,7 @@ fun Pokemon.toEntity(): PokemonEntity{
     )
 }
 
-fun Pokemon.toAbilitiesEntity(): List<AbilityEntity>{
+internal fun Pokemon.toAbilitiesEntity(): List<AbilityEntity>{
     return abilities.map {
         AbilityEntity(
             pokemonId = id,
@@ -67,14 +73,48 @@ fun Pokemon.toAbilitiesEntity(): List<AbilityEntity>{
     }
 }
 
-fun StatEntity.toStat(): Stat{
+private fun StatEntity.toStat(): Stat{
     return Stat(
+        abbreviation = description.toAbbreviation(),
         description = description,
         value = value,
     )
 }
 
-fun Pokemon.toStatsEntity(): List<StatEntity>{
+private fun StatDto.toStat(): Stat{
+    return Stat(
+        abbreviation = stat.name.toAbbreviation(),
+        value = baseStat,
+        description = stat.name
+    )
+}
+
+private fun String.toAbbreviation(): String {
+    return when(this.lowercase(Locale.ROOT)) {
+        "hp" -> "HP"
+        "attack" -> "Atk"
+        "defense" -> "Def"
+        "special-attack" -> "SpAtk"
+        "special-defense" -> "SpDef"
+        "speed" -> "Spd"
+        else -> abbreviatePhrase(this).upperCaseFirstChar()
+    }
+}
+
+private fun abbreviatePhrase(phrase: String): String {
+    val words = phrase.trim().split("\\s+".toRegex())
+
+    if (words.size == 1) {
+        val word = words[0]
+        return if (word.length > 3) word.substring(0, 3).uppercase() else word.uppercase()
+    }
+
+    val abbreviation = words.map { it.first().uppercase() }.joinToString("")
+
+    return abbreviation
+}
+
+internal fun Pokemon.toStatsEntity(): List<StatEntity>{
     return stats.map {
         StatEntity(
             pokemonId = id,
@@ -84,7 +124,16 @@ fun Pokemon.toStatsEntity(): List<StatEntity>{
     }
 }
 
-fun PokemonEntity.toPokedexEntry(): PokedexEntry{
+internal fun Pokemon.toTypesEntity(): List<TypeEntity>{
+    return types.map {
+        TypeEntity(
+            pokemonId = id,
+            description = it.description,
+        )
+    }
+}
+
+internal fun PokemonEntity.toPokedexEntry(): PokedexEntry{
     return PokedexEntry(
         id = id,
         name = name,
@@ -100,12 +149,7 @@ private fun OfficialArtworkDto.toUrl(default: String): String{
     }
 }
 
-private fun StatDto.toStat(): Stat{
-    return Stat(
-        value = baseStat,
-        description = stat.name
-    )
-}
+
 
 private fun String.toPokemonId(): String {
     return if(this.endsWith("/")) {
