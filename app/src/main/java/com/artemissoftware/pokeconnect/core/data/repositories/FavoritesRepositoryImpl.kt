@@ -57,7 +57,7 @@ class FavoritesRepositoryImpl @Inject constructor(
                 prefetchDistance = 20,
             ),
             pagingSourceFactory = {
-                pokemonDao.findPokemonByIdOrName(id = id, name = name)
+                pokemonDao.findPagedPokemonByIdOrName(id = id, name = name)
             },
         ).flow
             .map { value: PagingData<PokemonEntity> ->

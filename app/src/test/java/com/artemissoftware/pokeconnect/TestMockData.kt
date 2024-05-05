@@ -25,6 +25,8 @@ import com.artemissoftware.pokeconnect.core.network.dto.species.SpeciesDto
 
 object TestMockData {
 
+    val description = "A strange seed was planted on its back at birth.The plant sprouts and grows with this POKéMON."
+
     val pokedexEntryDto = PokedexEntryDto(
         name = "bulbasaur",
         url = "https://pokeapi.co/api/v2/pokemon/1/",
@@ -60,6 +62,20 @@ object TestMockData {
         abbreviation = "HP",
         description = "hp",
         value = 45,
+    )
+
+    val stats = listOf(
+        stat,
+        Stat(
+            abbreviation = "Atk",
+            description = "attack",
+            value = 145,
+        ),
+        Stat(
+            abbreviation = "SpAtk",
+            description = "special-attack",
+            value = 85,
+        )
     )
 
     val abilities = listOf("torrent")
@@ -101,7 +117,7 @@ object TestMockData {
         stats = listOf(stat),
         abilities = abilities,
         types = types,
-        description = "A strange seed was planted on its back at birth.The plant sprouts and grows with this POKéMON."
+        description = description
     )
 
     val pokemonFromDb = Pokemon(
@@ -114,7 +130,7 @@ object TestMockData {
         abilities = abilities,
         types = types,
         isFavorite = true,
-        description = "A strange seed was planted on its back at birth.The plant sprouts and grows with this POKéMON."
+        description = description
     )
 
     val pokemonDto = PokemonDto(
@@ -249,14 +265,6 @@ object TestMockData {
         description = description
     )
 
-    val pokemonEntity = PokemonEntity(
-        id = 1,
-        name = "bulbasaur",
-        height = 16,
-        weight = 69,
-        imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
-        description = "A strange seed was planted on its back at birth.The plant sprouts and grows with this POKéMON."
-    )
 
     val statEntry = StatEntity(
         pokemonId = 1,

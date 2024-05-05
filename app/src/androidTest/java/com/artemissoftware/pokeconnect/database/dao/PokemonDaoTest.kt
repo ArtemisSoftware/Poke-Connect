@@ -94,7 +94,7 @@ internal class PokemonDaoTest {
             typesEntities = listOf(typesEntity),
         )
 
-        val pagingSource = pokemonDao.findPokemonByIdOrName(pokemonEntity.id, pokemonEntity.name)
+        val pagingSource = pokemonDao.findPagedPokemonByIdOrName(pokemonEntity.id, pokemonEntity.name)
 
         val result = pagingSource.load(
             PagingSource.LoadParams.Refresh(

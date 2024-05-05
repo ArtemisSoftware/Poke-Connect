@@ -23,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import com.artemissoftware.pokeconnect.R
@@ -33,9 +34,11 @@ import com.artemissoftware.pokeconnect.core.designsystem.dimension
 import com.artemissoftware.pokeconnect.core.designsystem.shape
 import com.artemissoftware.pokeconnect.core.designsystem.spacing
 import com.artemissoftware.pokeconnect.core.models.Stat
+import com.artemissoftware.pokeconnect.core.presentation.util.extensions.roundToNearestIncrement
 import com.artemissoftware.pokeconnect.core.ui.palette.PaletteColor
 import com.artemissoftware.pokeconnect.core.ui.placeholder.PlaceHolderContent
 import com.artemissoftware.pokeconnect.features.PreviewData
+import com.artemissoftware.pokeconnect.features.detail.composables.TestTags
 
 @Composable
 internal fun StatsPage(
@@ -49,13 +52,12 @@ internal fun StatsPage(
         )
     }else {
         val statMaxValue by remember {
-            mutableIntStateOf(
-                roundToNearestIncrement(stats.map { it.value }.max())
-            )
+            mutableIntStateOf(stats.roundToNearestIncrement())
         }
 
         LazyColumn(
-            modifier = modifier,
+            modifier = modifier
+                .testTag(TestTags.STATS_LIST),
             verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.spacing1_5)
         )  {
             items(stats){ stat ->
@@ -63,7 +65,10 @@ internal fun StatsPage(
                     title = stat.abbreviation,
                     value = stat.value,
                     maxValue = statMaxValue.toFloat(),
-                    progressColor = paletteColor.background
+                    progressColor = paletteColor.background,
+                    modifier = Modifier
+                        .testTag(TestTags.statTag(stat.description))
+                        .fillMaxWidth()
                 )
             }
         }
@@ -103,13 +108,17 @@ private fun Stat(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(
-            modifier = Modifier.width(MaterialTheme.dimension.statMaxWidth),
+            modifier = Modifier
+                .testTag(TestTags.statTitleTag(title))
+                .width(MaterialTheme.dimension.statMaxWidth),
             text = title.upperCaseFirstChar(),
             fontWeight = FontWeight.Bold,
             style = MaterialTheme.typography.bodySmall,
         )
 
         Text(
+            modifier = Modifier
+                .testTag(TestTags.statValueTag(title)),
             text = value.toString(),
             style = MaterialTheme.typography.bodySmall,
         )
@@ -117,24 +126,13 @@ private fun Stat(
         LinearProgressIndicator(
             progress = { animatedProgress.value },
             modifier = Modifier
+                .testTag(TestTags.statProgressTag(title))
                 .fillMaxWidth()
                 .height(MaterialTheme.dimension.progressBarHeightSmall)
                 .clip(shape = MaterialTheme.shape.circular),
             color = progressColor,
             trackColor = progressColor.copy(alpha = 0.1F),
         )
-    }
-}
-
-fun roundToNearestIncrement(number: Int, increment: Int = 100): Int {
-    // Calculate the closest rounded value
-    val remainder = number % increment
-    return if (remainder >= increment / 2) {
-        // If the remainder is at least half of the increment, round up
-        number + (increment - remainder)
-    } else {
-        // Otherwise, round down
-        number - remainder
     }
 }
 

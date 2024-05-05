@@ -27,6 +27,19 @@ object TestInstrumentedData {
         description = "hp",
         value = 45,
     )
+    val stats = listOf(
+        stat,
+        Stat(
+            abbreviation = "Atk",
+            description = "attack",
+            value = 45,
+        ),
+        Stat(
+            abbreviation = "SpAtk",
+            description = "special-attack",
+            value = 100,
+        )
+    )
 
     val abilities = listOf("torrent")
     val types = listOf(PokemonType.GRASS, PokemonType.POISON)
