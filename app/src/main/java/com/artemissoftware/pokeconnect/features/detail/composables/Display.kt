@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import coil.compose.AsyncImage
@@ -24,6 +25,10 @@ import com.artemissoftware.pokeconnect.core.designsystem.spacing
 import com.artemissoftware.pokeconnect.core.models.Pokemon
 import com.artemissoftware.pokeconnect.core.ui.palette.PaletteColor
 import com.artemissoftware.pokeconnect.features.PreviewData
+import com.artemissoftware.pokeconnect.features.detail.composables.TestTags.DISPLAY_COLUMN
+import com.artemissoftware.pokeconnect.features.detail.composables.TestTags.DISPLAY_POKEMON_ID
+import com.artemissoftware.pokeconnect.features.detail.composables.TestTags.DISPLAY_POKEMON_IMAGE
+import com.artemissoftware.pokeconnect.features.detail.composables.TestTags.DISPLAY_POKEMON_TYPE
 
 @Composable
 internal fun Display(
@@ -32,7 +37,8 @@ internal fun Display(
     paletteColor: PaletteColor = PaletteColor(),
 ) {
     Column(
-        modifier = modifier,
+        modifier = modifier
+            .testTag(DISPLAY_COLUMN),
         verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.spacing0_5)
     ) {
         Column(
@@ -43,7 +49,9 @@ internal fun Display(
         ) {
             pokemon?.let {
                 Text(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .testTag(DISPLAY_POKEMON_ID)
+                        .fillMaxWidth(),
                     text = it.id.toFormattedNumber(),
                     color = paletteColor.text,
                     textAlign = TextAlign.Center,
@@ -54,6 +62,7 @@ internal fun Display(
 
             AsyncImage(
                 modifier = Modifier
+                    .testTag(DISPLAY_POKEMON_IMAGE)
                     .size(MaterialTheme.dimension.imageLarge),
                 model = ImageRequest
                     .Builder(LocalContext.current)
@@ -70,7 +79,9 @@ internal fun Display(
         pokemon?.let {
             TypeSection(
                 types = it.types,
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .testTag(DISPLAY_POKEMON_TYPE)
+                    .fillMaxWidth(),
             )
         }
     }

@@ -41,10 +41,6 @@ interface PokemonDao {
     }
 
     @Transaction
-    @Query("SELECT * FROM PokemonEntity WHERE id = :id")
-    suspend fun getPokemon(id: Int): PokemonRelation?
-
-    @Transaction
     @Query("SELECT * FROM PokemonEntity WHERE id = :id OR name LIKE '%' || :name || '%' ORDER BY id ASC")
     suspend fun getPokemon(id: Int, name: String): List<PokemonRelation>
 

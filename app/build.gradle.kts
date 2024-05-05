@@ -64,6 +64,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.material3.window.size)
 
     implementation(libs.lifecycle.runtime.compose)
 
@@ -112,7 +113,4 @@ dependencies {
 
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-
-
-    implementation("androidx.compose.material3:material3-window-size-class:1.1.1")
 }

@@ -6,8 +6,8 @@ import androidx.paging.PagingSource
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import assertk.assertThat
+import assertk.assertions.isEmpty
 import assertk.assertions.isEqualTo
-import assertk.assertions.isNull
 import com.artemissoftware.pokeconnect.TestInstrumentedData.abilityEntity
 import com.artemissoftware.pokeconnect.TestInstrumentedData.pokemonEntity
 import com.artemissoftware.pokeconnect.TestInstrumentedData.pokemonRelation
@@ -56,9 +56,9 @@ internal class PokemonDaoTest {
             typesEntities = listOf(typesEntity),
         )
 
-        val result = pokemonDao.getPokemon(pokemonEntity.id)
+        val result = pokemonDao.getPokemon(pokemonEntity.id, pokemonEntity.name)
 
-        assertThat(result).isEqualTo(pokemonRelation)
+        assertThat(result[0]).isEqualTo(pokemonRelation)
     }
 
     @Test
@@ -86,7 +86,7 @@ internal class PokemonDaoTest {
     }
 
     @Test
-    fun `Find pokemon by id and by name`() = runTest {
+    fun `Find paged pokemon list by id and by name`() = runTest {
         pokemonDao.insert(
             pokemonEntity = pokemonEntity,
             statsEntities = listOf(statEntry),
@@ -119,55 +119,8 @@ internal class PokemonDaoTest {
         )
 
         pokemonDao.delete(pokemonEntity)
-        val result = pokemonDao.getPokemon(pokemonEntity.id)
+        val result = pokemonDao.getPokemon(pokemonEntity.id, pokemonEntity.name)
 
-        assertThat(result).isNull()
+        assertThat(result).isEmpty()
     }
-
-    /*
-    @Test
-    fun `Add shopping item`() = runTest {
-        shoppingDao.insertShoppingItem(TestShoppingItemData.shoppingItem)
-
-        val allShoppingItem = shoppingDao.getAllShoppingItems()
-
-        allShoppingItem.test {
-            val list = awaitItem()
-            assertThat(list).isEqualTo(listOf(TestShoppingItemData.shoppingItem))
-            cancel()
-        }
-    }
-
-    @Test
-    fun `Delete shopping item`() = runTest {
-        shoppingDao.insertShoppingItem(TestShoppingItemData.shoppingItem)
-        shoppingDao.deleteShoppingItem(TestShoppingItemData.shoppingItem)
-
-        val allShoppingItem = shoppingDao.getAllShoppingItems()
-
-        allShoppingItem.test {
-            val list = awaitItem()
-
-            assertThat(list).all {
-                doesNotContain(TestShoppingItemData.shoppingItem)
-                hasSize(0)
-            }
-            cancel()
-        }
-    }
-
-    @Test
-    fun `Insert items and check total price sum`() = runTest {
-        TestShoppingItemData.shoppingItemList.forEach { shoppingItem ->
-            shoppingDao.insertShoppingItem(shoppingItem)
-        }
-
-        val totalPriceSum = shoppingDao.getTotalPrice()
-        totalPriceSum.test {
-            val total = awaitItem()
-            assertThat(total)
-                .isEqualTo(TestShoppingItemData.shoppingItemList.map { it.price * it.amount }.sum())
-        }
-    }
-    */
 }

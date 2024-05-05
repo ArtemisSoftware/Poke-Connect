@@ -21,4 +21,9 @@ internal object TestTags {
     fun statTitleTag(description: String) = STAT_TITLE + description
     fun statValueTag(description: String) = STAT_VALUE + description
     fun statProgressTag(description: String) = STAT_PROGRESS + description
+
+    const val DISPLAY_COLUMN = "display_column"
+    const val DISPLAY_POKEMON_ID = "display_pokemon_id"
+    const val DISPLAY_POKEMON_IMAGE = "display_pokemon_image"
+    const val DISPLAY_POKEMON_TYPE = "display_pokemon_type"
 }
