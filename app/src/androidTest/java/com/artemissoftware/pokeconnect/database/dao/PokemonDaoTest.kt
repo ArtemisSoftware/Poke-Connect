@@ -1,51 +1,48 @@
 package com.artemissoftware.pokeconnect.database.dao
 
-import android.content.Context
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.paging.PagingSource
-import androidx.room.Room
-import androidx.test.core.app.ApplicationProvider
 import assertk.assertThat
 import assertk.assertions.isEmpty
 import assertk.assertions.isEqualTo
+import com.artemissoftware.pokeconnect.TestInstrumentedData
 import com.artemissoftware.pokeconnect.TestInstrumentedData.abilityEntity
 import com.artemissoftware.pokeconnect.TestInstrumentedData.pokemonEntity
-import com.artemissoftware.pokeconnect.TestInstrumentedData.pokemonRelation
 import com.artemissoftware.pokeconnect.TestInstrumentedData.statEntry
 import com.artemissoftware.pokeconnect.TestInstrumentedData.typesEntity
 import com.artemissoftware.pokeconnect.core.database.PokemonDataBase
 import com.artemissoftware.pokeconnect.core.database.dao.PokemonDao
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.test.runTest
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
-import org.junit.jupiter.api.AfterEach
+import org.junit.Test
 import org.junit.jupiter.api.Assertions
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
+import javax.inject.Inject
 
-internal class PokemonDaoTest {
+@HiltAndroidTest
+class PokemonDaoTest {
 
     @get:Rule
-    var instantTaskExecutorRule = InstantTaskExecutorRule()
+    var hiltRule = HiltAndroidRule(this)
 
+
+    @Inject
     lateinit var database: PokemonDataBase
     private lateinit var pokemonDao: PokemonDao
 
-    @BeforeEach
+    @Before
     fun setUp() {
-
-        val context = ApplicationProvider.getApplicationContext<Context>()
-        database = Room
-            .inMemoryDatabaseBuilder(context, PokemonDataBase::class.java)
-            .allowMainThreadQueries()
-            .build()
-
+        hiltRule.inject()
         pokemonDao = database.getPokemonDao()
     }
 
-    @AfterEach
+    @After
     fun tearDown() {
         database.close()
     }
+
 
     @Test
     fun `Insert pokemon`() = runTest {
@@ -58,7 +55,7 @@ internal class PokemonDaoTest {
 
         val result = pokemonDao.getPokemon(pokemonEntity.id, pokemonEntity.name)
 
-        assertThat(result[0]).isEqualTo(pokemonRelation)
+        assertThat(result[0]).isEqualTo(TestInstrumentedData.pokemonRelation)
     }
 
     @Test
