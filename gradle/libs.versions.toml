@@ -34,6 +34,7 @@ kotlinx-coroutines-test = "1.7.1"
 core-testing = "2.1.0"
 mockk = "1.13.2"
 turbine = "1.0.0"
+okhttp3 = "4.10.0"
 
 
 [libraries]
@@ -66,6 +67,10 @@ lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-ru
 
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 converter-moshi = { group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "retrofit" }
+
+# okhttp3
+
+okhttp3 = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp3" }
 
 # Dagger Hilt
 
@@ -108,6 +113,8 @@ core-testing = { group = "androidx.arch.core", name = "core-testing", version.re
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 
 turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
+
+okhttp3-mock-webserver = { group = "com.squareup.okhttp3", name = "mockwebserver", version.ref = "okhttp3" }
 
 
 [plugins]

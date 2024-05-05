@@ -74,6 +74,8 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.moshi)
 
+    implementation(libs.okhttp3)
+
     implementation(libs.hilt.android)
     implementation(libs.hilt.navigation.compose)
     ksp(libs.hilt.android.compiler)
@@ -101,6 +103,7 @@ dependencies {
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.mockk)
     testImplementation(libs.turbine)
+    testImplementation(libs.okhttp3.mock.webserver)
 
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -110,6 +113,7 @@ dependencies {
     androidTestImplementation(libs.core.testing)
     androidTestImplementation(libs.hilt.android.testing)
     androidTestImplementation(libs.junit.jupiter.api)
+    androidTestImplementation(libs.okhttp3.mock.webserver)
 
     kspAndroidTest(libs.hilt.android.compiler)
 

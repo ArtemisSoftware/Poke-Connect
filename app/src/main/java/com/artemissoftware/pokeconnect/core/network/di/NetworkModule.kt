@@ -13,7 +13,9 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object NetworkModule {
+open class NetworkModule {
+
+    protected open fun baseUrl() = PokeApi.BASE_URL
 
     @Provides
     @Singleton
@@ -28,7 +30,7 @@ object NetworkModule {
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(PokeApi.BASE_URL)
+            .baseUrl(baseUrl())
             .client(okHttpClient)
             .addConverterFactory(MoshiConverterFactory.create())
             .build()

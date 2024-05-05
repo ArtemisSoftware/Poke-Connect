@@ -42,5 +42,9 @@ private fun PokemonError.asUiText(): UiText {
         PokemonError.SearchWithNoResults -> UiText.StringResource(
             R.string.search_no_results,
         )
+
+        PokemonError.NoDetailFound -> UiText.StringResource(
+            R.string.search_no_results,
+        )
     }
 }

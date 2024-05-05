@@ -4,6 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.artemissoftware.pokeconnect.R
+import com.artemissoftware.pokeconnect.core.domain.error.PokemonError
 import com.artemissoftware.pokeconnect.core.domain.usecases.SearchPokemonUseCase
 import com.artemissoftware.pokeconnect.core.domain.usecases.UpdateFavoriteUseCase
 import com.artemissoftware.pokeconnect.core.presentation.models.ErrorData
@@ -34,6 +35,14 @@ internal class DetailViewModel @Inject constructor(
         savedStateHandle.get<String>(NavArguments.ID)?.let {
             pokemonId = it
             getPokemon(it)
+        } ?: run {
+            updateState {
+                it.copy(
+                    error = ErrorData(
+                        message = PokemonError.NoDetailFound.toUiText(),
+                    ),
+                )
+            }
         }
     }
 
