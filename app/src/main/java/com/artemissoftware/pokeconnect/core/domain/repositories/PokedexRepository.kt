@@ -6,7 +6,7 @@ import com.artemissoftware.pokeconnect.core.models.PokedexEntry
 import com.artemissoftware.pokeconnect.core.models.Pokemon
 import kotlinx.coroutines.flow.Flow
 
-interface PokemonRepository {
+interface PokedexRepository {
     fun getPokedex(): Flow<PagingData<PokedexEntry>>
 
     suspend fun searchPokedex(query: String): Resource<List<Pokemon>>

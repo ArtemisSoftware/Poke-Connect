@@ -1,6 +1,5 @@
 package com.artemissoftware.pokeconnect.core.presentation.composables.card
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -95,10 +94,6 @@ fun ShimmerPokedexEntryCard(
 ) {
     Card(
         modifier = modifier,
-        border = BorderStroke(
-            width = MaterialTheme.dimension.iconBorderWidthSmall,
-            color = MaterialTheme.colorScheme.outline,
-        ),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer),
     ) {
 

@@ -129,9 +129,7 @@ private fun abbreviatePhrase(phrase: String): String {
         return if (word.length > 3) word.substring(0, 3).uppercase() else word.uppercase()
     }
 
-    val abbreviation = words.map { it.first().uppercase() }.joinToString("")
-
-    return abbreviation
+    return words.joinToString("") { it.first().uppercase() }
 }
 
 internal fun Pokemon.toStatsEntity(): List<StatEntity>{
@@ -168,8 +166,6 @@ private fun OfficialArtworkDto.toUrl(default: String): String{
         else -> default
     }
 }
-
-
 
 private fun String.toPokemonId(): String {
     return if(this.endsWith("/")) {

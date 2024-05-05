@@ -12,7 +12,7 @@ class PokeApiSource @Inject constructor(
 ) {
 
     suspend fun getPokemonList(limit: Int, offset: Int): PokedexPageDto {
-        return HandleApi.safeApiCall { pokeApi.getPokemonList(limit = limit, offset = offset) }
+        return HandleApi.safeApiCall { pokeApi.getPokedexPage(limit = limit, offset = offset) }
     }
 
     suspend fun getPokemon(query: String): PokemonDto {

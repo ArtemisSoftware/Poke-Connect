@@ -13,6 +13,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import com.artemissoftware.pokeconnect.core.common.util.extensions.upperCaseFirstChar
 import com.artemissoftware.pokeconnect.core.designsystem.PokeConnectTheme
 import com.artemissoftware.pokeconnect.core.designsystem.ThemePreviews
@@ -23,6 +24,7 @@ import com.artemissoftware.pokeconnect.core.models.PokemonType
 import com.artemissoftware.pokeconnect.core.presentation.util.extensions.toType
 import com.artemissoftware.pokeconnect.core.ui.icon.CircularIcon
 import com.artemissoftware.pokeconnect.features.PreviewData
+import com.artemissoftware.pokeconnect.features.detail.composables.TestTags.TYPES_ROW
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -34,13 +36,17 @@ fun TypeSection(
         modifier = modifier,
     ) {
         FlowRow(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .testTag(tag = TYPES_ROW)
+                .fillMaxWidth(),
             horizontalArrangement = Arrangement.Center,
         ) {
             types.forEach { type->
                 val (typeColor, typeIcon) = type.toType()
 
                 AssistChip(
+                    modifier = Modifier
+                        .testTag(tag = TestTags.typeChipTag(type.description)),
                     onClick = {  },
                     label = {
                         Text(

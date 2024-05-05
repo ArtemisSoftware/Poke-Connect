@@ -2,23 +2,24 @@ package com.artemissoftware.pokeconnect.data.mapper
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo
+import com.artemissoftware.pokeconnect.TestMockData.abilityEntity
+import com.artemissoftware.pokeconnect.TestMockData.getPokemonDtoWithArt
+import com.artemissoftware.pokeconnect.TestMockData.pokedexEntry
+import com.artemissoftware.pokeconnect.TestMockData.pokedexEntryDto
+import com.artemissoftware.pokeconnect.TestMockData.pokemonDto
+import com.artemissoftware.pokeconnect.TestMockData.pokemonEntity
+import com.artemissoftware.pokeconnect.TestMockData.pokemonFromApi
+import com.artemissoftware.pokeconnect.TestMockData.pokemonFromDb
+import com.artemissoftware.pokeconnect.TestMockData.pokemonRelation
+import com.artemissoftware.pokeconnect.TestMockData.speciesDto
+import com.artemissoftware.pokeconnect.TestMockData.statEntry
+import com.artemissoftware.pokeconnect.TestMockData.typesEntity
 import com.artemissoftware.pokeconnect.core.data.mappers.toAbilitiesEntity
 import com.artemissoftware.pokeconnect.core.data.mappers.toEntity
 import com.artemissoftware.pokeconnect.core.data.mappers.toPokedexEntry
 import com.artemissoftware.pokeconnect.core.data.mappers.toPokemon
 import com.artemissoftware.pokeconnect.core.data.mappers.toStatsEntity
 import com.artemissoftware.pokeconnect.core.data.mappers.toTypesEntity
-import com.artemissoftware.pokeconnect.TestMockData.abilityEntity
-import com.artemissoftware.pokeconnect.TestMockData.getPokemonDtoWithArt
-import com.artemissoftware.pokeconnect.TestMockData.pokedexEntry
-import com.artemissoftware.pokeconnect.TestMockData.pokedexEntryDto
-import com.artemissoftware.pokeconnect.TestMockData.pokemonFromApi
-import com.artemissoftware.pokeconnect.TestMockData.pokemonFromDb
-import com.artemissoftware.pokeconnect.TestMockData.pokemonDto
-import com.artemissoftware.pokeconnect.TestMockData.pokemonEntity
-import com.artemissoftware.pokeconnect.TestMockData.pokemonRelation
-import com.artemissoftware.pokeconnect.TestMockData.statEntry
-import com.artemissoftware.pokeconnect.TestMockData.typesEntity
 import org.junit.jupiter.api.Test
 
 class PokemonMapperTest {
@@ -31,6 +32,11 @@ class PokemonMapperTest {
     @Test
     fun `Map PokemonDto to Pokemon`() {
         assertThat(pokemonDto.toPokemon()).isEqualTo(pokemonFromApi)
+    }
+
+    @Test
+    fun `Map PokemonDto with SpeciesDto to Pokemon`() {
+        assertThat(pokemonDto.toPokemon(speciesDto)).isEqualTo(pokemonFromApi)
     }
 
     @Test

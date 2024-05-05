@@ -60,7 +60,7 @@ object TestInstrumentedData {
     )
 
     val abilities = listOf("torrent")
-    val types = listOf(PokemonType.GRASS)
+    val types = listOf(PokemonType.GRASS, PokemonType.POISON)
 
 
     val pokemon = Pokemon(

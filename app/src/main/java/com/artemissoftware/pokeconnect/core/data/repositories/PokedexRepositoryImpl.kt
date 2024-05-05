@@ -11,7 +11,7 @@ import com.artemissoftware.pokeconnect.core.data.pagination.PokedexPagingSource
 import com.artemissoftware.pokeconnect.core.database.dao.PokemonDao
 import com.artemissoftware.pokeconnect.core.database.relations.PokemonRelation
 import com.artemissoftware.pokeconnect.core.domain.Resource
-import com.artemissoftware.pokeconnect.core.domain.repositories.PokemonRepository
+import com.artemissoftware.pokeconnect.core.domain.repositories.PokedexRepository
 import com.artemissoftware.pokeconnect.core.models.PokedexEntry
 import com.artemissoftware.pokeconnect.core.models.Pokemon
 import com.artemissoftware.pokeconnect.core.network.PokeApi
@@ -24,10 +24,10 @@ import kotlinx.coroutines.flow.map
 import java.util.Locale
 import javax.inject.Inject
 
-class PokemonRepositoryImpl @Inject constructor(
+class PokedexRepositoryImpl @Inject constructor(
     private val pokeApiSource: PokeApiSource,
     private val pokemonDao: PokemonDao,
-) : PokemonRepository {
+) : PokedexRepository {
 
     override fun getPokedex(): Flow<PagingData<PokedexEntry>> {
         return Pager(

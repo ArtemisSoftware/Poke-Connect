@@ -19,6 +19,9 @@ import com.artemissoftware.pokeconnect.core.network.dto.pokemon.SpritesDto
 import com.artemissoftware.pokeconnect.core.network.dto.pokemon.StatDto
 import com.artemissoftware.pokeconnect.core.network.dto.pokemon.TypeDto
 import com.artemissoftware.pokeconnect.core.network.dto.pokemon.UrlNameDto
+import com.artemissoftware.pokeconnect.core.network.dto.species.EvolutionChainDto
+import com.artemissoftware.pokeconnect.core.network.dto.species.FlavorTextEntryDto
+import com.artemissoftware.pokeconnect.core.network.dto.species.SpeciesDto
 
 object TestMockData {
 
@@ -72,6 +75,7 @@ object TestMockData {
         stats = listOf(stat),
         abilities = abilities,
         types = types,
+        description = "A strange seed was planted on its back at birth.The plant sprouts and grows with this POKéMON."
     )
 
     val pokemonFromDb = Pokemon(
@@ -84,6 +88,7 @@ object TestMockData {
         abilities = abilities,
         types = types,
         isFavorite = true,
+        description = "A strange seed was planted on its back at birth.The plant sprouts and grows with this POKéMON."
     )
 
     val pokemonDto = PokemonDto(
@@ -130,6 +135,31 @@ object TestMockData {
         order = 1,
         locationAreaEncounters = "https://pokeapi.co/api/v2/pokemon/9/encounters",
         species = UrlNameDto(name = "bulbasaur"),
+    )
+
+    val speciesDto = SpeciesDto(
+        baseHappiness = 50,
+        captureRate = 45,
+        color = UrlNameDto(
+            "green"
+        ),
+        eggGroups = listOf(
+            UrlNameDto(
+                "monster"
+            )
+        ),
+        evolutionChain = EvolutionChainDto("https://pokeapi.co/api/v2/evolution-chain/1/"),
+        flavorTextEntries = listOf(
+            FlavorTextEntryDto(
+                "A strange seed was\nplanted on its\nback at birth.The plant sprouts\nand grows with\nthis POKéMON.",
+                UrlNameDto(
+                    "en"
+                ),
+                UrlNameDto(
+                    "red"
+                ),
+            )
+        )
     )
 
     fun getPokemonDtoWithArt(
@@ -190,7 +220,7 @@ object TestMockData {
         height = 16,
         weight = 69,
         imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
-        description = ""
+        description = "A strange seed was planted on its back at birth.The plant sprouts and grows with this POKéMON."
     )
 
     val statEntry = StatEntity(
