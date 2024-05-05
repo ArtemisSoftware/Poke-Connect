@@ -6,6 +6,7 @@ import androidx.compose.ui.graphics.Color
 import com.artemissoftware.pokeconnect.R
 import com.artemissoftware.pokeconnect.core.designsystem.palette.pokemon.pokemonPalette
 import com.artemissoftware.pokeconnect.core.models.PokemonType
+import com.artemissoftware.pokeconnect.core.models.Stat
 
 @Composable
 fun PokemonType.toType(): Pair<Color, Int> {
@@ -29,5 +30,20 @@ fun PokemonType.toType(): Pair<Color, Int> {
         PokemonType.STEEL -> MaterialTheme.pokemonPalette.steel to R.drawable.ic_steel
         PokemonType.FAIRY -> MaterialTheme.pokemonPalette.fairy to R.drawable.ic_fairy
         else -> MaterialTheme.pokemonPalette.unspecified to R.drawable.ic_pokeball
+    }
+}
+fun List<Stat>.roundToNearestIncrement(): Int {
+
+    val number = this.map { it.value }.max()
+
+    val increment = 100
+    val remainder = number % increment
+
+    return if (remainder == 0) {
+        // If there's no remainder, it's already a multiple of the increment
+        number
+    } else {
+        // If there is a remainder, round up to the next multiple of the increment
+        number + (increment - remainder)
     }
 }
