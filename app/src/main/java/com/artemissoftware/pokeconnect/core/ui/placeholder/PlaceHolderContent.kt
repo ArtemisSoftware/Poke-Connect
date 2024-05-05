@@ -29,6 +29,7 @@ import com.artemissoftware.pokeconnect.core.designsystem.ThemePreviews
 import com.artemissoftware.pokeconnect.core.designsystem.dimension
 import com.artemissoftware.pokeconnect.core.designsystem.spacing
 import com.artemissoftware.pokeconnect.core.ui.TestTags.PLACE_HOLDER_PAGE
+import com.artemissoftware.pokeconnect.core.ui.TestTags.PLACE_HOLDER__PAGE_TEXT
 
 
 @Composable
@@ -68,6 +69,7 @@ fun PlaceHolderContent(
         )
         Text(
             modifier = Modifier
+                .testTag(PLACE_HOLDER__PAGE_TEXT)
                 .padding(MaterialTheme.spacing.spacing1_5)
                 .alpha(alphaAnimation),
             text = message,

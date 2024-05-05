@@ -7,32 +7,21 @@ import java.io.InputStreamReader
 
 class MockServerDispatcher {
 
-    var shouldReturnError = false
-
-
-    fun successDispatcher(map: Map<String, String>): Dispatcher {
+    fun successDispatcher(): Dispatcher {
         return object : Dispatcher() {
             override fun dispatch(request: RecordedRequest): MockResponse {
-
-                if(shouldReturnError){
-                    return MockResponse().setResponseCode(200).setBody(getJsonContent("error.json"))
-                }
-
-
                 return when (request.path) {
-                    POKEMON_PAGE_1 -> {
-                        var json = ""
-                        if (map.containsKey(POKEMON_PAGE_1)) {
-                            json = map[POKEMON_PAGE_1]!!
-                        }
-                        MockResponse().setResponseCode(200).setBody(getJsonContent(json))
+                    PathFile.POKEMON_PAGE_1.path -> {
+                        MockResponse().setResponseCode(200).setBody(getJsonContent(PathFile.POKEMON_PAGE_1.file))
                     }
-                    POKEMON_PAGE_2 -> {
-                        var json = ""
-                        if (map.containsKey(POKEMON_PAGE_2)) {
-                            json = map[POKEMON_PAGE_2]!!
-                        }
-                        MockResponse().setResponseCode(200).setBody(getJsonContent(json))
+                    PathFile.POKEMON_PAGE_2.path -> {
+                        MockResponse().setResponseCode(200).setBody(getJsonContent(PathFile.POKEMON_PAGE_2.file))
+                    }
+                    PathFile.POKEMON.path -> {
+                        MockResponse().setResponseCode(200).setBody(getJsonContent(PathFile.POKEMON.file))
+                    }
+                    PathFile.POKEMON_SPECIES.path -> {
+                        MockResponse().setResponseCode(200).setBody(getJsonContent(PathFile.POKEMON_SPECIES.file))
                     }
                     else -> MockResponse().setResponseCode(200).setBody("")
                 }
@@ -52,13 +41,10 @@ class MockServerDispatcher {
         return InputStreamReader(this.javaClass.classLoader!!.getResourceAsStream(fileName)).use { it.readText() }
     }
 
-    companion object Path {
-        const val POKEMON_PAGE_1 = "/pokemon?limit=20&offset=0"
-        const val POKEMON_PAGE_2 = "/pokemon?limit=20&offset=20"
-
-        val serviceMap: Map<String, String> = mapOf(
-            Pair(POKEMON_PAGE_1, "pokemon.json"),
-            Pair(POKEMON_PAGE_2, "pokemon_page_2.json"),
-        )
+    enum class PathFile(val path: String, val file: String){
+        POKEMON_PAGE_1(path = "/pokemon?limit=20&offset=0", file = "pokemon_page_1.json"),
+        POKEMON_PAGE_2(path = "/pokemon?limit=20&offset=20", file = "pokemon_page_2.json"),
+        POKEMON(path = "/pokemon/1", file = "pokemon.json"),
+        POKEMON_SPECIES(path = "/pokemon-species/1", file = "pokemon_species.json"),
     }
 }

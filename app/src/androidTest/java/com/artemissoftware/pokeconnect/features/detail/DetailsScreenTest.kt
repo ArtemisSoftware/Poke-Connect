@@ -1,4 +1,4 @@
-package com.artemissoftware.pokeconnect.features.pokedex
+package com.artemissoftware.pokeconnect.features.detail
 
 import android.content.Context
 import androidx.compose.ui.test.ExperimentalTestApi
@@ -12,9 +12,6 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.artemissoftware.pokeconnect.MainActivity
 import com.artemissoftware.pokeconnect.core.network.MockServerDispatcher
-import com.artemissoftware.pokeconnect.core.ui.TestTags.PLACE_HOLDER_PAGE
-import com.artemissoftware.pokeconnect.features.pokedex.TestTags.POKEDEX_GRID
-import com.artemissoftware.pokeconnect.features.pokedex.TestTags.SEARCH_BAR
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import okhttp3.OkHttpClient
@@ -28,7 +25,7 @@ import javax.inject.Inject
 
 @HiltAndroidTest
 @RunWith(AndroidJUnit4::class)
-class PokedexScreenTest {
+class DetailsScreenTest {
 
     @Inject
     lateinit var okHttp: OkHttpClient
@@ -58,43 +55,65 @@ class PokedexScreenTest {
 
     @OptIn(ExperimentalTestApi::class)
     @Test
-    fun load_pokedex_check_grid_has_data() {
+    fun select_pokemon_from_pokedex_check_details() {
 
-         mockServer.dispatcher = MockServerDispatcher().successDispatcher()
+        mockServer.dispatcher = MockServerDispatcher().successDispatcher()
+
+        goToDetails()
+
+        composeTestRule.waitUntilExactlyOneExists(hasTestTag(TestTags.DETAIL_CONTENT))
 
         composeTestRule
-            .onNodeWithTag(SEARCH_BAR)
+            .onNodeWithTag(TestTags.DETAIL_PANEL)
             .assertIsDisplayed()
 
-        composeTestRule.waitUntilExactlyOneExists(hasTestTag(POKEDEX_GRID))
-
-        val pokedex = composeTestRule
-            .onNodeWithTag(POKEDEX_GRID)
-
-        pokedex
+        composeTestRule
+            .onNodeWithTag(TestTags.DETAIL_CONTENT)
             .assertIsDisplayed()
 
-        pokedex
-            .onChildAt(0)
+        composeTestRule
+            .onNodeWithTag(TestTags.DETAIL_CONTENT)
             .assertIsDisplayed()
-            .performClick()
+
+        composeTestRule
+            .onNodeWithTag(TestTags.getPageTabTestTag(0.toString()))
+            .assertIsDisplayed()
+
+        composeTestRule
+            .onNodeWithTag(TestTags.DETAIL_PAGER)
+            .assertIsDisplayed()
     }
 
     @OptIn(ExperimentalTestApi::class)
     @Test
-    fun load_pokedex_with_error_check_error_screen() {
+    fun select_pokemon_from_pokedex_check_details_get_error() {
+
+        mockServer.dispatcher = MockServerDispatcher().successDispatcher()
+
+        goToDetails()
 
         mockServer.dispatcher = MockServerDispatcher().errorDispatcher()
 
-        composeTestRule
-            .onNodeWithTag(SEARCH_BAR)
-            .assertIsDisplayed()
-
-        composeTestRule.waitUntilExactlyOneExists(hasTestTag(PLACE_HOLDER_PAGE))
+        composeTestRule.waitUntilExactlyOneExists(hasTestTag(com.artemissoftware.pokeconnect.core.ui.TestTags.PLACE_HOLDER_PAGE))
 
         composeTestRule
-            .onNodeWithTag(PLACE_HOLDER_PAGE)
+            .onNodeWithTag(com.artemissoftware.pokeconnect.core.ui.TestTags.PLACE_HOLDER_PAGE)
             .assertIsDisplayed()
     }
 
+    @OptIn(ExperimentalTestApi::class)
+    private fun goToDetails() {
+
+        this.composeTestRule
+            .onNodeWithTag(com.artemissoftware.pokeconnect.features.pokedex.TestTags.SEARCH_BAR)
+            .assertIsDisplayed()
+
+        this.composeTestRule.waitUntilExactlyOneExists(hasTestTag(com.artemissoftware.pokeconnect.features.pokedex.TestTags.POKEDEX_GRID))
+
+        this.composeTestRule
+            .onNodeWithTag(com.artemissoftware.pokeconnect.features.pokedex.TestTags.POKEDEX_GRID)
+            .onChildAt(0)
+            .assertIsDisplayed()
+            .performClick()
+    }
 }

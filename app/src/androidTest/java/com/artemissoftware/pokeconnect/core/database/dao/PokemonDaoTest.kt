@@ -1,4 +1,4 @@
-package com.artemissoftware.pokeconnect.database.dao
+package com.artemissoftware.pokeconnect.core.database.dao
 
 import androidx.paging.PagingSource
 import assertk.assertThat

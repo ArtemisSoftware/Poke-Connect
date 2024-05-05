@@ -38,7 +38,7 @@ import com.artemissoftware.pokeconnect.core.presentation.util.extensions.roundTo
 import com.artemissoftware.pokeconnect.core.ui.palette.PaletteColor
 import com.artemissoftware.pokeconnect.core.ui.placeholder.PlaceHolderContent
 import com.artemissoftware.pokeconnect.features.PreviewData
-import com.artemissoftware.pokeconnect.features.detail.composables.TestTags
+import com.artemissoftware.pokeconnect.features.detail.TestTags
 
 @Composable
 internal fun StatsPage(

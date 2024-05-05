@@ -1,4 +1,4 @@
-package com.artemissoftware.pokeconnect.features.detail.composables
+package com.artemissoftware.pokeconnect.features.detail
 
 internal object TestTags {
 
@@ -26,4 +26,16 @@ internal object TestTags {
     const val DISPLAY_POKEMON_ID = "display_pokemon_id"
     const val DISPLAY_POKEMON_IMAGE = "display_pokemon_image"
     const val DISPLAY_POKEMON_TYPE = "display_pokemon_type"
+
+
+    const val DETAIL_PANEL = "detail_panel"
+    const val DETAIL_CONTENT = "detail_content"
+    const val DETAIL_TOP_BAR = "detail_top_bar"
+    const val DETAIL_BACK_BUTTON = "detail_back_button"
+    const val FAVORITE_BUTTON = "favorite_button"
+
+    const val DETAIL_DISPLAY = "detail_display"
+    private const val DETAIL_PAGE_TAB = "detail_page"
+    fun getPageTabTestTag(description: String) = DETAIL_PAGE_TAB + description
+    const val DETAIL_PAGER = "detail_pager"
 }

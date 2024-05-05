@@ -25,10 +25,10 @@ import com.artemissoftware.pokeconnect.core.designsystem.spacing
 import com.artemissoftware.pokeconnect.core.models.Pokemon
 import com.artemissoftware.pokeconnect.core.ui.palette.PaletteColor
 import com.artemissoftware.pokeconnect.features.PreviewData
-import com.artemissoftware.pokeconnect.features.detail.composables.TestTags.DISPLAY_COLUMN
-import com.artemissoftware.pokeconnect.features.detail.composables.TestTags.DISPLAY_POKEMON_ID
-import com.artemissoftware.pokeconnect.features.detail.composables.TestTags.DISPLAY_POKEMON_IMAGE
-import com.artemissoftware.pokeconnect.features.detail.composables.TestTags.DISPLAY_POKEMON_TYPE
+import com.artemissoftware.pokeconnect.features.detail.TestTags.DISPLAY_COLUMN
+import com.artemissoftware.pokeconnect.features.detail.TestTags.DISPLAY_POKEMON_ID
+import com.artemissoftware.pokeconnect.features.detail.TestTags.DISPLAY_POKEMON_IMAGE
+import com.artemissoftware.pokeconnect.features.detail.TestTags.DISPLAY_POKEMON_TYPE
 
 @Composable
 internal fun Display(

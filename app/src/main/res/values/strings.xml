@@ -29,4 +29,5 @@
     <string name="not_found">Not found</string>
     <string name="stats">Stats</string>
     <string name="about">About</string>
+    <string name="title_activity_empty">EmptyActivity</string>
 </resources>

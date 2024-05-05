@@ -9,8 +9,8 @@ import androidx.compose.ui.test.onNodeWithTag
 import com.artemissoftware.pokeconnect.TestInstrumentedData.types
 import com.artemissoftware.pokeconnect.core.common.util.extensions.upperCaseFirstChar
 import com.artemissoftware.pokeconnect.core.designsystem.PokeConnectTheme
-import com.artemissoftware.pokeconnect.features.detail.composables.TestTags.TYPES_ROW
-import com.artemissoftware.pokeconnect.features.detail.composables.TestTags.typeChipTag
+import com.artemissoftware.pokeconnect.features.detail.TestTags.TYPES_ROW
+import com.artemissoftware.pokeconnect.features.detail.TestTags.typeChipTag
 import org.junit.Rule
 import org.junit.Test
 

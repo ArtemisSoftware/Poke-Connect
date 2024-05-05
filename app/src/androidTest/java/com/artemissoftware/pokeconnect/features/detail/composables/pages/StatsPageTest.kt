@@ -14,7 +14,7 @@ import androidx.compose.ui.test.performScrollToIndex
 import com.artemissoftware.pokeconnect.R
 import com.artemissoftware.pokeconnect.TestInstrumentedData.stats
 import com.artemissoftware.pokeconnect.core.designsystem.PokeConnectTheme
-import com.artemissoftware.pokeconnect.features.detail.composables.TestTags
+import com.artemissoftware.pokeconnect.features.detail.TestTags
 import org.junit.Rule
 import org.junit.Test
 

@@ -17,7 +17,7 @@ import com.artemissoftware.pokeconnect.core.designsystem.ThemePreviews
 import com.artemissoftware.pokeconnect.core.designsystem.spacing
 import com.artemissoftware.pokeconnect.core.models.Pokemon
 import com.artemissoftware.pokeconnect.features.PreviewData
-import com.artemissoftware.pokeconnect.features.detail.composables.TestTags
+import com.artemissoftware.pokeconnect.features.detail.TestTags
 
 @Composable
 internal fun AboutPage(

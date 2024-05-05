@@ -24,7 +24,8 @@ import com.artemissoftware.pokeconnect.core.models.PokemonType
 import com.artemissoftware.pokeconnect.core.presentation.util.extensions.toType
 import com.artemissoftware.pokeconnect.core.ui.icon.CircularIcon
 import com.artemissoftware.pokeconnect.features.PreviewData
-import com.artemissoftware.pokeconnect.features.detail.composables.TestTags.TYPES_ROW
+import com.artemissoftware.pokeconnect.features.detail.TestTags
+import com.artemissoftware.pokeconnect.features.detail.TestTags.TYPES_ROW
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable

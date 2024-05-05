@@ -26,6 +26,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -44,6 +45,12 @@ import com.artemissoftware.pokeconnect.core.ui.panel.Panel
 import com.artemissoftware.pokeconnect.core.ui.placeholder.PlaceHolderContent
 import com.artemissoftware.pokeconnect.core.ui.util.PaletteUtil
 import com.artemissoftware.pokeconnect.features.PreviewData
+import com.artemissoftware.pokeconnect.features.detail.TestTags.DETAIL_CONTENT
+import com.artemissoftware.pokeconnect.features.detail.TestTags.DETAIL_DISPLAY
+import com.artemissoftware.pokeconnect.features.detail.TestTags.DETAIL_PAGER
+import com.artemissoftware.pokeconnect.features.detail.TestTags.DETAIL_PANEL
+import com.artemissoftware.pokeconnect.features.detail.TestTags.DETAIL_TOP_BAR
+import com.artemissoftware.pokeconnect.features.detail.TestTags.getPageTabTestTag
 import com.artemissoftware.pokeconnect.features.detail.composables.DetailTopBar
 import com.artemissoftware.pokeconnect.features.detail.composables.Display
 import com.artemissoftware.pokeconnect.features.detail.composables.pages.AboutPage
@@ -135,6 +142,7 @@ private fun PortraitContent(
             Box(modifier = Modifier.fillMaxSize()) {
                 Panel(
                     modifier = Modifier
+                        .testTag(DETAIL_PANEL)
                         .fillMaxWidth()
                         .fillMaxHeight(0.4F),
                     color = paletteColor.background,
@@ -144,12 +152,14 @@ private fun PortraitContent(
             if (state.pokemon != null) {
                 Column(
                     modifier = Modifier
+                        .testTag(DETAIL_CONTENT)
                         .fillMaxSize()
                         .navigationBarsPadding(),
                     verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.spacing1_5)
                 ) {
                     DetailTopBar(
                         modifier = Modifier
+                            .testTag(DETAIL_TOP_BAR)
                             .fillMaxWidth()
                             .padding(horizontal = MaterialTheme.spacing.spacing0_5),
                         name = state.pokemon.name,
@@ -164,7 +174,9 @@ private fun PortraitContent(
                     Display(
                         paletteColor = paletteColor,
                         pokemon = state.pokemon,
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier
+                            .testTag(DETAIL_DISPLAY)
+                            .fillMaxWidth()
                     )
 
                     ScrollableTabRow(
@@ -174,6 +186,8 @@ private fun PortraitContent(
                     ) {
                         state.tabs.forEachIndexed { index, tabItem ->
                             Tab(
+                                modifier = Modifier
+                                    .testTag(getPageTabTestTag(index.toString())),
                                 selected = index == state.selectedTabIndex,
                                 onClick = {
                                     event(DetailEvent.UpdateSelectedTab(index))
@@ -194,6 +208,7 @@ private fun PortraitContent(
                     HorizontalPager(
                         state = pagerState,
                         modifier = Modifier
+                            .testTag(DETAIL_PAGER)
                             .fillMaxWidth()
                     ) { index ->
                         when (DetailTab.getTabByIndex(index)) {

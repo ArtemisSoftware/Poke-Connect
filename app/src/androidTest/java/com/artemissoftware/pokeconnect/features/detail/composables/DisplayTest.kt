@@ -9,6 +9,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import com.artemissoftware.pokeconnect.TestInstrumentedData.getPokemon
 import com.artemissoftware.pokeconnect.core.common.util.extensions.toFormattedNumber
 import com.artemissoftware.pokeconnect.core.designsystem.PokeConnectTheme
+import com.artemissoftware.pokeconnect.features.detail.TestTags
 import org.junit.Rule
 import org.junit.Test
 

@@ -19,6 +19,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -38,6 +39,9 @@ import com.artemissoftware.pokeconnect.core.presentation.composables.pagination.
 import com.artemissoftware.pokeconnect.core.presentation.composables.scaffold.PCScaffold
 import com.artemissoftware.pokeconnect.core.ui.placeholder.PlaceHolderContent
 import com.artemissoftware.pokeconnect.features.PreviewData
+import com.artemissoftware.pokeconnect.features.favorites.TestTag.FAVORITES_HEADER
+import com.artemissoftware.pokeconnect.features.favorites.TestTag.POKEDEX_GRID
+import com.artemissoftware.pokeconnect.features.favorites.TestTag.SEARCH_BAR
 
 @Composable
 internal fun FavoritesScreen(
@@ -94,6 +98,7 @@ private fun FavoritesScreenContent(
                         ) {
                             Header(
                                 modifier = Modifier
+                                    .testTag(FAVORITES_HEADER)
                                     .fillMaxWidth()
                                     .padding(horizontal = MaterialTheme.spacing.spacing3),
                             )
@@ -103,6 +108,7 @@ private fun FavoritesScreenContent(
 
                 PCSearchBar(
                     modifier = Modifier
+                        .testTag(SEARCH_BAR)
                         .fillMaxWidth()
                         .padding(horizontal = searchBarSize.value),
                     historyItems = state.searchHistory,
@@ -158,6 +164,7 @@ private fun FavoritesScreenContent(
                                             navigateToDetails(entry.id.toString())
                                         },
                                         modifier = Modifier
+                                            .testTag(POKEDEX_GRID)
                                             .fillMaxWidth()
                                             .padding(horizontal = MaterialTheme.spacing.spacing3),
                                         state = gridState,

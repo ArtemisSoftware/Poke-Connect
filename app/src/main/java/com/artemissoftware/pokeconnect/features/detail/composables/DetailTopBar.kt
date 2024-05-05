@@ -8,6 +8,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import com.artemissoftware.pokeconnect.R
 import com.artemissoftware.pokeconnect.core.common.util.extensions.upperCaseFirstChar
@@ -16,6 +17,8 @@ import com.artemissoftware.pokeconnect.core.designsystem.ThemePreviews
 import com.artemissoftware.pokeconnect.core.designsystem.palette
 import com.artemissoftware.pokeconnect.core.ui.icon.CircularIcon
 import com.artemissoftware.pokeconnect.core.ui.palette.PaletteColor
+import com.artemissoftware.pokeconnect.features.detail.TestTags.DETAIL_BACK_BUTTON
+import com.artemissoftware.pokeconnect.features.detail.TestTags.FAVORITE_BUTTON
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -35,6 +38,7 @@ internal fun DetailTopBar(
         ),
         navigationIcon = {
             CircularIcon(
+                modifier = Modifier.testTag(DETAIL_BACK_BUTTON),
                 icon = R.drawable.ic_back,
                 onClick = onBackClick,
             )
@@ -49,6 +53,7 @@ internal fun DetailTopBar(
         },
         actions = {
             CircularIcon(
+                modifier = Modifier.testTag(FAVORITE_BUTTON),
                 icon = R.drawable.ic_love,
                 tint = if(isFavorite) MaterialTheme.palette.favorite else MaterialTheme.palette.notFavorite,
                 onClick = { onFavoriteClick() },
