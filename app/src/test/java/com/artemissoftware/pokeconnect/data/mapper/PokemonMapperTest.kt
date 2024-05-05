@@ -3,13 +3,12 @@ package com.artemissoftware.pokeconnect.data.mapper
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import com.artemissoftware.pokeconnect.TestMockData.abilityEntity
+import com.artemissoftware.pokeconnect.TestMockData.getPokemon
 import com.artemissoftware.pokeconnect.TestMockData.getPokemonDtoWithArt
+import com.artemissoftware.pokeconnect.TestMockData.getPokemonEntity
 import com.artemissoftware.pokeconnect.TestMockData.pokedexEntry
 import com.artemissoftware.pokeconnect.TestMockData.pokedexEntryDto
 import com.artemissoftware.pokeconnect.TestMockData.pokemonDto
-import com.artemissoftware.pokeconnect.TestMockData.pokemonEntity
-import com.artemissoftware.pokeconnect.TestMockData.pokemonFromApi
-import com.artemissoftware.pokeconnect.TestMockData.pokemonFromDb
 import com.artemissoftware.pokeconnect.TestMockData.pokemonRelation
 import com.artemissoftware.pokeconnect.TestMockData.speciesDto
 import com.artemissoftware.pokeconnect.TestMockData.statEntry
@@ -31,12 +30,12 @@ class PokemonMapperTest {
 
     @Test
     fun `Map PokemonDto to Pokemon`() {
-        assertThat(pokemonDto.toPokemon()).isEqualTo(pokemonFromApi)
+        assertThat(pokemonDto.toPokemon()).isEqualTo(getPokemon())
     }
 
     @Test
     fun `Map PokemonDto with SpeciesDto to Pokemon`() {
-        assertThat(pokemonDto.toPokemon(speciesDto)).isEqualTo(pokemonFromApi)
+        assertThat(pokemonDto.toPokemon(speciesDto)).isEqualTo(getPokemon("A strange seed was planted on its back at birth.The plant sprouts and grows with this POKéMON."))
     }
 
     @Test
@@ -75,31 +74,31 @@ class PokemonMapperTest {
 
     @Test
     fun `Map Pokemon to a list of StatEntity`() {
-        assertThat(pokemonFromApi.toStatsEntity()).isEqualTo(listOf(statEntry))
+        assertThat(getPokemon().toStatsEntity()).isEqualTo(listOf(statEntry))
     }
 
     @Test
     fun `Map Pokemon to a list of AbilityEntity`() {
-        assertThat(pokemonFromApi.toAbilitiesEntity()).isEqualTo(listOf(abilityEntity))
+        assertThat(getPokemon().toAbilitiesEntity()).isEqualTo(listOf(abilityEntity))
     }
 
     @Test
     fun `Map Pokemon to a list of TypeEntity`() {
-        assertThat(pokemonFromApi.toTypesEntity()).isEqualTo(listOf(typesEntity))
+        assertThat(getPokemon().toTypesEntity()).isEqualTo(listOf(typesEntity))
     }
 
     @Test
     fun `Map PokemonRelation to Pokemon`() {
-        assertThat(pokemonRelation.toPokemon()).isEqualTo(pokemonFromDb)
+        assertThat(pokemonRelation.toPokemon()).isEqualTo(getPokemon(isFavorite = true))
     }
 
     @Test
     fun `Map Pokemon to PokemonEntity`() {
-        assertThat(pokemonFromApi.toEntity()).isEqualTo(pokemonEntity)
+        assertThat(getPokemon().toEntity()).isEqualTo(getPokemonEntity())
     }
 
     @Test
     fun `Map PokemonEntity to PokedexEntry`() {
-        assertThat(pokemonEntity.toPokedexEntry()).isEqualTo(pokedexEntry)
+        assertThat(getPokemonEntity().toPokedexEntry()).isEqualTo(pokedexEntry)
     }
 }

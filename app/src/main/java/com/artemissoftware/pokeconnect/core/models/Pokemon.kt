@@ -15,4 +15,6 @@ data class Pokemon(
     val stats: List<Stat> = emptyList(),
     val abilities: List<String> = emptyList(),
     val types: List<PokemonType> = emptyList(),
-): Parcelable
+): Parcelable{
+    fun getAbilitiesFormatted() = abilities.joinToString(separator = ", ")
+}

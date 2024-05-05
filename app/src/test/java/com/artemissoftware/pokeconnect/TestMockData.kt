@@ -65,8 +65,34 @@ object TestMockData {
     val abilities = listOf("torrent")
     val types = listOf(PokemonType.GRASS)
 
+    fun getPokemon(description: String = "", isFavorite: Boolean = false): Pokemon{
+        return Pokemon(
+            id = 1,
+            name = "bulbasaur",
+            height = 16,
+            weight = 69,
+            isFavorite = isFavorite,
+            imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+            stats = listOf(stat),
+            abilities = abilities,
+            types = types,
+            description = description
+        )
+    }
 
     val pokemonFromApi = Pokemon(
+        id = 1,
+        name = "bulbasaur",
+        height = 16,
+        weight = 69,
+        imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+        stats = listOf(stat),
+        abilities = abilities,
+        types = types,
+        description = "A strange seed was planted on its back at birth.The plant sprouts and grows with this POKéMON."
+    )
+
+    val pokemonFromApiWithSpeciesDescription = Pokemon(
         id = 1,
         name = "bulbasaur",
         height = 16,
@@ -214,6 +240,15 @@ object TestMockData {
         )
     }
 
+    fun getPokemonEntity(description: String = "") = PokemonEntity(
+        id = 1,
+        name = "bulbasaur",
+        height = 16,
+        weight = 69,
+        imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+        description = description
+    )
+
     val pokemonEntity = PokemonEntity(
         id = 1,
         name = "bulbasaur",
@@ -239,7 +274,7 @@ object TestMockData {
     )
 
     val pokemonRelation = PokemonRelation(
-        pokemon = pokemonEntity,
+        pokemon = getPokemonEntity(),
         stats = listOf(statEntry),
         abilities = listOf(abilityEntity),
         types = listOf(typesEntity)

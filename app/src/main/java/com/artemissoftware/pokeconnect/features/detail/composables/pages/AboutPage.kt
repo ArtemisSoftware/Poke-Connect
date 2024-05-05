@@ -9,6 +9,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import com.artemissoftware.pokeconnect.R
 import com.artemissoftware.pokeconnect.core.designsystem.PokeConnectTheme
@@ -16,6 +17,7 @@ import com.artemissoftware.pokeconnect.core.designsystem.ThemePreviews
 import com.artemissoftware.pokeconnect.core.designsystem.spacing
 import com.artemissoftware.pokeconnect.core.models.Pokemon
 import com.artemissoftware.pokeconnect.features.PreviewData
+import com.artemissoftware.pokeconnect.features.detail.composables.TestTags
 
 @Composable
 internal fun AboutPage(
@@ -23,14 +25,17 @@ internal fun AboutPage(
     modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier,
+        modifier = modifier
+            .testTag(TestTags.ABOUT_PAGE),
         verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.spacing2)
     ) {
         if(pokemon.description.isNotEmpty()) {
             Text(
                 text = pokemon.description,
                 style = MaterialTheme.typography.labelMedium,
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .testTag(TestTags.ABOUT_PAGE_POKEMON_DESCRIPTION)
+                    .fillMaxWidth(),
             )
         }
 
@@ -38,22 +43,28 @@ internal fun AboutPage(
             modifier = Modifier.fillMaxWidth(),
         ) {
             Description(
-                modifier = Modifier.weight(0.5F),
-                title = R.string.height,
+                modifier = Modifier
+                    .testTag(TestTags.ABOUT_PAGE_POKEMON_HEIGHT)
+                    .weight(0.5F),
+                title = R.string.height_label,
                 text = pokemon.height.toString(),
             )
             Description(
-                modifier = Modifier.weight(0.5F),
-                title = R.string.weight,
+                modifier = Modifier
+                    .testTag(TestTags.ABOUT_PAGE_POKEMON_WEIGHT)
+                    .weight(0.5F),
+                title = R.string.weight_label,
                 text = pokemon.weight.toString(),
             )
         }
 
         if(pokemon.abilities.isNotEmpty()) {
             Description(
-                title = R.string.abilities,
-                text = pokemon.abilities.joinToString(separator = ", "),
-                modifier = Modifier.fillMaxWidth(),
+                title = R.string.abilities_label,
+                text = pokemon.getAbilitiesFormatted(),
+                modifier = Modifier
+                    .testTag(TestTags.ABOUT_PAGE_POKEMON_ABILITIES)
+                    .fillMaxWidth(),
             )
         }
 
@@ -71,7 +82,7 @@ private fun Description(
         horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.spacing0_5),
     ) {
         Text(
-            text = stringResource(id = title) + ": ",
+            text = stringResource(id = title),
             style = MaterialTheme.typography.labelMedium,
         )
         Text(

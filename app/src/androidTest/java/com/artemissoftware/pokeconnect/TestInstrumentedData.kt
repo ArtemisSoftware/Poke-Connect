@@ -22,6 +22,45 @@ import com.artemissoftware.pokeconnect.core.network.dto.pokemon.UrlNameDto
 
 object TestInstrumentedData {
 
+    val stat =  Stat(
+        abbreviation = "HP",
+        description = "hp",
+        value = 45,
+    )
+
+    val abilities = listOf("torrent")
+    val types = listOf(PokemonType.GRASS, PokemonType.POISON)
+
+    fun getPokemon(description: String = "", isFavorite: Boolean = false, currentAbilities: List<String> = abilities): Pokemon{
+        return Pokemon(
+            id = 1,
+            name = "bulbasaur",
+            height = 16,
+            weight = 69,
+            isFavorite = isFavorite,
+            imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+            stats = listOf(stat),
+            abilities = currentAbilities,
+            types = types,
+            description = description
+        )
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     val pokedexEntryDto = PokedexEntryDto(
         name = "bulbasaur",
         url = "https://pokeapi.co/api/v2/pokemon/1/",
@@ -53,14 +92,8 @@ object TestInstrumentedData {
         imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
     )
 
-    val stat =  Stat(
-        abbreviation = "HP",
-        description = "hp",
-        value = 45,
-    )
 
-    val abilities = listOf("torrent")
-    val types = listOf(PokemonType.GRASS, PokemonType.POISON)
+
 
 
     val pokemon = Pokemon(
