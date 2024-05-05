@@ -5,16 +5,20 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.artemissoftware.pokeconnect.TestMockData.errorDescription
 import com.artemissoftware.pokeconnect.TestMockData.pokedexEntry
 import com.artemissoftware.pokeconnect.TestMockData.pokemonFromApi
 import com.artemissoftware.pokeconnect.TestMockData.pokemonFromDb
 import com.artemissoftware.pokeconnect.core.domain.Resource
+import com.artemissoftware.pokeconnect.core.domain.error.DataError
 import com.artemissoftware.pokeconnect.core.domain.repositories.PokedexRepository
 import com.artemissoftware.pokeconnect.core.models.PokedexEntry
 import com.artemissoftware.pokeconnect.core.models.Pokemon
 import kotlinx.coroutines.flow.Flow
 
 class FakePokedexRepository: PokedexRepository {
+
+    var shouldReturnError = false
 
     private var pokemon = pokemonFromDb
 
@@ -39,7 +43,12 @@ class FakePokedexRepository: PokedexRepository {
     }
 
     override suspend fun searchPokedex(query: String): Resource<List<Pokemon>> {
-        return Resource.Success(listOf(pokemonFromApi))
+        return if(shouldReturnError){
+            Resource.Failure(DataError.NetworkError.Error(errorDescription))
+        }
+        else {
+            Resource.Success(listOf(pokemon))
+        }
     }
 }
 
@@ -55,7 +64,7 @@ private class InMemoryPokemonPagingSource(
             val fromIndex = (currentPage - 1) * pageSize
             val toIndex = minOf(fromIndex + pageSize, pokedexList.size)
 
-            val pageData = pokedexList.subList(fromIndex, toIndex)
+            val pageData = pokedexList
 
             val prevKey = if (currentPage > 1) currentPage - 1 else null
             val nextKey = if (toIndex < pokedexList.size) currentPage + 1 else null

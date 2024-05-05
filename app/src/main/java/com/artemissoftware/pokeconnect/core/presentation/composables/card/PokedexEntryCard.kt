@@ -23,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import coil.compose.AsyncImage
@@ -36,6 +37,14 @@ import com.artemissoftware.pokeconnect.core.designsystem.dimension
 import com.artemissoftware.pokeconnect.core.designsystem.spacing
 import com.artemissoftware.pokeconnect.core.designsystem.window.WindowContent
 import com.artemissoftware.pokeconnect.core.models.PokedexEntry
+import com.artemissoftware.pokeconnect.core.presentation.TestTags.POKEDEX_ENTRY_CARD
+import com.artemissoftware.pokeconnect.core.presentation.TestTags.POKEDEX_ENTRY_CARD_CONTENT
+import com.artemissoftware.pokeconnect.core.presentation.TestTags.POKEDEX_ENTRY_ID
+import com.artemissoftware.pokeconnect.core.presentation.TestTags.POKEDEX_ENTRY_IMAGE
+import com.artemissoftware.pokeconnect.core.presentation.TestTags.POKEDEX_ENTRY_NAME
+import com.artemissoftware.pokeconnect.core.presentation.TestTags.POKEDEX_ENTRY_SHIMMER_CARD
+import com.artemissoftware.pokeconnect.core.presentation.TestTags.POKEDEX_ENTRY_SHIMMER_ID
+import com.artemissoftware.pokeconnect.core.presentation.TestTags.POKEDEX_ENTRY_SHIMMER_NAME
 import com.artemissoftware.pokeconnect.core.ui.palette.PaletteColor
 import com.artemissoftware.pokeconnect.core.ui.util.PaletteUtil
 import com.artemissoftware.pokeconnect.core.ui.util.extensions.shimmerEffect
@@ -60,7 +69,8 @@ fun PokedexEntryCard(
     }
 
     Card(
-        modifier = modifier,
+        modifier = modifier
+            .testTag(POKEDEX_ENTRY_CARD),
         colors = CardDefaults.cardColors(containerColor = paletteColor.background),
         onClick = { onClick() },
     ) {
@@ -93,7 +103,8 @@ fun ShimmerPokedexEntryCard(
     modifier: Modifier = Modifier,
 ) {
     Card(
-        modifier = modifier,
+        modifier = modifier
+            .testTag(POKEDEX_ENTRY_SHIMMER_CARD),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer),
     ) {
 
@@ -134,13 +145,15 @@ private fun PortraitContent (
     }
 
     Column(
-        modifier = modifier,
+        modifier = modifier
+            .testTag(POKEDEX_ENTRY_CARD_CONTENT),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.spacing1)
     ) {
 
         AsyncImage(
             modifier = Modifier
+                .testTag(POKEDEX_ENTRY_IMAGE)
                 .size(MaterialTheme.dimension.cardImage),
             model = request
                 .build(),
@@ -216,7 +229,9 @@ private fun Description(
                 style = MaterialTheme.typography.bodyMedium,
                 fontWeight = FontWeight.Bold,
                 color = paletteColor.text,
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .testTag(POKEDEX_ENTRY_NAME)
+                    .fillMaxWidth(),
             )
 
             Text(
@@ -224,11 +239,14 @@ private fun Description(
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.bodySmall,
                 color = paletteColor.text,
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .testTag(POKEDEX_ENTRY_ID)
+                    .fillMaxWidth(),
             )
         } ?: run{
             Box(
                 modifier = Modifier
+                    .testTag(POKEDEX_ENTRY_SHIMMER_NAME)
                     .fillMaxWidth(0.7f)
                     .height(MaterialTheme.dimension.shimmerTextHeight)
                     .shimmerEffect()
@@ -236,6 +254,7 @@ private fun Description(
 
             Box(
                 modifier = Modifier
+                    .testTag(POKEDEX_ENTRY_SHIMMER_ID)
                     .fillMaxWidth(0.7f)
                     .height(MaterialTheme.dimension.shimmerTextHeight)
                     .shimmerEffect()

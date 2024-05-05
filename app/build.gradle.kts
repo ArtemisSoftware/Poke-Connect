@@ -81,6 +81,7 @@ dependencies {
     implementation(libs.paging.compose)
     implementation(libs.paging.runtime)
     implementation(libs.paging.common)
+    implementation(libs.paging.runtime.ktx)
 
     implementation(libs.coil.compose)
 
@@ -99,6 +100,7 @@ dependencies {
     testImplementation(libs.assertk)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.mockk)
+    testImplementation(libs.turbine)
 
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

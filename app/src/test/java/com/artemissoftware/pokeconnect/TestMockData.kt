@@ -287,4 +287,6 @@ object TestMockData {
         abilities = listOf(abilityEntity),
         types = listOf(typesEntity)
     )
+
+    val errorDescription = "Cant catch them all"
 }

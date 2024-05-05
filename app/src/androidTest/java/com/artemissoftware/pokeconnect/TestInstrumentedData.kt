@@ -59,7 +59,11 @@ object TestInstrumentedData {
         )
     }
 
-
+    val pokedexEntry = PokedexEntry(
+        id = 1,
+        name = "bulbasaur",
+        imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+    )
 
 
 
@@ -99,11 +103,7 @@ object TestInstrumentedData {
         )
     )
 
-    val pokedexEntry = PokedexEntry(
-        id = 1,
-        name = "bulbasaur",
-        imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
-    )
+
 
 
 

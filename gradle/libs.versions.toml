@@ -33,6 +33,7 @@ de-mannodermaus-android-junit5 = "1.9.3.0"
 kotlinx-coroutines-test = "1.7.1"
 core-testing = "2.1.0"
 mockk = "1.13.2"
+turbine = "1.0.0"
 
 
 [libraries]
@@ -105,6 +106,8 @@ kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-cor
 hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hilt" }
 core-testing = { group = "androidx.arch.core", name = "core-testing", version.ref = "core-testing" }
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+
+turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
 
 
 [plugins]
