@@ -21,12 +21,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import com.artemissoftware.pokeconnect.R
 import com.artemissoftware.pokeconnect.core.designsystem.PokeConnectTheme
 import com.artemissoftware.pokeconnect.core.designsystem.ThemePreviews
 import com.artemissoftware.pokeconnect.core.designsystem.dimension
 import com.artemissoftware.pokeconnect.core.designsystem.spacing
+import com.artemissoftware.pokeconnect.core.ui.TestTags.PLACE_HOLDER_PAGE
 
 
 @Composable
@@ -51,7 +53,9 @@ fun PlaceHolderContent(
     }
 
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .testTag(PLACE_HOLDER_PAGE)
+            .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {

@@ -23,7 +23,7 @@
     <string name="search_pokemon_by_name_number">Search for a Pokémon by name or using its National Pokédex number</string>
     <string name="no_favorites_found">No favorites found</string>
     <string name="search_no_results">No pokemons found</string>
-    <string name="search_detail_found">No detail found for the pokemon</string>
+    <string name="search_detail_not_found">No detail found for the pokemon</string>
     <string name="no_stats_available">No stats available</string>
     <string name="try_again">Try again</string>
     <string name="not_found">Not found</string>

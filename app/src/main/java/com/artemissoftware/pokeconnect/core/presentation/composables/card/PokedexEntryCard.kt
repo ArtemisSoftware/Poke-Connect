@@ -37,7 +37,6 @@ import com.artemissoftware.pokeconnect.core.designsystem.dimension
 import com.artemissoftware.pokeconnect.core.designsystem.spacing
 import com.artemissoftware.pokeconnect.core.designsystem.window.WindowContent
 import com.artemissoftware.pokeconnect.core.models.PokedexEntry
-import com.artemissoftware.pokeconnect.core.presentation.TestTags.POKEDEX_ENTRY_CARD
 import com.artemissoftware.pokeconnect.core.presentation.TestTags.POKEDEX_ENTRY_CARD_CONTENT
 import com.artemissoftware.pokeconnect.core.presentation.TestTags.POKEDEX_ENTRY_ID
 import com.artemissoftware.pokeconnect.core.presentation.TestTags.POKEDEX_ENTRY_IMAGE
@@ -45,6 +44,7 @@ import com.artemissoftware.pokeconnect.core.presentation.TestTags.POKEDEX_ENTRY_
 import com.artemissoftware.pokeconnect.core.presentation.TestTags.POKEDEX_ENTRY_SHIMMER_CARD
 import com.artemissoftware.pokeconnect.core.presentation.TestTags.POKEDEX_ENTRY_SHIMMER_ID
 import com.artemissoftware.pokeconnect.core.presentation.TestTags.POKEDEX_ENTRY_SHIMMER_NAME
+import com.artemissoftware.pokeconnect.core.presentation.TestTags.getEntryCardTag
 import com.artemissoftware.pokeconnect.core.ui.palette.PaletteColor
 import com.artemissoftware.pokeconnect.core.ui.util.PaletteUtil
 import com.artemissoftware.pokeconnect.core.ui.util.extensions.shimmerEffect
@@ -70,7 +70,7 @@ fun PokedexEntryCard(
 
     Card(
         modifier = modifier
-            .testTag(POKEDEX_ENTRY_CARD),
+            .testTag(getEntryCardTag(pokedexEntry.id.toString())),
         colors = CardDefaults.cardColors(containerColor = paletteColor.background),
         onClick = { onClick() },
     ) {

@@ -13,7 +13,7 @@ import com.artemissoftware.pokeconnect.TestInstrumentedData
 import com.artemissoftware.pokeconnect.core.common.util.extensions.toFormattedNumber
 import com.artemissoftware.pokeconnect.core.common.util.extensions.upperCaseFirstChar
 import com.artemissoftware.pokeconnect.core.designsystem.PokeConnectTheme
-import com.artemissoftware.pokeconnect.core.presentation.TestTags.POKEDEX_ENTRY_CARD
+import com.artemissoftware.pokeconnect.core.presentation.TestTags
 import com.artemissoftware.pokeconnect.core.presentation.TestTags.POKEDEX_ENTRY_CARD_CONTENT
 import com.artemissoftware.pokeconnect.core.presentation.TestTags.POKEDEX_ENTRY_ID
 import com.artemissoftware.pokeconnect.core.presentation.TestTags.POKEDEX_ENTRY_IMAGE
@@ -51,7 +51,7 @@ class PokedexEntryCardTest {
         composeTestRule.onRoot(useUnmergedTree = true).printToLog("currentLabelExists")
 
         composeTestRule
-            .onNodeWithTag(POKEDEX_ENTRY_CARD)
+            .onNodeWithTag(TestTags.getEntryCardTag(pokedexEntry.id.toString()))
             .assertIsDisplayed()
             .performClick()
 

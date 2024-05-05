@@ -38,6 +38,8 @@ import com.artemissoftware.pokeconnect.core.presentation.composables.pagination.
 import com.artemissoftware.pokeconnect.core.presentation.composables.scaffold.PCScaffold
 import com.artemissoftware.pokeconnect.core.ui.placeholder.PlaceHolderContent
 import com.artemissoftware.pokeconnect.features.PreviewData
+import com.artemissoftware.pokeconnect.features.pokedex.TestTags.POKEDEX_GRID
+import com.artemissoftware.pokeconnect.features.pokedex.TestTags.SEARCH_BAR
 
 @Composable
 internal fun PokedexScreen(
@@ -104,7 +106,7 @@ private fun PokedexScreenContent(
 
                 PCSearchBar(
                     modifier = Modifier
-                        .testTag(tag = "enter email")
+                        .testTag(tag = SEARCH_BAR)
                         .fillMaxWidth()
                         .padding(horizontal = searchBarSize.value),
                     historyItems = state.searchHistory,
@@ -159,6 +161,7 @@ private fun PokedexScreenContent(
                                     PokedexGrid(
                                         state = gridState,
                                         modifier = Modifier
+                                            .testTag(tag = POKEDEX_GRID)
                                             .fillMaxWidth()
                                             .padding(horizontal = MaterialTheme.spacing.spacing3),
                                         pokedexEntries = pokedexEntries,

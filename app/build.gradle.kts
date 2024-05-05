@@ -114,6 +114,9 @@ dependencies {
     androidTestImplementation(libs.hilt.android.testing)
     androidTestImplementation(libs.junit.jupiter.api)
     androidTestImplementation(libs.okhttp3.mock.webserver)
+    androidTestImplementation(libs.okhttp3.idling.resource)
+
+    androidTestImplementation ("androidx.navigation:navigation-testing:2.5.3")
 
     kspAndroidTest(libs.hilt.android.compiler)
 
