@@ -22,7 +22,19 @@ object SearchHistoryTestMockData {
             note = "ivysaur"
         ),
         SearchResult(
-            description = "batman",
+            description = "pika",
+        ),
+    )
+
+    val searchResultList2 = listOf(
+        SearchResult(
+            description = "1",
+        ),
+        SearchResult(
+            description = "2",
+        ),
+        SearchResult(
+            description = "pika",
         ),
     )
 }

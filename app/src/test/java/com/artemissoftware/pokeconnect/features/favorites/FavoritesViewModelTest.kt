@@ -2,9 +2,13 @@ package com.artemissoftware.pokeconnect.features.favorites
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo
+import com.artemissoftware.pokeconnect.core.data.fakes.FakeFavoritesRepository
+import com.artemissoftware.pokeconnect.core.data.fakes.FakeSearchHistoryRepository
+import com.artemissoftware.pokeconnect.core.domain.usecases.GetSearchHistoryUseCase
+import com.artemissoftware.pokeconnect.core.domain.usecases.UpdateSearchHistoryUseCase
 import com.artemissoftware.pokeconnect.domain.favorites.usecases.GetFavoritesUseCase
 import com.artemissoftware.pokeconnect.domain.favorites.usecases.SearchFavoritesUseCase
-import com.artemissoftware.pokeconnect.core.data.fakes.FakeFavoritesRepository
+import com.artemissoftware.pokeconnect.testdata.SearchHistoryTestMockData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -21,9 +25,12 @@ class FavoritesViewModelTest {
     private lateinit var viewModel: FavoritesViewModel
 
     private lateinit var favoritesRepository: FakeFavoritesRepository
+    private lateinit var searchHistoryRepository: FakeSearchHistoryRepository
 
     private lateinit var getFavoritesUseCase: GetFavoritesUseCase
     private lateinit var searchPokemonUseCase: SearchFavoritesUseCase
+    private lateinit var getSearchHistoryUseCase: GetSearchHistoryUseCase
+    private lateinit var updateSearchHistoryUseCase: UpdateSearchHistoryUseCase
 
     private val testDispatcher = StandardTestDispatcher()
 
@@ -33,12 +40,18 @@ class FavoritesViewModelTest {
         Dispatchers.setMain(testDispatcher)
 
         favoritesRepository = FakeFavoritesRepository()
+        searchHistoryRepository = FakeSearchHistoryRepository()
+
         getFavoritesUseCase = GetFavoritesUseCase(favoritesRepository = favoritesRepository)
         searchPokemonUseCase = SearchFavoritesUseCase(favoritesRepository = favoritesRepository)
+        getSearchHistoryUseCase = GetSearchHistoryUseCase(searchHistoryRepository = searchHistoryRepository)
+        updateSearchHistoryUseCase = UpdateSearchHistoryUseCase(searchHistoryRepository = searchHistoryRepository)
 
         viewModel = FavoritesViewModel(
             getFavoritesUseCase = getFavoritesUseCase,
             searchFavoritesUseCase = searchPokemonUseCase,
+            getSearchHistoryUseCase = getSearchHistoryUseCase,
+            updateSearchHistoryUseCase = updateSearchHistoryUseCase
         )
     }
 
@@ -77,24 +90,27 @@ class FavoritesViewModelTest {
     }
 
     @org.junit.jupiter.api.Test
-    fun `_when multiple searches are triggered check if searchHistory is updated`() = runTest {
-        val searchHistory = listOf("89", "bulbasaur")
-
-        viewModel.onTriggerEvent(FavoriteEvent.UpdateSearchQuery(searchQuery = "bulbasaur"))
+    fun `when multiple searches are triggered check if searchHistory is updated`() = runTest {
+        viewModel.onTriggerEvent(FavoriteEvent.UpdateSearchQuery(searchQuery = SearchHistoryTestMockData.searchResultList2[0].description))
         viewModel.onTriggerEvent(FavoriteEvent.SearchPokemon)
 
         advanceUntilIdle()
 
-        viewModel.onTriggerEvent(FavoriteEvent.UpdateSearchQuery(searchQuery = "89"))
+        viewModel.onTriggerEvent(FavoriteEvent.UpdateSearchQuery(searchQuery = SearchHistoryTestMockData.searchResultList2[1].description))
         viewModel.onTriggerEvent(FavoriteEvent.SearchPokemon)
 
         advanceUntilIdle()
 
-        viewModel.onTriggerEvent(FavoriteEvent.UpdateSearchQuery(searchQuery = "bulbasaur"))
+        viewModel.onTriggerEvent(FavoriteEvent.UpdateSearchQuery(searchQuery = SearchHistoryTestMockData.searchResultList2[0].description))
         viewModel.onTriggerEvent(FavoriteEvent.SearchPokemon)
 
         advanceUntilIdle()
-        assertThat(searchHistory).isEqualTo(viewModel.state.value.searchHistory)
+        assertThat(viewModel.state.value.searchHistory).isEqualTo(
+            listOf(
+                SearchHistoryTestMockData.searchResultList2[1],
+                SearchHistoryTestMockData.searchResultList2[0]
+            )
+        )
     }
 
 }
