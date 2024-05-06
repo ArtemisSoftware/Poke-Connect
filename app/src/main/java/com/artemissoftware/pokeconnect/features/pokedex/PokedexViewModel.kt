@@ -4,11 +4,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.artemissoftware.pokeconnect.R
-import com.artemissoftware.pokeconnect.domain.pokedex.usecases.GetPokedexUseCase
-import com.artemissoftware.pokeconnect.domain.pokedex.usecases.SearchPokemonUseCase
+import com.artemissoftware.pokeconnect.core.domain.usecases.GetSearchHistoryUseCase
+import com.artemissoftware.pokeconnect.core.domain.usecases.UpdateSearchHistoryUseCase
+import com.artemissoftware.pokeconnect.core.models.Pokemon
+import com.artemissoftware.pokeconnect.core.models.search.SearchResult
 import com.artemissoftware.pokeconnect.core.presentation.models.ErrorData
 import com.artemissoftware.pokeconnect.core.presentation.util.extensions.toUiText
 import com.artemissoftware.pokeconnect.core.ui.text.UiText
+import com.artemissoftware.pokeconnect.domain.pokedex.usecases.GetPokedexUseCase
+import com.artemissoftware.pokeconnect.domain.pokedex.usecases.SearchPokemonUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -21,6 +25,8 @@ import javax.inject.Inject
 internal class PokedexViewModel @Inject constructor(
     private val getPokedexUseCase: GetPokedexUseCase,
     private val searchPokemonUseCase: SearchPokemonUseCase,
+    private val getSearchHistoryUseCase: GetSearchHistoryUseCase,
+    private val updateSearchHistoryUseCase: UpdateSearchHistoryUseCase,
 ): ViewModel() {
 
     private val _state = MutableStateFlow(PokedexState())
@@ -28,6 +34,7 @@ internal class PokedexViewModel @Inject constructor(
 
     init {
         getPokedex()
+        getSearchHistory()
     }
 
     fun onTriggerEvent(event: PokedexEvent) {
@@ -61,10 +68,12 @@ internal class PokedexViewModel @Inject constructor(
 
         viewModelScope.launch {
             searchPokemonUseCase(query = value.searchQuery)
-                .onSuccess { pokemon ->
+                .onSuccess { pokemons ->
                     update {
-                        it.copy(searchResult = pokemon, isLoading = false, error = null)
+                        it.copy(searchResult = pokemons, isLoading = false, error = null)
                     }
+
+                    updateSearchHistory(pokemons = pokemons)
                 }
                 .onFailure { error ->
                     update {
@@ -94,17 +103,33 @@ internal class PokedexViewModel @Inject constructor(
     }
 
     private fun updateHistory() = with(_state) {
-        val history = value.searchHistory.toMutableList()
-
-        if(!history.contains(value.searchQuery)) {
-            history.add(0, value.searchQuery)
-            update {
-                it.copy(searchHistory = history, isSearching = false)
-            }
-        }
-        else{
+        viewModelScope.launch {
+            updateSearchHistoryUseCase(SearchResult(description = value.searchQuery))
             update {
                 it.copy(isSearching = false)
+            }
+        }
+    }
+
+    private fun updateSearchHistory(pokemons: List<Pokemon>) = with(_state) {
+        if(pokemons.size == 1) {
+            viewModelScope.launch {
+                updateSearchHistoryUseCase(
+                    SearchResult(
+                        description = pokemons.first().id.toString(),
+                        note = pokemons.first().name
+                    )
+                )
+            }
+        }
+    }
+
+    private fun getSearchHistory() = with(_state){
+        viewModelScope.launch {
+            getSearchHistoryUseCase().collect{ result ->
+                update {
+                    it.copy(searchHistory = result)
+                }
             }
         }
     }

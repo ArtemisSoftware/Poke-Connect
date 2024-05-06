@@ -204,7 +204,7 @@ private fun PokedexScreenContent(
             }
         },
         isLoading = state.isLoading,
-        error = state.error,
+        error = if(state.isSearching) null else state.error,
     )
 }
 

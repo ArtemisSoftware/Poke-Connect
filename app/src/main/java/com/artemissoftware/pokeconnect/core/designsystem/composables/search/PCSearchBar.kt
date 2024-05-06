@@ -20,6 +20,7 @@ import com.artemissoftware.pokeconnect.R
 import com.artemissoftware.pokeconnect.core.designsystem.PokeConnectTheme
 import com.artemissoftware.pokeconnect.core.designsystem.ThemePreviews
 import com.artemissoftware.pokeconnect.core.designsystem.spacing
+import com.artemissoftware.pokeconnect.core.models.search.SearchResult
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -32,7 +33,7 @@ fun PCSearchBar(
     onClearSearch: () -> Unit,
     modifier: Modifier = Modifier,
     isSearching: Boolean = false,
-    historyItems: List<String> = emptyList(),
+    historyItems: List<SearchResult> = emptyList(),
 ) {
     SearchBar(
         modifier = modifier,
@@ -86,7 +87,7 @@ fun PCSearchBar(
                     contentDescription = null,
                 )
                 Text(
-                    text = historyItem,
+                    text = historyItem.entry(),
                     style = MaterialTheme.typography.labelSmall,
                 )
             }
@@ -118,7 +119,7 @@ private fun PCSearchBar_history_Preview() {
         PCSearchBar(
             modifier = Modifier
                 .fillMaxWidth(),
-            historyItems = listOf("Theme 1", "Theme 2"),
+            historyItems = listOf(SearchResult("1"), SearchResult("2", "Ivysaur")),
             text = "Theme 3",
             placeHolderText = "Search",
             isSearching = true,

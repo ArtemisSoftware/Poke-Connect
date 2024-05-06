@@ -26,6 +26,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import com.artemissoftware.pokeconnect.R
 import com.artemissoftware.pokeconnect.core.designsystem.PokeConnectTheme
 import com.artemissoftware.pokeconnect.core.presentation.models.ErrorData
 import com.artemissoftware.pokeconnect.core.ui.loading.LoadingProgress
@@ -96,6 +97,7 @@ fun PCScaffold(
 
         error?.let {
             PlaceHolderContent(
+                icon = R.drawable.ic_pokeball,
                 message = it.message.asString(),
                 onClick = it.onClick,
                 buttonText = it.buttonText.asString(),
