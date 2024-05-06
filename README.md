@@ -28,12 +28,15 @@ Additionally, I wanted the app to be scalable, testable, and maintainable. That'
 
 ## App preview:
 
-
+### Portarit (light mode)
 
 
 Image #1            |               Image #2               |  Image #3           
 :-------------------------:|:------------------------------------:|:----------------------------:
 <img src="images/PokeConnect_1.jpg">    | <img src="images/PokeConnect_2.jpg"> |  <img src="images/PokeConnect_3.jpg"> 
+
+
+### Portarit (dark mode)
 
 Image #1            |               Image #2               |  Image #3           
 :-------------------------:|:------------------------------------:|:----------------------------:
