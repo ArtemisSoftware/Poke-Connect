@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 
 @Entity(
+    tableName = "abilities",
     primaryKeys = ["pokemonId", "description"],
     foreignKeys = [
         ForeignKey(

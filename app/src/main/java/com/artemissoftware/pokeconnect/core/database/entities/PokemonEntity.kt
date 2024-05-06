@@ -3,7 +3,7 @@ package com.artemissoftware.pokeconnect.core.database.entities
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "pokemon")
 data class PokemonEntity(
     @PrimaryKey
     val id: Int,
