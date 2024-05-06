@@ -1,4 +1,4 @@
-package com.artemissoftware.pokeconnect.core.domain.repositories
+package com.artemissoftware.pokeconnect.data.favorites.repositories
 
 import androidx.paging.PagingData
 import com.artemissoftware.pokeconnect.core.models.PokedexEntry

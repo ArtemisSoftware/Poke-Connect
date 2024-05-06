@@ -1,4 +1,4 @@
-package com.artemissoftware.pokeconnect.core.data.pagination
+package com.artemissoftware.pokeconnect.data.pokedex.pagination
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState

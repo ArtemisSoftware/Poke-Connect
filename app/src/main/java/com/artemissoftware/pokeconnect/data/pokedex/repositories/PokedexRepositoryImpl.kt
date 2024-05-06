@@ -1,4 +1,4 @@
-package com.artemissoftware.pokeconnect.core.data.repositories
+package com.artemissoftware.pokeconnect.data.pokedex.repositories
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -7,11 +7,10 @@ import androidx.paging.map
 import com.artemissoftware.pokeconnect.core.data.HandleNetwork
 import com.artemissoftware.pokeconnect.core.data.mappers.toPokedexEntry
 import com.artemissoftware.pokeconnect.core.data.mappers.toPokemon
-import com.artemissoftware.pokeconnect.core.data.pagination.PokedexPagingSource
+import com.artemissoftware.pokeconnect.data.pokedex.pagination.PokedexPagingSource
 import com.artemissoftware.pokeconnect.core.database.dao.PokemonDao
 import com.artemissoftware.pokeconnect.core.database.relations.PokemonRelation
 import com.artemissoftware.pokeconnect.core.domain.Resource
-import com.artemissoftware.pokeconnect.core.domain.repositories.PokedexRepository
 import com.artemissoftware.pokeconnect.core.models.PokedexEntry
 import com.artemissoftware.pokeconnect.core.models.Pokemon
 import com.artemissoftware.pokeconnect.core.network.PokeApi

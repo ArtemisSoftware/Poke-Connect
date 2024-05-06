@@ -1,4 +1,4 @@
-package com.artemissoftware.pokeconnect.core.data.repositories
+package com.artemissoftware.pokeconnect.data.favorites.repositories
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -11,7 +11,6 @@ import com.artemissoftware.pokeconnect.core.data.mappers.toStatsEntity
 import com.artemissoftware.pokeconnect.core.data.mappers.toTypesEntity
 import com.artemissoftware.pokeconnect.core.database.dao.PokemonDao
 import com.artemissoftware.pokeconnect.core.database.entities.PokemonEntity
-import com.artemissoftware.pokeconnect.core.domain.repositories.FavoritesRepository
 import com.artemissoftware.pokeconnect.core.models.PokedexEntry
 import com.artemissoftware.pokeconnect.core.models.Pokemon
 import kotlinx.coroutines.flow.Flow
@@ -20,7 +19,7 @@ import javax.inject.Inject
 
 class FavoritesRepositoryImpl @Inject constructor(
     private val pokemonDao: PokemonDao,
-) : FavoritesRepository{
+) : FavoritesRepository {
     override suspend fun save(pokemon: Pokemon) {
         pokemonDao.insert(
             pokemonEntity = pokemon.toEntity(),

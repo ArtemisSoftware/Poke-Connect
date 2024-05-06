@@ -1,15 +1,15 @@
-package com.artemissoftware.pokeconnect.core.data.repository
+package com.artemissoftware.pokeconnect.data.pokedex.repository
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import com.artemissoftware.pokeconnect.TestMockData.description
 import com.artemissoftware.pokeconnect.TestMockData.getPokemon
 import com.artemissoftware.pokeconnect.TestMockData.pokemonRelation
-import com.artemissoftware.pokeconnect.core.data.repositories.PokedexRepositoryImpl
+import com.artemissoftware.pokeconnect.core.data.fakes.FakePokeApi
 import com.artemissoftware.pokeconnect.core.database.dao.PokemonDao
 import com.artemissoftware.pokeconnect.core.domain.Resource
 import com.artemissoftware.pokeconnect.core.network.source.PokeApiSource
-import com.artemissoftware.pokeconnect.core.data.fakes.FakePokeApi
+import com.artemissoftware.pokeconnect.data.pokedex.repositories.PokedexRepositoryImpl
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk

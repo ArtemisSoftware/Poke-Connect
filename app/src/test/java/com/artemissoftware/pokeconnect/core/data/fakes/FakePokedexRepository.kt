@@ -11,7 +11,7 @@ import com.artemissoftware.pokeconnect.TestMockData.pokemonFromApi
 import com.artemissoftware.pokeconnect.TestMockData.pokemonFromDb
 import com.artemissoftware.pokeconnect.core.domain.Resource
 import com.artemissoftware.pokeconnect.core.domain.error.DataError
-import com.artemissoftware.pokeconnect.core.domain.repositories.PokedexRepository
+import com.artemissoftware.pokeconnect.data.pokedex.repositories.PokedexRepository
 import com.artemissoftware.pokeconnect.core.models.PokedexEntry
 import com.artemissoftware.pokeconnect.core.models.Pokemon
 import kotlinx.coroutines.flow.Flow

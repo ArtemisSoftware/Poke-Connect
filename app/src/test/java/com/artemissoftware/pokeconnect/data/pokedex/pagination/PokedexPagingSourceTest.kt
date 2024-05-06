@@ -1,13 +1,12 @@
-package com.artemissoftware.pokeconnect.core.data.pagination
+package com.artemissoftware.pokeconnect.data.pokedex.pagination
 
 import androidx.paging.PagingSource
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import com.artemissoftware.pokeconnect.TestMockData.pokedexPageDto
-import com.artemissoftware.pokeconnect.core.data.pagination.PokedexPagingSource
+import com.artemissoftware.pokeconnect.core.data.fakes.FakePokeApi
 import com.artemissoftware.pokeconnect.core.network.PokeApi
 import com.artemissoftware.pokeconnect.core.network.source.PokeApiSource
-import com.artemissoftware.pokeconnect.core.data.fakes.FakePokeApi
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
