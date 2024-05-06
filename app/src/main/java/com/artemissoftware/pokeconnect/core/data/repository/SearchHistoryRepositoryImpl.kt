@@ -6,6 +6,7 @@ import com.artemissoftware.pokeconnect.core.database.dao.SearchHistoryDao
 import com.artemissoftware.pokeconnect.core.models.search.SearchResult
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import java.util.Date
 import javax.inject.Inject
 
 class SearchHistoryRepositoryImpl @Inject constructor(
@@ -13,7 +14,12 @@ class SearchHistoryRepositoryImpl @Inject constructor(
 ): SearchHistoryRepository {
 
     override suspend fun addSearch(searchResult: SearchResult) {
-        searchHistoryDao.insert(searchResult.toSearchHistoryEntity())
+        if(searchHistoryDao.existWithFullData(searchResult.description)){
+            searchHistoryDao.updateTimeStamp(searchResult.description, Date())
+        }
+        else {
+            searchHistoryDao.insert(searchResult.toSearchHistoryEntity())
+        }
     }
 
     override fun getHistory(): Flow<List<SearchResult>> {

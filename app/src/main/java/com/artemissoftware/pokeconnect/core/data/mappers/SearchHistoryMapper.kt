@@ -10,3 +10,4 @@ fun SearchHistoryEntity.toSearchResult(): SearchResult{
 fun SearchResult.toSearchHistoryEntity(): SearchHistoryEntity{
     return SearchHistoryEntity(description = description, note = note)
 }
+

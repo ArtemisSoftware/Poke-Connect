@@ -168,9 +168,7 @@ private fun FavoritesScreenContent(
                                             .fillMaxWidth()
                                             .padding(horizontal = MaterialTheme.spacing.spacing3),
                                         state = gridState,
-                                        reloadContent = {
-
-                                        }
+                                        reloadContent = {}
                                     )
                                 }
                             )
