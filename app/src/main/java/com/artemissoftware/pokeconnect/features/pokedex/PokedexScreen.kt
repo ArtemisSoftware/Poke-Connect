@@ -148,14 +148,7 @@ private fun PokedexScreenContent(
                         state.pokedex?.let {
 
                             val item = it.collectAsLazyPagingItems()
-                            PlaceHolderNotice(
-                                message = "",
-                                buttonText = stringResource(id = R.string.try_again),
-                                onClick = {
-                                    item.refresh()
-                                    //event(PokedexEvent.Reload)
-                                }
-                            )
+
                             PaginationContent(
                                 items = it.collectAsLazyPagingItems(),
                                 loadingContent = {
@@ -186,14 +179,12 @@ private fun PokedexScreenContent(
                                             navigateToDetails(entry.id.toString())
                                         },
                                         reloadContent = {
-//                                            PlaceHolderNotice(
-//                                                message = errorText?.asString() ?: "",
-//                                                buttonText = stringResource(id = R.string.try_again),
-//                                                onClick = {
-//                                                    item.refresh()
-//                                                    //event(PokedexEvent.Reload)
-//                                                }
-//                                            )
+                                            PlaceHolderNotice(
+                                                buttonText = stringResource(id = R.string.error_occurred_try_reload),
+                                                onClick = {
+                                                    item.refresh()
+                                                }
+                                            )
                                         }
                                     )
                                 }

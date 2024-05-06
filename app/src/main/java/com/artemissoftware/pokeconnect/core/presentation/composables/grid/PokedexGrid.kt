@@ -30,7 +30,8 @@ fun PokedexGrid(
     reloadContent: @Composable () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val span: (LazyGridItemSpanScope) -> GridItemSpan = { GridItemSpan(1) }
+    val gridSpan = getGridItemCount()
+    val span: (LazyGridItemSpanScope) -> GridItemSpan = { GridItemSpan(gridSpan) }
 
 
     LazyVerticalGrid(

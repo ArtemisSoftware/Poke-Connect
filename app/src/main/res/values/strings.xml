@@ -26,6 +26,7 @@
     <string name="search_detail_not_found">No detail found for the pokemon</string>
     <string name="no_stats_available">No stats available</string>
     <string name="try_again">Try again</string>
+    <string name="error_occurred_try_reload">An error occurred - reload</string>
     <string name="not_found">Not found</string>
     <string name="stats">Stats</string>
     <string name="about">About</string>

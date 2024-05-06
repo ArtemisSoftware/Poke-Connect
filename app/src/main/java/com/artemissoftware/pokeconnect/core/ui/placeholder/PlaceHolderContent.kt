@@ -87,51 +87,15 @@ fun PlaceHolderContent(
 
 @Composable
 fun PlaceHolderNotice(
-    message: String,
-    @DrawableRes icon: Int = R.drawable.ic_placeholder,
     onClick: (() -> Unit)? = null,
     buttonText: String = "",
 ) {
-
-    var startAnimation by remember {
-        mutableStateOf(false)
-    }
-
-    val alphaAnimation by animateFloatAsState(
-        targetValue = if (startAnimation) 0.8f else 0f,
-        animationSpec = tween(durationMillis = 1000),
-        label = "",
-    )
-
-    LaunchedEffect(key1 = true) {
-        startAnimation = true
-    }
-
     Row(
         modifier = Modifier
             .testTag(PLACE_HOLDER_PAGE)
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceEvenly,
     ) {
-
-        Row(modifier = Modifier.weight(0.7F)) {
-            Icon(
-                painter = painterResource(id = icon),
-                contentDescription = null,
-                modifier = Modifier
-                    .size(MaterialTheme.dimension.iconSize)
-                    .alpha(alphaAnimation),
-            )
-            Text(
-                modifier = Modifier
-                    .testTag(PLACE_HOLDER__PAGE_TEXT)
-                    .padding(MaterialTheme.spacing.spacing1_5)
-                    .alpha(alphaAnimation),
-                text = message,
-                style = MaterialTheme.typography.bodyMedium,
-            )
-        }
-
         onClick?.let {
             Button(onClick = it) {
                 Text(text = buttonText)
@@ -154,8 +118,6 @@ private fun PlaceHolderContentPreview() {
 @Composable
 private fun PlaceHolderNoticePreview() {
     PokeConnectTheme {
-        PlaceHolderNotice(
-            message = "Internet Unavailable.",
-        )
+        PlaceHolderNotice()
     }
 }

@@ -49,7 +49,6 @@ internal class PokedexViewModel @Inject constructor(
                 updateSearchQuery(searchQuery = event.searchQuery)
             }
             PokedexEvent.ClearSearch -> clearSearch()
-            PokedexEvent.Reload -> getPokedex()
         }
     }
 
