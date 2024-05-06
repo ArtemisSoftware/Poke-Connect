@@ -1,9 +1,9 @@
 package com.artemissoftware.pokeconnect.features
 
-import com.artemissoftware.pokeconnect.core.models.PokedexEntry
-import com.artemissoftware.pokeconnect.core.models.Pokemon
-import com.artemissoftware.pokeconnect.core.models.PokemonType
-import com.artemissoftware.pokeconnect.core.models.Stat
+import com.artemissoftware.pokeconnect.core.models.pokemon.PokedexEntry
+import com.artemissoftware.pokeconnect.core.models.pokemon.Pokemon
+import com.artemissoftware.pokeconnect.core.models.pokemon.PokemonType
+import com.artemissoftware.pokeconnect.core.models.pokemon.Stat
 import com.artemissoftware.pokeconnect.features.detail.DetailState
 import com.artemissoftware.pokeconnect.features.favorites.FavoritesState
 import com.artemissoftware.pokeconnect.features.pokedex.PokedexState

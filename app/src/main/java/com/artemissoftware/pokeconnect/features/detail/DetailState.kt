@@ -1,7 +1,7 @@
 package com.artemissoftware.pokeconnect.features.detail
 
 import android.os.Parcelable
-import com.artemissoftware.pokeconnect.core.models.Pokemon
+import com.artemissoftware.pokeconnect.core.models.pokemon.Pokemon
 import com.artemissoftware.pokeconnect.core.presentation.models.ErrorData
 import com.artemissoftware.pokeconnect.core.ui.tab.TabItem
 import com.artemissoftware.pokeconnect.features.detail.models.DetailTab

@@ -1,8 +1,8 @@
 package com.artemissoftware.pokeconnect.data.favorites.repositories
 
 import androidx.paging.PagingData
-import com.artemissoftware.pokeconnect.core.models.PokedexEntry
-import com.artemissoftware.pokeconnect.core.models.Pokemon
+import com.artemissoftware.pokeconnect.core.models.pokemon.PokedexEntry
+import com.artemissoftware.pokeconnect.core.models.pokemon.Pokemon
 import kotlinx.coroutines.flow.Flow
 
 interface FavoritesRepository {

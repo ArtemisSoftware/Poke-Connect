@@ -22,7 +22,7 @@ import com.artemissoftware.pokeconnect.core.designsystem.PokeConnectTheme
 import com.artemissoftware.pokeconnect.core.designsystem.ThemePreviews
 import com.artemissoftware.pokeconnect.core.designsystem.dimension
 import com.artemissoftware.pokeconnect.core.designsystem.spacing
-import com.artemissoftware.pokeconnect.core.models.Pokemon
+import com.artemissoftware.pokeconnect.core.models.pokemon.Pokemon
 import com.artemissoftware.pokeconnect.core.ui.palette.PaletteColor
 import com.artemissoftware.pokeconnect.features.PreviewData
 import com.artemissoftware.pokeconnect.features.detail.TestTags.DISPLAY_COLUMN

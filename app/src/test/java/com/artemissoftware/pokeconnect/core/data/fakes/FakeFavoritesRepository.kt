@@ -7,8 +7,8 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.artemissoftware.pokeconnect.testdata.TestMockData.pokedexEntry
 import com.artemissoftware.pokeconnect.data.favorites.repositories.FavoritesRepository
-import com.artemissoftware.pokeconnect.core.models.PokedexEntry
-import com.artemissoftware.pokeconnect.core.models.Pokemon
+import com.artemissoftware.pokeconnect.core.models.pokemon.PokedexEntry
+import com.artemissoftware.pokeconnect.core.models.pokemon.Pokemon
 import kotlinx.coroutines.flow.Flow
 
 class FakeFavoritesRepository: FavoritesRepository {

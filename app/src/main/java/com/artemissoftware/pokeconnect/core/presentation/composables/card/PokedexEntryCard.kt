@@ -36,7 +36,7 @@ import com.artemissoftware.pokeconnect.core.designsystem.ThemePreviews
 import com.artemissoftware.pokeconnect.core.designsystem.dimension
 import com.artemissoftware.pokeconnect.core.designsystem.spacing
 import com.artemissoftware.pokeconnect.core.designsystem.window.WindowContent
-import com.artemissoftware.pokeconnect.core.models.PokedexEntry
+import com.artemissoftware.pokeconnect.core.models.pokemon.PokedexEntry
 import com.artemissoftware.pokeconnect.core.presentation.TestTags.POKEDEX_ENTRY_CARD_CONTENT
 import com.artemissoftware.pokeconnect.core.presentation.TestTags.POKEDEX_ENTRY_ID
 import com.artemissoftware.pokeconnect.core.presentation.TestTags.POKEDEX_ENTRY_IMAGE

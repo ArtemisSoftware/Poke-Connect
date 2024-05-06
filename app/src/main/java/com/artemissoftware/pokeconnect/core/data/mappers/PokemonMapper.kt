@@ -6,10 +6,10 @@ import com.artemissoftware.pokeconnect.core.database.entities.PokemonEntity
 import com.artemissoftware.pokeconnect.core.database.entities.StatEntity
 import com.artemissoftware.pokeconnect.core.database.entities.TypeEntity
 import com.artemissoftware.pokeconnect.core.database.relations.PokemonRelation
-import com.artemissoftware.pokeconnect.core.models.PokedexEntry
-import com.artemissoftware.pokeconnect.core.models.Pokemon
-import com.artemissoftware.pokeconnect.core.models.PokemonType
-import com.artemissoftware.pokeconnect.core.models.Stat
+import com.artemissoftware.pokeconnect.core.models.pokemon.PokedexEntry
+import com.artemissoftware.pokeconnect.core.models.pokemon.Pokemon
+import com.artemissoftware.pokeconnect.core.models.pokemon.PokemonType
+import com.artemissoftware.pokeconnect.core.models.pokemon.Stat
 import com.artemissoftware.pokeconnect.core.network.dto.pokemon.OfficialArtworkDto
 import com.artemissoftware.pokeconnect.core.network.dto.pokemon.PokemonDto
 import com.artemissoftware.pokeconnect.core.network.dto.pokemon.StatDto
@@ -44,7 +44,7 @@ internal fun PokemonDto.toPokemon(speciesDto: SpeciesDto): Pokemon {
     )
 }
 
-internal fun PokemonRelation.toPokemon(): Pokemon{
+internal fun PokemonRelation.toPokemon(): Pokemon {
     return Pokemon(
         id = pokemon.id,
         name = pokemon.name,
@@ -79,7 +79,7 @@ internal fun Pokemon.toAbilitiesEntity(): List<AbilityEntity>{
     }
 }
 
-private fun StatEntity.toStat(): Stat{
+private fun StatEntity.toStat(): Stat {
     return Stat(
         abbreviation = description.toAbbreviation(),
         description = description,
@@ -87,7 +87,7 @@ private fun StatEntity.toStat(): Stat{
     )
 }
 
-private fun StatDto.toStat(): Stat{
+private fun StatDto.toStat(): Stat {
     return Stat(
         abbreviation = stat.name.toAbbreviation(),
         value = baseStat,
@@ -141,7 +141,7 @@ internal fun Pokemon.toTypesEntity(): List<TypeEntity>{
     }
 }
 
-internal fun PokemonEntity.toPokedexEntry(): PokedexEntry{
+internal fun PokemonEntity.toPokedexEntry(): PokedexEntry {
     return PokedexEntry(
         id = id,
         name = name,

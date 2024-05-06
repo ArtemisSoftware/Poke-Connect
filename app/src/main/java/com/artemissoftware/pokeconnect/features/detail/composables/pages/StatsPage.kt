@@ -33,7 +33,7 @@ import com.artemissoftware.pokeconnect.core.designsystem.ThemePreviews
 import com.artemissoftware.pokeconnect.core.designsystem.dimension
 import com.artemissoftware.pokeconnect.core.designsystem.shape
 import com.artemissoftware.pokeconnect.core.designsystem.spacing
-import com.artemissoftware.pokeconnect.core.models.Stat
+import com.artemissoftware.pokeconnect.core.models.pokemon.Stat
 import com.artemissoftware.pokeconnect.core.presentation.util.extensions.roundToNearestIncrement
 import com.artemissoftware.pokeconnect.core.ui.palette.PaletteColor
 import com.artemissoftware.pokeconnect.core.ui.placeholder.PlaceHolderContent

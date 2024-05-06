@@ -6,10 +6,10 @@ import com.artemissoftware.pokeconnect.core.database.entities.SearchHistoryEntit
 import com.artemissoftware.pokeconnect.core.database.entities.StatEntity
 import com.artemissoftware.pokeconnect.core.database.entities.TypeEntity
 import com.artemissoftware.pokeconnect.core.database.relations.PokemonRelation
-import com.artemissoftware.pokeconnect.core.models.PokedexEntry
-import com.artemissoftware.pokeconnect.core.models.Pokemon
-import com.artemissoftware.pokeconnect.core.models.PokemonType
-import com.artemissoftware.pokeconnect.core.models.Stat
+import com.artemissoftware.pokeconnect.core.models.pokemon.PokedexEntry
+import com.artemissoftware.pokeconnect.core.models.pokemon.Pokemon
+import com.artemissoftware.pokeconnect.core.models.pokemon.PokemonType
+import com.artemissoftware.pokeconnect.core.models.pokemon.Stat
 
 object TestInstrumentedData {
 
@@ -35,7 +35,7 @@ object TestInstrumentedData {
     val abilities = listOf("torrent")
     val types = listOf(PokemonType.GRASS, PokemonType.POISON)
 
-    fun getPokemon(description: String = "", isFavorite: Boolean = false, currentAbilities: List<String> = abilities): Pokemon{
+    fun getPokemon(description: String = "", isFavorite: Boolean = false, currentAbilities: List<String> = abilities): Pokemon {
         return Pokemon(
             id = 1,
             name = "bulbasaur",

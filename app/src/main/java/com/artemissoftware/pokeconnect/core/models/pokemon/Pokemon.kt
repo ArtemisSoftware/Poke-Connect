@@ -1,4 +1,4 @@
-package com.artemissoftware.pokeconnect.core.models
+package com.artemissoftware.pokeconnect.core.models.pokemon
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

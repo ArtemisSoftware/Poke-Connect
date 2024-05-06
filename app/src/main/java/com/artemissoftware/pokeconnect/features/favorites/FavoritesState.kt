@@ -1,7 +1,7 @@
 package com.artemissoftware.pokeconnect.features.favorites
 
 import androidx.paging.PagingData
-import com.artemissoftware.pokeconnect.core.models.PokedexEntry
+import com.artemissoftware.pokeconnect.core.models.pokemon.PokedexEntry
 import com.artemissoftware.pokeconnect.core.models.search.SearchResult
 import kotlinx.coroutines.flow.Flow
 

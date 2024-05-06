@@ -5,10 +5,10 @@ import com.artemissoftware.pokeconnect.core.database.entities.PokemonEntity
 import com.artemissoftware.pokeconnect.core.database.entities.StatEntity
 import com.artemissoftware.pokeconnect.core.database.entities.TypeEntity
 import com.artemissoftware.pokeconnect.core.database.relations.PokemonRelation
-import com.artemissoftware.pokeconnect.core.models.PokedexEntry
-import com.artemissoftware.pokeconnect.core.models.Pokemon
-import com.artemissoftware.pokeconnect.core.models.PokemonType
-import com.artemissoftware.pokeconnect.core.models.Stat
+import com.artemissoftware.pokeconnect.core.models.pokemon.PokedexEntry
+import com.artemissoftware.pokeconnect.core.models.pokemon.Pokemon
+import com.artemissoftware.pokeconnect.core.models.pokemon.PokemonType
+import com.artemissoftware.pokeconnect.core.models.pokemon.Stat
 import com.artemissoftware.pokeconnect.core.network.dto.pokedex.PokedexEntryDto
 import com.artemissoftware.pokeconnect.core.network.dto.pokedex.PokedexPageDto
 import com.artemissoftware.pokeconnect.core.network.dto.pokemon.AbilityDto
@@ -81,7 +81,7 @@ object TestMockData {
     val abilities = listOf("torrent")
     val types = listOf(PokemonType.GRASS)
 
-    fun getPokemon(description: String = "", isFavorite: Boolean = false): Pokemon{
+    fun getPokemon(description: String = "", isFavorite: Boolean = false): Pokemon {
         return Pokemon(
             id = 1,
             name = "bulbasaur",

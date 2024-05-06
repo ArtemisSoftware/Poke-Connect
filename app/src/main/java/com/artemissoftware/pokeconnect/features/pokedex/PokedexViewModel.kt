@@ -6,7 +6,7 @@ import androidx.paging.cachedIn
 import com.artemissoftware.pokeconnect.R
 import com.artemissoftware.pokeconnect.core.domain.usecases.GetSearchHistoryUseCase
 import com.artemissoftware.pokeconnect.core.domain.usecases.UpdateSearchHistoryUseCase
-import com.artemissoftware.pokeconnect.core.models.Pokemon
+import com.artemissoftware.pokeconnect.core.models.pokemon.Pokemon
 import com.artemissoftware.pokeconnect.core.models.search.SearchResult
 import com.artemissoftware.pokeconnect.core.presentation.models.ErrorData
 import com.artemissoftware.pokeconnect.core.presentation.util.extensions.toUiText

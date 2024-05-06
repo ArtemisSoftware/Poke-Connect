@@ -18,7 +18,7 @@ import com.artemissoftware.pokeconnect.core.designsystem.PokeConnectTheme
 import com.artemissoftware.pokeconnect.core.designsystem.ThemePreviews
 import com.artemissoftware.pokeconnect.core.designsystem.spacing
 import com.artemissoftware.pokeconnect.core.designsystem.window
-import com.artemissoftware.pokeconnect.core.models.PokedexEntry
+import com.artemissoftware.pokeconnect.core.models.pokemon.PokedexEntry
 import com.artemissoftware.pokeconnect.core.presentation.composables.card.PokedexEntryCard
 import com.artemissoftware.pokeconnect.core.presentation.composables.card.ShimmerPokedexEntryCard
 

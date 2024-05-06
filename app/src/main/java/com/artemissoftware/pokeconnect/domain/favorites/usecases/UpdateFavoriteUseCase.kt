@@ -1,7 +1,7 @@
 package com.artemissoftware.pokeconnect.domain.favorites.usecases
 
 import com.artemissoftware.pokeconnect.data.favorites.repositories.FavoritesRepository
-import com.artemissoftware.pokeconnect.core.models.Pokemon
+import com.artemissoftware.pokeconnect.core.models.pokemon.Pokemon
 import javax.inject.Inject
 
 class UpdateFavoriteUseCase @Inject constructor(private val favoritesRepository: FavoritesRepository) {

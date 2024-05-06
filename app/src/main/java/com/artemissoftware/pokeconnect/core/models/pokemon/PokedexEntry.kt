@@ -1,4 +1,4 @@
-package com.artemissoftware.pokeconnect.core.models
+package com.artemissoftware.pokeconnect.core.models.pokemon
 
 data class PokedexEntry(
     val id: Int,

@@ -5,8 +5,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import com.artemissoftware.pokeconnect.R
 import com.artemissoftware.pokeconnect.core.designsystem.palette.pokemon.pokemonPalette
-import com.artemissoftware.pokeconnect.core.models.PokemonType
-import com.artemissoftware.pokeconnect.core.models.Stat
+import com.artemissoftware.pokeconnect.core.models.pokemon.PokemonType
+import com.artemissoftware.pokeconnect.core.models.pokemon.Stat
 
 @Composable
 fun PokemonType.toType(): Pair<Color, Int> {

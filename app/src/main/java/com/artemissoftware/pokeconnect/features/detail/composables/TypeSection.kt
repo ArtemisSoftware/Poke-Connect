@@ -20,7 +20,7 @@ import com.artemissoftware.pokeconnect.core.designsystem.ThemePreviews
 import com.artemissoftware.pokeconnect.core.designsystem.dimension
 import com.artemissoftware.pokeconnect.core.designsystem.shape
 import com.artemissoftware.pokeconnect.core.designsystem.spacing
-import com.artemissoftware.pokeconnect.core.models.PokemonType
+import com.artemissoftware.pokeconnect.core.models.pokemon.PokemonType
 import com.artemissoftware.pokeconnect.core.presentation.util.extensions.toType
 import com.artemissoftware.pokeconnect.core.ui.icon.CircularIcon
 import com.artemissoftware.pokeconnect.features.PreviewData
