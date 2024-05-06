@@ -37,7 +37,7 @@ Image #1            |               Image #2               |  Image #3
 
 Image #1            |               Image #2               |  Image #3           
 :-------------------------:|:------------------------------------:|:----------------------------:
-<img src="images/PokeConnect_4.jpg">    | <img src="images/PokeConnect_5.jpg"> |  <img src="images/PokeConnect_6.jpg"> 
+<img src="images/PokeConnect_4.png">    | <img src="images/PokeConnect_5.png"> |  <img src="images/PokeConnect_6.png"> 
 
 
 # App Architecture Description
