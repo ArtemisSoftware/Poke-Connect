@@ -31,13 +31,13 @@ Additionally, I wanted the app to be scalable, testable, and maintainable. That'
 
 
 
-Image #1            |  Image #2             |  Image #3           
-:-------------------------:|:----------------------------:|:----------------------------:
-<img src="images/Demeter_Recipes_1.jpg">    |  <img src="images/Demeter_Recipes_2.jpg">     |  <img src="images/Demeter_Recipes_3.jpg"> 
+Image #1            |               Image #2               |  Image #3           
+:-------------------------:|:------------------------------------:|:----------------------------:
+<img src="images/PokeConnect_1.jpg">    | <img src="images/PokeConnect_2.jpg"> |  <img src="images/PokeConnect_3.jpg"> 
 
-Image #1            |  Image #2             |  Image #3           
-:-------------------------:|:----------------------------:|:----------------------------:
-<img src="images/Demeter_Recipes_1.jpg">    |  <img src="images/Demeter_Recipes_2.jpg">     |  <img src="images/Demeter_Recipes_3.jpg"> 
+Image #1            |               Image #2               |  Image #3           
+:-------------------------:|:------------------------------------:|:----------------------------:
+<img src="images/PokeConnect_4.jpg">    | <img src="images/PokeConnect_5.jpg"> |  <img src="images/PokeConnect_6.jpg"> 
 
 
 # App Architecture Description
