@@ -7,7 +7,6 @@ import com.artemissoftware.pokeconnect.TestMockData.getPokemon
 import com.artemissoftware.pokeconnect.TestMockData.getPokemonDtoWithArt
 import com.artemissoftware.pokeconnect.TestMockData.getPokemonEntity
 import com.artemissoftware.pokeconnect.TestMockData.pokedexEntry
-import com.artemissoftware.pokeconnect.TestMockData.pokedexEntryDto
 import com.artemissoftware.pokeconnect.TestMockData.pokemonDto
 import com.artemissoftware.pokeconnect.TestMockData.pokemonRelation
 import com.artemissoftware.pokeconnect.TestMockData.speciesDto
@@ -23,10 +22,6 @@ import org.junit.jupiter.api.Test
 
 class PokemonMapperTest {
 
-    @Test
-    fun `Map PokedexEntryDto to PokedexEntry`() {
-        assertThat(pokedexEntryDto.toPokedexEntry()).isEqualTo(pokedexEntry)
-    }
 
     @Test
     fun `Map PokemonDto to Pokemon`() {

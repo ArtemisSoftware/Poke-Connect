@@ -7,7 +7,6 @@ import androidx.paging.map
 import com.artemissoftware.pokeconnect.core.data.HandleNetwork
 import com.artemissoftware.pokeconnect.core.data.mappers.toPokedexEntry
 import com.artemissoftware.pokeconnect.core.data.mappers.toPokemon
-import com.artemissoftware.pokeconnect.data.pokedex.pagination.PokedexPagingSource
 import com.artemissoftware.pokeconnect.core.database.dao.PokemonDao
 import com.artemissoftware.pokeconnect.core.database.relations.PokemonRelation
 import com.artemissoftware.pokeconnect.core.domain.Resource
@@ -16,6 +15,7 @@ import com.artemissoftware.pokeconnect.core.models.Pokemon
 import com.artemissoftware.pokeconnect.core.network.PokeApi
 import com.artemissoftware.pokeconnect.core.network.dto.pokedex.PokedexEntryDto
 import com.artemissoftware.pokeconnect.core.network.source.PokeApiSource
+import com.artemissoftware.pokeconnect.data.pokedex.pagination.PokedexPagingSource
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -23,7 +23,7 @@ import kotlinx.coroutines.flow.map
 import java.util.Locale
 import javax.inject.Inject
 
-class PokedexRepositoryImpl @Inject constructor(
+internal class PokedexRepositoryImpl @Inject constructor(
     private val pokeApiSource: PokeApiSource,
     private val pokemonDao: PokemonDao,
 ) : PokedexRepository {
