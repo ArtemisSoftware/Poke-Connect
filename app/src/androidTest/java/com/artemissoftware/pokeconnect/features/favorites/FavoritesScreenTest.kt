@@ -58,7 +58,7 @@ class FavoritesScreenTest {
 
     @OptIn(ExperimentalTestApi::class)
     @Test
-    fun go_to_favorites_check_favorite_pokemon() {
+    fun select_a_pokemon_on_pokedex_go_to_details_make_it_favorite_check_the_new_favorite_on_favorite_list() {
 
         mockServer.dispatcher = MockServerDispatcher().successDispatcher()
 
