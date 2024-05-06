@@ -157,7 +157,7 @@ private fun FavoritesScreenContent(
                                 errorContent = { error ->
                                     PlaceHolderContent(message = error.asString())
                                 },
-                                content = { pokedexEntries ->
+                                content = { pokedexEntries, errorText ->
                                     PokedexGrid(
                                         pokedexEntries = pokedexEntries,
                                         onClick = { entry ->
@@ -168,6 +168,9 @@ private fun FavoritesScreenContent(
                                             .fillMaxWidth()
                                             .padding(horizontal = MaterialTheme.spacing.spacing3),
                                         state = gridState,
+                                        reloadContent = {
+
+                                        }
                                     )
                                 }
                             )

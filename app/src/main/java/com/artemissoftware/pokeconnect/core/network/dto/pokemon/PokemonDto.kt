@@ -22,7 +22,6 @@ data class PokemonDto(
     val types: List<TypeDto> = emptyList(),
     @field:Json(name = "cries")
     val cries: CriesDto = CriesDto(),
-
     @field:Json(name = "base_experience")
     val baseExperience: Int,
     @field:Json(name = "is_default")
@@ -37,21 +36,4 @@ data class PokemonDto(
     val forms: List<UrlNameDto> = emptyList(),
     @field:Json(name = "moves")
     val moves: List<MoveDto> = emptyList(),
-
-//    @field:Json(name = "game_indices")
-//    val gameIndices: List<GameIndiceDto> = emptyList(),
-
-//    @field:Json(name = "held_items")
-//    val heldItems: List<Any> = listOf(), // TODO: encontrar exemplo
-
-
-
-
-
-//    @field:Json(name = "past_abilities")
-//    val pastAbilities: List<Any> = listOf(), // TODO: encontrar exemplo
-//    @field:Json(name = "past_types")
-//    val pastTypes: List<Any> = listOf(), // TODO: encontrar exemplo
-
-
 )

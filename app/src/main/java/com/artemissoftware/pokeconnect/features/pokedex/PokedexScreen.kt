@@ -37,6 +37,7 @@ import com.artemissoftware.pokeconnect.core.presentation.composables.grid.Shimme
 import com.artemissoftware.pokeconnect.core.presentation.composables.pagination.PaginationContent
 import com.artemissoftware.pokeconnect.core.presentation.composables.scaffold.PCScaffold
 import com.artemissoftware.pokeconnect.core.ui.placeholder.PlaceHolderContent
+import com.artemissoftware.pokeconnect.core.ui.placeholder.PlaceHolderNotice
 import com.artemissoftware.pokeconnect.features.PreviewData
 import com.artemissoftware.pokeconnect.features.pokedex.TestTags.POKEDEX_GRID
 import com.artemissoftware.pokeconnect.features.pokedex.TestTags.SEARCH_BAR
@@ -145,6 +146,16 @@ private fun PokedexScreenContent(
                         )
                     } else {
                         state.pokedex?.let {
+
+                            val item = it.collectAsLazyPagingItems()
+                            PlaceHolderNotice(
+                                message = "",
+                                buttonText = stringResource(id = R.string.try_again),
+                                onClick = {
+                                    item.refresh()
+                                    //event(PokedexEvent.Reload)
+                                }
+                            )
                             PaginationContent(
                                 items = it.collectAsLazyPagingItems(),
                                 loadingContent = {
@@ -155,9 +166,15 @@ private fun PokedexScreenContent(
                                     )
                                 },
                                 errorContent = { error ->
-                                    PlaceHolderContent(message = error.asString())
+                                    PlaceHolderContent(
+                                        message = error.asString(),
+                                        buttonText = stringResource(id = R.string.try_again),
+                                        onClick = {
+                                            item.refresh()
+                                        }
+                                    )
                                 },
-                                content = { pokedexEntries ->
+                                content = { pokedexEntries, errorText ->
                                     PokedexGrid(
                                         state = gridState,
                                         modifier = Modifier
@@ -168,6 +185,16 @@ private fun PokedexScreenContent(
                                         onClick = { entry ->
                                             navigateToDetails(entry.id.toString())
                                         },
+                                        reloadContent = {
+//                                            PlaceHolderNotice(
+//                                                message = errorText?.asString() ?: "",
+//                                                buttonText = stringResource(id = R.string.try_again),
+//                                                onClick = {
+//                                                    item.refresh()
+//                                                    //event(PokedexEvent.Reload)
+//                                                }
+//                                            )
+                                        }
                                     )
                                 }
                             )

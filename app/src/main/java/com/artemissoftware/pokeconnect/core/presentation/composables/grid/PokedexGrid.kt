@@ -3,6 +3,8 @@ package com.artemissoftware.pokeconnect.core.presentation.composables.grid
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
+import androidx.compose.foundation.lazy.grid.LazyGridItemSpanScope
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -25,8 +27,12 @@ fun PokedexGrid(
     state: LazyGridState,
     pokedexEntries: LazyPagingItems<PokedexEntry>,
     onClick: (PokedexEntry) -> Unit,
+    reloadContent: @Composable () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val span: (LazyGridItemSpanScope) -> GridItemSpan = { GridItemSpan(1) }
+
+
     LazyVerticalGrid(
         state = state,
         modifier = modifier,
@@ -46,6 +52,10 @@ fun PokedexGrid(
                     onClick = { onClick(entry) },
                 )
             }
+        }
+
+        item(span = span) {
+            reloadContent()
         }
     }
 }

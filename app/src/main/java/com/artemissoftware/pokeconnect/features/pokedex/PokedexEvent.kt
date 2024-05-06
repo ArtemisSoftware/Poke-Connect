@@ -5,4 +5,5 @@ internal sealed class PokedexEvent {
     data object SearchPokemon : PokedexEvent()
     data class ActivateSearch(val isActive: Boolean) : PokedexEvent()
     data object ClearSearch : PokedexEvent()
+    data object Reload : PokedexEvent()
 }

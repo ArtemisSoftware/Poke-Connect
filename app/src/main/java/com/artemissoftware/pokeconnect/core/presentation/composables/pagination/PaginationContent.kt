@@ -13,7 +13,7 @@ fun <T : Any>PaginationContent(
     items: LazyPagingItems<T>,
     loadingContent: @Composable () -> Unit,
     errorContent: @Composable (UiText) -> Unit,
-    content: @Composable (LazyPagingItems<T>) -> Unit,
+    content: @Composable (LazyPagingItems<T>, UiText?) -> Unit,
 ) {
     items.apply {
         val error = when {
@@ -22,10 +22,13 @@ fun <T : Any>PaginationContent(
             loadState.append is LoadState.Error -> loadState.append as LoadState.Error
             else -> null
         }
-
         when {
             loadState.refresh is LoadState.Loading -> {
                 loadingContent()
+            }
+
+            error != null && this.itemCount > 0 -> {
+                content(items, parseErrorMessage(error))
             }
 
             error != null -> {
@@ -33,7 +36,7 @@ fun <T : Any>PaginationContent(
             }
 
             else -> {
-                content(items)
+                content(items, null)
             }
         }
     }
