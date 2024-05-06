@@ -3,7 +3,7 @@ package com.artemissoftware.pokeconnect.domain.favorites.usecases
 import assertk.assertThat
 import assertk.assertions.isEmpty
 import assertk.assertions.isNotEmpty
-import com.artemissoftware.pokeconnect.TestMockData
+import com.artemissoftware.pokeconnect.testdata.TestMockData
 import com.artemissoftware.pokeconnect.core.data.fakes.FakeFavoritesRepository
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.BeforeEach

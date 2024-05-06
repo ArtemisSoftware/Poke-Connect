@@ -2,7 +2,7 @@ package com.artemissoftware.pokeconnect.core.data.mapper
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo
-import com.artemissoftware.pokeconnect.TestMockData
+import com.artemissoftware.pokeconnect.testdata.TestMockData
 import com.artemissoftware.pokeconnect.core.data.mappers.toPokedexEntry
 import org.junit.jupiter.api.Test
 

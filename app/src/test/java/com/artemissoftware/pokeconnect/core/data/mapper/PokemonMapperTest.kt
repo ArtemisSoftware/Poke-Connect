@@ -2,16 +2,16 @@ package com.artemissoftware.pokeconnect.core.data.mapper
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo
-import com.artemissoftware.pokeconnect.TestMockData.abilityEntity
-import com.artemissoftware.pokeconnect.TestMockData.getPokemon
-import com.artemissoftware.pokeconnect.TestMockData.getPokemonDtoWithArt
-import com.artemissoftware.pokeconnect.TestMockData.getPokemonEntity
-import com.artemissoftware.pokeconnect.TestMockData.pokedexEntry
-import com.artemissoftware.pokeconnect.TestMockData.pokemonDto
-import com.artemissoftware.pokeconnect.TestMockData.pokemonRelation
-import com.artemissoftware.pokeconnect.TestMockData.speciesDto
-import com.artemissoftware.pokeconnect.TestMockData.statEntry
-import com.artemissoftware.pokeconnect.TestMockData.typesEntity
+import com.artemissoftware.pokeconnect.testdata.TestMockData.abilityEntity
+import com.artemissoftware.pokeconnect.testdata.TestMockData.getPokemon
+import com.artemissoftware.pokeconnect.testdata.TestMockData.getPokemonDtoWithArt
+import com.artemissoftware.pokeconnect.testdata.TestMockData.getPokemonEntity
+import com.artemissoftware.pokeconnect.testdata.TestMockData.pokedexEntry
+import com.artemissoftware.pokeconnect.testdata.TestMockData.pokemonDto
+import com.artemissoftware.pokeconnect.testdata.TestMockData.pokemonRelation
+import com.artemissoftware.pokeconnect.testdata.TestMockData.speciesDto
+import com.artemissoftware.pokeconnect.testdata.TestMockData.statEntry
+import com.artemissoftware.pokeconnect.testdata.TestMockData.typesEntity
 import com.artemissoftware.pokeconnect.core.data.mappers.toAbilitiesEntity
 import com.artemissoftware.pokeconnect.core.data.mappers.toEntity
 import com.artemissoftware.pokeconnect.core.data.mappers.toPokedexEntry

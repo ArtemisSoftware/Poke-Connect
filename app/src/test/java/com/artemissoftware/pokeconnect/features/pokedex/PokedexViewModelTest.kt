@@ -4,12 +4,16 @@ import assertk.assertThat
 import assertk.assertions.isEmpty
 import assertk.assertions.isEqualTo
 import assertk.assertions.isFalse
-import com.artemissoftware.pokeconnect.TestMockData
-import com.artemissoftware.pokeconnect.TestMockData.errorDescription
+import com.artemissoftware.pokeconnect.testdata.TestMockData
+import com.artemissoftware.pokeconnect.testdata.TestMockData.errorDescription
+import com.artemissoftware.pokeconnect.core.data.fakes.FakePokedexRepository
+import com.artemissoftware.pokeconnect.core.data.fakes.FakeSearchHistoryRepository
+import com.artemissoftware.pokeconnect.core.domain.usecases.GetSearchHistoryUseCase
+import com.artemissoftware.pokeconnect.core.domain.usecases.UpdateSearchHistoryUseCase
+import com.artemissoftware.pokeconnect.core.ui.text.UiText
 import com.artemissoftware.pokeconnect.domain.pokedex.usecases.GetPokedexUseCase
 import com.artemissoftware.pokeconnect.domain.pokedex.usecases.SearchPokemonUseCase
-import com.artemissoftware.pokeconnect.core.ui.text.UiText
-import com.artemissoftware.pokeconnect.core.data.fakes.FakePokedexRepository
+import com.artemissoftware.pokeconnect.testdata.SearchHistoryTestMockData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -26,9 +30,12 @@ class PokedexViewModelTest {
     private lateinit var viewModel: PokedexViewModel
 
     private lateinit var pokedexRepository: FakePokedexRepository
+    private lateinit var searchHistoryRepository: FakeSearchHistoryRepository
 
     private lateinit var getPokedexUseCase: GetPokedexUseCase
     private lateinit var searchPokemonUseCase: SearchPokemonUseCase
+    private lateinit var getSearchHistoryUseCase: GetSearchHistoryUseCase
+    private lateinit var updateSearchHistoryUseCase: UpdateSearchHistoryUseCase
 
 //    @OptIn(ExperimentalCoroutinesApi::class)
 //    @get:Rule
@@ -40,13 +47,18 @@ class PokedexViewModelTest {
         Dispatchers.setMain(testDispatcher)
 
         pokedexRepository = FakePokedexRepository()
+        searchHistoryRepository = FakeSearchHistoryRepository()
 
         getPokedexUseCase = GetPokedexUseCase(pokedexRepository = pokedexRepository)
         searchPokemonUseCase = SearchPokemonUseCase(pokedexRepository = pokedexRepository)
+        getSearchHistoryUseCase = GetSearchHistoryUseCase(searchHistoryRepository = searchHistoryRepository)
+        updateSearchHistoryUseCase = UpdateSearchHistoryUseCase(searchHistoryRepository = searchHistoryRepository)
 
         viewModel = PokedexViewModel(
             getPokedexUseCase = getPokedexUseCase,
             searchPokemonUseCase = searchPokemonUseCase,
+            getSearchHistoryUseCase = getSearchHistoryUseCase,
+            updateSearchHistoryUseCase = updateSearchHistoryUseCase
         )
     }
 
@@ -88,23 +100,27 @@ class PokedexViewModelTest {
 
     @org.junit.jupiter.api.Test
     fun `when multiple searches are triggered check searchHistory is updated`() = runTest {
-        val searchHistory = listOf("charmander", "bulbasaur")
 
-        viewModel.onTriggerEvent(PokedexEvent.UpdateSearchQuery(searchQuery = "bulbasaur"))
+        viewModel.onTriggerEvent(PokedexEvent.UpdateSearchQuery(searchQuery = SearchHistoryTestMockData.searchResultList[0].description))
         viewModel.onTriggerEvent(PokedexEvent.SearchPokemon)
 
         advanceUntilIdle()
 
-        viewModel.onTriggerEvent(PokedexEvent.UpdateSearchQuery(searchQuery = "charmander"))
+        viewModel.onTriggerEvent(PokedexEvent.UpdateSearchQuery(searchQuery = SearchHistoryTestMockData.searchResultList[1].description))
         viewModel.onTriggerEvent(PokedexEvent.SearchPokemon)
 
         advanceUntilIdle()
 
-        viewModel.onTriggerEvent(PokedexEvent.UpdateSearchQuery(searchQuery = "bulbasaur"))
+        viewModel.onTriggerEvent(PokedexEvent.UpdateSearchQuery(searchQuery = SearchHistoryTestMockData.searchResultList[0].description))
         viewModel.onTriggerEvent(PokedexEvent.SearchPokemon)
 
         advanceUntilIdle()
-        assertThat(viewModel.state.value.searchHistory).isEqualTo(searchHistory)
+        assertThat(viewModel.state.value.searchHistory).isEqualTo(
+            listOf(
+                SearchHistoryTestMockData.searchResultList[1],
+                SearchHistoryTestMockData.searchResultList[0]
+            )
+        )
     }
 
     @org.junit.jupiter.api.Test

@@ -3,7 +3,6 @@ package com.artemissoftware.pokeconnect.core.database.di
 import android.content.Context
 import androidx.room.Room
 import com.artemissoftware.pokeconnect.core.database.PokemonDataBase
-import com.artemissoftware.pokeconnect.core.database.di.DataBaseModule
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -24,4 +23,8 @@ object TestDataBaseModule {
     @Singleton
     @Provides
     fun providePokemonDao(database: PokemonDataBase) = database.getPokemonDao()
+
+    @Singleton
+    @Provides
+    fun provideSearchHistoryDao(database: PokemonDataBase) = database.getSearchHistoryDao()
 }

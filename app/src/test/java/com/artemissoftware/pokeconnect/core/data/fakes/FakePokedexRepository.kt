@@ -5,15 +5,16 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.artemissoftware.pokeconnect.TestMockData.errorDescription
-import com.artemissoftware.pokeconnect.TestMockData.pokedexEntry
-import com.artemissoftware.pokeconnect.TestMockData.pokemonFromApi
-import com.artemissoftware.pokeconnect.TestMockData.pokemonFromDb
+import com.artemissoftware.pokeconnect.testdata.TestMockData.errorDescription
+import com.artemissoftware.pokeconnect.testdata.TestMockData.pokedexEntry
+import com.artemissoftware.pokeconnect.testdata.TestMockData.pokemon2
+import com.artemissoftware.pokeconnect.testdata.TestMockData.pokemonFromApi
+import com.artemissoftware.pokeconnect.testdata.TestMockData.pokemonFromDb
 import com.artemissoftware.pokeconnect.core.domain.Resource
 import com.artemissoftware.pokeconnect.core.domain.error.DataError
-import com.artemissoftware.pokeconnect.data.pokedex.repositories.PokedexRepository
 import com.artemissoftware.pokeconnect.core.models.PokedexEntry
 import com.artemissoftware.pokeconnect.core.models.Pokemon
+import com.artemissoftware.pokeconnect.data.pokedex.repositories.PokedexRepository
 import kotlinx.coroutines.flow.Flow
 
 class FakePokedexRepository: PokedexRepository {
@@ -47,7 +48,14 @@ class FakePokedexRepository: PokedexRepository {
             Resource.Failure(DataError.NetworkError.Error(errorDescription))
         }
         else {
-            Resource.Success(listOf(pokemon))
+            when(query){
+                "1" -> Resource.Success(listOf(pokemon))
+                "bulbasaur" -> Resource.Success(listOf(pokemon))
+                "2" -> Resource.Success(listOf(pokemon2))
+                "ivysayur" -> Resource.Success(listOf(pokemon2))
+                else ->  Resource.Success(listOf(pokemon))
+            }
+
         }
     }
 }

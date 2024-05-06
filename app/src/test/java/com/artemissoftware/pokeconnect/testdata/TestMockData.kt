@@ -1,4 +1,4 @@
-package com.artemissoftware.pokeconnect
+package com.artemissoftware.pokeconnect.testdata
 
 import com.artemissoftware.pokeconnect.core.database.entities.AbilityEntity
 import com.artemissoftware.pokeconnect.core.database.entities.PokemonEntity
@@ -123,6 +123,19 @@ object TestMockData {
     val pokemonFromDb = Pokemon(
         id = 1,
         name = "bulbasaur",
+        height = 16,
+        weight = 69,
+        imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+        stats = listOf(stat),
+        abilities = abilities,
+        types = types,
+        isFavorite = true,
+        description = description
+    )
+
+    val pokemon2 = Pokemon(
+        id = 2,
+        name = "ivysaur",
         height = 16,
         weight = 69,
         imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",

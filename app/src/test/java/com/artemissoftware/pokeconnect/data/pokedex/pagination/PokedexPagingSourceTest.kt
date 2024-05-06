@@ -3,7 +3,7 @@ package com.artemissoftware.pokeconnect.data.pokedex.pagination
 import androidx.paging.PagingSource
 import assertk.assertThat
 import assertk.assertions.isEqualTo
-import com.artemissoftware.pokeconnect.TestMockData.pokedexPageDto
+import com.artemissoftware.pokeconnect.testdata.TestMockData.pokedexPageDto
 import com.artemissoftware.pokeconnect.core.data.fakes.FakePokeApi
 import com.artemissoftware.pokeconnect.core.network.PokeApi
 import com.artemissoftware.pokeconnect.core.network.source.PokeApiSource

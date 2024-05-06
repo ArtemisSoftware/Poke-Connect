@@ -4,7 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.assertions.isNotNull
-import com.artemissoftware.pokeconnect.TestMockData
+import com.artemissoftware.pokeconnect.testdata.TestMockData
 import com.artemissoftware.pokeconnect.domain.pokedex.usecases.SearchPokemonUseCase
 import com.artemissoftware.pokeconnect.domain.favorites.usecases.UpdateFavoriteUseCase
 import com.artemissoftware.pokeconnect.core.ui.text.UiText

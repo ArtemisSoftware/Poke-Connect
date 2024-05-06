@@ -2,6 +2,7 @@ package com.artemissoftware.pokeconnect
 
 import com.artemissoftware.pokeconnect.core.database.entities.AbilityEntity
 import com.artemissoftware.pokeconnect.core.database.entities.PokemonEntity
+import com.artemissoftware.pokeconnect.core.database.entities.SearchHistoryEntity
 import com.artemissoftware.pokeconnect.core.database.entities.StatEntity
 import com.artemissoftware.pokeconnect.core.database.entities.TypeEntity
 import com.artemissoftware.pokeconnect.core.database.relations.PokemonRelation
@@ -84,5 +85,10 @@ object TestInstrumentedData {
         stats = listOf(statEntry),
         abilities = listOf(abilityEntity),
         types = listOf(typesEntity),
+    )
+
+    val searchHistoryEntity = SearchHistoryEntity(
+        description = "1",
+        note = "bulbasaur"
     )
 }

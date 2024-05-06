@@ -5,7 +5,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.artemissoftware.pokeconnect.TestMockData.pokedexEntry
+import com.artemissoftware.pokeconnect.testdata.TestMockData.pokedexEntry
 import com.artemissoftware.pokeconnect.data.favorites.repositories.FavoritesRepository
 import com.artemissoftware.pokeconnect.core.models.PokedexEntry
 import com.artemissoftware.pokeconnect.core.models.Pokemon
