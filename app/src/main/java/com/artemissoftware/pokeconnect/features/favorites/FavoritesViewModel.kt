@@ -3,8 +3,8 @@ package com.artemissoftware.pokeconnect.features.favorites
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
-import com.artemissoftware.pokeconnect.core.domain.usecases.GetFavoritesUseCase
-import com.artemissoftware.pokeconnect.core.domain.usecases.SearchFavoritesUseCase
+import com.artemissoftware.pokeconnect.domain.favorites.usecases.GetFavoritesUseCase
+import com.artemissoftware.pokeconnect.domain.favorites.usecases.SearchFavoritesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

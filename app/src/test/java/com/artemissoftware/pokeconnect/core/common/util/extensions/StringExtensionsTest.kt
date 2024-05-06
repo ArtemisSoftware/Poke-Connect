@@ -1,4 +1,4 @@
-package com.artemissoftware.pokeconnect.common.util.extensions
+package com.artemissoftware.pokeconnect.core.common.util.extensions
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo

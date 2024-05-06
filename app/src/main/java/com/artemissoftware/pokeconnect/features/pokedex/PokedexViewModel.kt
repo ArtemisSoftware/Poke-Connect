@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.artemissoftware.pokeconnect.R
-import com.artemissoftware.pokeconnect.core.domain.usecases.GetPokedexUseCase
-import com.artemissoftware.pokeconnect.core.domain.usecases.SearchPokemonUseCase
+import com.artemissoftware.pokeconnect.domain.pokedex.usecases.GetPokedexUseCase
+import com.artemissoftware.pokeconnect.domain.pokedex.usecases.SearchPokemonUseCase
 import com.artemissoftware.pokeconnect.core.presentation.models.ErrorData
 import com.artemissoftware.pokeconnect.core.presentation.util.extensions.toUiText
 import com.artemissoftware.pokeconnect.core.ui.text.UiText

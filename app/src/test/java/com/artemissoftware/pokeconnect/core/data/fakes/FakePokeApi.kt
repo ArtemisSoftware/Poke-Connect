@@ -1,4 +1,4 @@
-package com.artemissoftware.pokeconnect.data.fakes
+package com.artemissoftware.pokeconnect.core.data.fakes
 
 import com.artemissoftware.pokeconnect.TestMockData.pokedexPageDto
 import com.artemissoftware.pokeconnect.TestMockData.pokemonDto

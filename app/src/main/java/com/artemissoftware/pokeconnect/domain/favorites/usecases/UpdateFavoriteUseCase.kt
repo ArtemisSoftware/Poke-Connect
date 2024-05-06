@@ -1,4 +1,4 @@
-package com.artemissoftware.pokeconnect.core.domain.usecases
+package com.artemissoftware.pokeconnect.domain.favorites.usecases
 
 import com.artemissoftware.pokeconnect.core.domain.repositories.FavoritesRepository
 import com.artemissoftware.pokeconnect.core.models.Pokemon

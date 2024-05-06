@@ -1,58 +1,54 @@
-package com.artemissoftware.pokeconnect.data.fakes
+package com.artemissoftware.pokeconnect.core.data.fakes
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.artemissoftware.pokeconnect.TestMockData.errorDescription
 import com.artemissoftware.pokeconnect.TestMockData.pokedexEntry
-import com.artemissoftware.pokeconnect.TestMockData.pokemonFromApi
-import com.artemissoftware.pokeconnect.TestMockData.pokemonFromDb
-import com.artemissoftware.pokeconnect.core.domain.Resource
-import com.artemissoftware.pokeconnect.core.domain.error.DataError
-import com.artemissoftware.pokeconnect.core.domain.repositories.PokedexRepository
+import com.artemissoftware.pokeconnect.core.domain.repositories.FavoritesRepository
 import com.artemissoftware.pokeconnect.core.models.PokedexEntry
 import com.artemissoftware.pokeconnect.core.models.Pokemon
 import kotlinx.coroutines.flow.Flow
 
-class FakePokedexRepository: PokedexRepository {
+class FakeFavoritesRepository: FavoritesRepository {
 
-    var shouldReturnError = false
+    var pokemonList = mutableListOf<Pokemon>()
 
-    private var pokemon = pokemonFromDb
-
-    fun setPokemonFromDb(){
-        pokemon = pokemonFromDb
+    override suspend fun save(pokemon: Pokemon) {
+        pokemonList.add(pokemon)
     }
 
-    fun setPokemonFromApi(){
-        pokemon = pokemonFromApi
+    override suspend fun delete(pokemon: Pokemon) {
+        pokemonList.removeIf { pokemon.id == it.id }
     }
 
-    override fun getPokedex(): Flow<PagingData<PokedexEntry>> {
+    override fun getAll(): Flow<PagingData<PokedexEntry>> {
         return Pager(
             config = PagingConfig(
                 pageSize = 1,
                 enablePlaceholders = false
             ),
             pagingSourceFactory = {
-                InMemoryPokemonPagingSource(listOf(pokedexEntry), 1)
+                InMemoryFavoritePagingSource(listOf(pokedexEntry), 1)
             }
         ).flow
     }
 
-    override suspend fun searchPokedex(query: String): Resource<List<Pokemon>> {
-        return if(shouldReturnError){
-            Resource.Failure(DataError.NetworkError.Error(errorDescription))
-        }
-        else {
-            Resource.Success(listOf(pokemon))
-        }
+    override fun search(query: String): Flow<PagingData<PokedexEntry>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 1,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = {
+                InMemoryFavoritePagingSource(listOf(pokedexEntry), 1)
+            }
+        ).flow
     }
 }
 
-private class InMemoryPokemonPagingSource(
+private class InMemoryFavoritePagingSource(
     private val pokedexList: List<PokedexEntry>,
     private val pageSize: Int = 10
 ) : PagingSource<Int, PokedexEntry>() {

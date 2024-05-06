@@ -2,9 +2,9 @@ package com.artemissoftware.pokeconnect.features.favorites
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo
-import com.artemissoftware.pokeconnect.core.domain.usecases.GetFavoritesUseCase
-import com.artemissoftware.pokeconnect.core.domain.usecases.SearchFavoritesUseCase
-import com.artemissoftware.pokeconnect.data.fakes.FakeFavoritesRepository
+import com.artemissoftware.pokeconnect.domain.favorites.usecases.GetFavoritesUseCase
+import com.artemissoftware.pokeconnect.domain.favorites.usecases.SearchFavoritesUseCase
+import com.artemissoftware.pokeconnect.core.data.fakes.FakeFavoritesRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher

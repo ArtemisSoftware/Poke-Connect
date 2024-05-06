@@ -1,4 +1,4 @@
-package com.artemissoftware.pokeconnect.data.mapper
+package com.artemissoftware.pokeconnect.core.data.mapper
 
 import assertk.assertThat
 import assertk.assertions.isEqualTo

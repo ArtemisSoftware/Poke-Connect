@@ -5,11 +5,11 @@ import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.assertions.isNotNull
 import com.artemissoftware.pokeconnect.TestMockData
-import com.artemissoftware.pokeconnect.core.domain.usecases.SearchPokemonUseCase
-import com.artemissoftware.pokeconnect.core.domain.usecases.UpdateFavoriteUseCase
+import com.artemissoftware.pokeconnect.domain.pokedex.usecases.SearchPokemonUseCase
+import com.artemissoftware.pokeconnect.domain.favorites.usecases.UpdateFavoriteUseCase
 import com.artemissoftware.pokeconnect.core.ui.text.UiText
-import com.artemissoftware.pokeconnect.data.fakes.FakeFavoritesRepository
-import com.artemissoftware.pokeconnect.data.fakes.FakePokedexRepository
+import com.artemissoftware.pokeconnect.core.data.fakes.FakeFavoritesRepository
+import com.artemissoftware.pokeconnect.core.data.fakes.FakePokedexRepository
 import com.artemissoftware.pokeconnect.features.navigation.NavArguments
 import io.mockk.every
 import io.mockk.mockk

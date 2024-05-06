@@ -6,10 +6,10 @@ import assertk.assertions.isEqualTo
 import assertk.assertions.isFalse
 import com.artemissoftware.pokeconnect.TestMockData
 import com.artemissoftware.pokeconnect.TestMockData.errorDescription
-import com.artemissoftware.pokeconnect.core.domain.usecases.GetPokedexUseCase
-import com.artemissoftware.pokeconnect.core.domain.usecases.SearchPokemonUseCase
+import com.artemissoftware.pokeconnect.domain.pokedex.usecases.GetPokedexUseCase
+import com.artemissoftware.pokeconnect.domain.pokedex.usecases.SearchPokemonUseCase
 import com.artemissoftware.pokeconnect.core.ui.text.UiText
-import com.artemissoftware.pokeconnect.data.fakes.FakePokedexRepository
+import com.artemissoftware.pokeconnect.core.data.fakes.FakePokedexRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
