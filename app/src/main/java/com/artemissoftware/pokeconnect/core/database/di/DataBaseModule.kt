@@ -31,4 +31,8 @@ object DataBaseModule {
     @Singleton
     @Provides
     fun providePokemonDao(database: PokemonDataBase) = database.getPokemonDao()
+
+    @Singleton
+    @Provides
+    fun provideSearchHistoryDao(database: PokemonDataBase) = database.getSearchHistoryDao()
 }

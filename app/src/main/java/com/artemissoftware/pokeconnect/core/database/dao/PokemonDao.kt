@@ -41,14 +41,14 @@ interface PokemonDao {
     }
 
     @Transaction
-    @Query("SELECT * FROM PokemonEntity WHERE id = :id OR name LIKE '%' || :name || '%' ORDER BY id ASC")
+    @Query("SELECT * FROM pokemon WHERE id = :id OR name LIKE '%' || :name || '%' ORDER BY id ASC")
     suspend fun getPokemon(id: Int, name: String): List<PokemonRelation>
 
-    @Query("SELECT * FROM PokemonEntity ORDER BY id ASC")
+    @Query("SELECT * FROM pokemon ORDER BY id ASC")
     fun getAll(): PagingSource<Int, PokemonEntity>
 
 
-    @Query("SELECT * FROM PokemonEntity WHERE id = :id OR name LIKE '%' || :name || '%' ORDER BY id ASC")
+    @Query("SELECT * FROM pokemon WHERE id = :id OR name LIKE '%' || :name || '%' ORDER BY id ASC")
     fun findPagedPokemonByIdOrName(id: Int, name: String): PagingSource<Int, PokemonEntity>
 
     @Delete
