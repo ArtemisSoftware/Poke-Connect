@@ -116,8 +116,6 @@ dependencies {
     androidTestImplementation(libs.okhttp3.mock.webserver)
     androidTestImplementation(libs.okhttp3.idling.resource)
 
-    androidTestImplementation ("androidx.navigation:navigation-testing:2.5.3")
-
     kspAndroidTest(libs.hilt.android.compiler)
 
     debugImplementation(libs.androidx.ui.tooling)
