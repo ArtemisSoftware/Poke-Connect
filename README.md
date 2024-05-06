@@ -28,7 +28,7 @@ Additionally, I wanted the app to be scalable, testable, and maintainable. That'
 
 ## App preview:
 
-### Portarit (light mode)
+### Portrait (light mode)
 
 
 Image #1            |               Image #2               |  Image #3           
@@ -36,7 +36,7 @@ Image #1            |               Image #2               |  Image #3
 <img src="images/PokeConnect_1.jpg">    | <img src="images/PokeConnect_2.jpg"> |  <img src="images/PokeConnect_3.jpg"> 
 
 
-### Portarit (dark mode)
+### LandScape (dark mode)
 
 Image #1            |               Image #2               |  Image #3           
 :-------------------------:|:------------------------------------:|:----------------------------:
@@ -57,10 +57,10 @@ This package houses utilities, constants, extensions, and helper functions that 
 The design system component includes shared UI elements such as themes, colors, typography, and reusable components. This ensures a consistent look and feel across the entire app.
 
 ### Network
-This component manages network-related tasks, including API calls, network clients (such as Retrofit or OkHttp for RESTful communication), and error handling logic. It also defines common request/response structures and handles network-based utilities.
+This component manages network-related tasks, including API calls, network clients (such as Retrofit for RESTful communication), and error handling logic. It also defines common request/response structures and handles network-based utilities.
 
 ### Database
-The database component is responsible for local data storage. It defines the structure of the local database (like SQLite), manages database migrations, and provides DAOs (Data Access Objects) for querying and modifying local data.
+The database component is responsible for local data storage. It defines the structure of the local database, manages database migrations, and provides DAOs (Data Access Objects) for querying and modifying local data.
 
 ### Models
 This package contains data models and entities used throughout the app. These models represent business data and are shared across different layers, facilitating data transfer between modules.
@@ -69,7 +69,7 @@ This package contains data models and entities used throughout the app. These mo
 The presentation component includes view models, presenters, and other logic related to presenting data to the user. This package acts as the bridge between the UI and the underlying business logic, often following the MVVM or MVP pattern.
 
 ### UI
-This package contains the user interface components, such as activities, fragments, widgets, and custom views. It leverages elements from the design system to create a cohesive user experience.
+This package contains the user interface components and custom views. It leverages elements from the design system to create a cohesive user experience.
 
 # Data Module
 
@@ -95,12 +95,12 @@ By separating favorites management into its own sub-module, the app can easily a
 
 # Domain Module
 
-The domain module serves as the core of the application, containing business logic, entities, and use cases. It defines the "what" of the application rather than the "how." The focus is on representing the core concepts and business rules of the app, independent of frameworks or technologies. This module is designed to be framework-agnostic, ensuring flexibility and testability.
+The domain module serves as the core of the application, containing business logic and use cases. It defines the "what" of the application rather than the "how." The focus is on representing the core concepts and business rules of the app, independent of frameworks or technologies. This module is designed to be framework-agnostic, ensuring flexibility and testability.
 
 Within the domain module, there are two key sub-modules:
 
 ## Pokedex Sub-Module
-The Pokedex sub-module represents the domain logic related to Pokémon data. It contains business logic for operations like fetching Pokémon lists, retrieving Pokémon details, and defining Pokémon-related entities.
+The Pokedex sub-module represents the domain logic related to Pokémon data. It contains business logic for operations like fetching Pokémon lists, retrieving Pokémon details.
 
 ## Favorites Sub-Module
 The Favorites sub-module is responsible for managing business logic related to user-defined favorite Pokémon. This includes adding or removing favorites, checking if a Pokémon is marked as a favorite, and retrieving the list of favorite Pokémon.
